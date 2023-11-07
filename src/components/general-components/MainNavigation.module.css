@@ -1,7 +1,9 @@
 .container {
+  width: 100%;
   background-color: #062427;
   color: white;
   padding: 0.6vw 0vw;
+  position: fixed;
 }
 .innerContainer {
   width: 95%;
