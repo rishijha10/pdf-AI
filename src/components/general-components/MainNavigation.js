@@ -5,7 +5,13 @@ const MainNavigation = () => {
   return (
     <div className={styles.container}>
       <div className={styles.innerContainer}>
-        <p>PDFPal</p>
+        <section className={styles.logo}>
+          <div className={styles.first}></div>
+          <div className={styles.second}></div>
+          <div className={styles.third}></div>
+          <p>ReadifyAI</p>
+        </section>
+        {/* <p>PDFPal</p> */}
         <nav className={styles.navLinks}>
           <ul>
             <li>Product</li>

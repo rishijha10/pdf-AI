@@ -14,7 +14,7 @@
   font-family: Inter;
 }
 .innerContainer p {
-  flex: 1;
+  /* flex: 1; */
   font-size: 17px;
 }
 .navButtons {
@@ -52,4 +52,28 @@ nav ul {
     rgba(156, 213, 197, 1) 70%
   );
   color: white;
+}
+.logo {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex: 1;
+}
+.first,
+.second,
+.third {
+  width: 8px;
+  height: 30px;
+  background-color: white;
+  margin: 0 3px;
+  border-radius: 2px;
+}
+.first {
+  transform: rotate(20deg);
+}
+.logo p {
+  margin: 0 5px;
+  font-family: Kanit;
+  font-weight: 500;
+  font-size: 35px;
 }
