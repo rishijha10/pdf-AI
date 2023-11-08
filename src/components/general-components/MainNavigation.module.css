@@ -31,6 +31,7 @@ nav ul {
   list-style: none;
   gap: 4vw;
   font-size: 16px;
+  font-weight: 500;
 }
 .navButtons button {
   border: none;
