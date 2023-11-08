@@ -1,25 +1,35 @@
 .outerContainer {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #faf9f6;
+}
+.innerContainer {
   display: inline-block;
   margin: 5vw auto;
   font-family: Inter;
   width: 20%;
-  padding: 1.5vw;
-  /* background-color: #faf9f6; */
-  /* background-color: #f1faee; */
+  padding: 1.2vw 1.5vw;
   background-color: #f8f5ee;
   border-radius: 5px;
+  border: 1px solid rgb(229, 227, 218);
 }
-.outerContainer p {
+.innerContainer p {
+  margin: 0;
   font-size: 19px;
+  margin-bottom: 19px;
 }
-.outerContainer form {
+.innerContainer form {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 1vw;
 }
 .submitButton,
-.outerContainer form input {
+.googleLoginBtn,
+.innerContainer form input {
   outline: none;
   border: 1px solid rgb(229, 227, 218);
   font-size: 18px;
@@ -28,17 +38,36 @@
   border-radius: 5px;
 }
 .submitButton {
+  width: 100%;
   background-color: rgb(255, 97, 47);
   color: white;
   font-weight: 600;
+  cursor: pointer;
 }
-/* .submitButton {
-  border: 1px solid rgb(229, 227, 218);
-  background-color: rgb(255, 97, 47);
-  color: white;
-  padding: 0.8vw 0vw;
-  font-family: inherit;
-  font-size: 19px;
-  font-weight: 600;
-  border-radius: 5px;
-} */
+.innerContainer h4 {
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 18px;
+  color: #7c7a77;
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid rgb(229, 227, 218);
+  line-height: 0.1em;
+  margin: 30px 0 20px;
+}
+
+.innerContainer h4 span {
+  background: #f8f5ee;
+  padding: 0 10px;
+}
+.googleLoginBtn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  width: 100%;
+  cursor: pointer;
+}
+.googleIcon {
+  font-size: 30px;
+}

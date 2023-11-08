@@ -4,10 +4,10 @@ import FormComponent from "../components/general-components/FormComponent";
 
 const RegisterPage = () => {
   return (
-    <div>
+    <>
       <MainNavigation />
       <FormComponent />
-    </div>
+    </>
   );
 };
 
