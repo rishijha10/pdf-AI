@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./MainNavigation.module.css";
+
 const MainNavigation = () => {
   return (
     <div className={styles.container}>

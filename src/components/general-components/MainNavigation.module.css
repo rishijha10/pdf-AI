@@ -42,6 +42,7 @@ nav ul {
   background-color: white;
   padding: 0.7vw;
   margin-left: 1vw;
+  cursor: pointer;
 }
 .vibrant {
   background: rgb(67, 134, 141);

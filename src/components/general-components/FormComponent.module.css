@@ -10,7 +10,7 @@
   display: inline-block;
   margin: 5vw auto;
   font-family: Inter;
-  width: 20%;
+  width: 20%; /* width of the visible form container */
   padding: 1.2vw 1.5vw;
   background-color: #f8f5ee;
   border-radius: 5px;
