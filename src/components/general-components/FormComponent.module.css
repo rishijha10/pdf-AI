@@ -33,6 +33,7 @@
 }
 .submitButton,
 .googleLoginBtn,
+.toggleBtn,
 .innerContainer form input {
   outline: none;
   border: 1px solid rgb(229, 227, 218);
@@ -48,6 +49,13 @@
   color: white;
   font-weight: 600;
   cursor: pointer;
+}
+.toggleBtn {
+  background-color: #7f5539;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  margin: 20px 0px;
 }
 .innerContainer h4 {
   font-family: Inter;

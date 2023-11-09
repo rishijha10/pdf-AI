@@ -1,10 +1,11 @@
 import React from "react";
-import MainNavigation from "../components/general-components/MainNavigation";
 
 const HomePage = () => {
   return (
     <div>
-      <MainNavigation />
+      <h1 style={{ margin: "100px auto", display: "inline-block" }}>
+        This is the home Page
+      </h1>
     </div>
   );
 };

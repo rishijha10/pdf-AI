@@ -60,6 +60,9 @@ nav ul {
   align-items: center;
   flex: 1;
 }
+a {
+  text-decoration: none;
+}
 .first,
 .second,
 .third {
@@ -77,4 +80,5 @@ nav ul {
   font-family: Kanit;
   font-weight: 500;
   font-size: 35px;
+  color: white;
 }
