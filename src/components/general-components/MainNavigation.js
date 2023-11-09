@@ -6,14 +6,14 @@ const MainNavigation = () => {
   return (
     <div className={styles.container}>
       <div className={styles.innerContainer}>
-        <NavLink to="/">
-          <section className={styles.logo}>
-            <div className={styles.first}></div>
-            <div className={styles.second}></div>
-            <div className={styles.third}></div>
+        <section className={styles.logo}>
+          <div className={styles.first}></div>
+          <div className={styles.second}></div>
+          <div className={styles.third}></div>
+          <Link to="/">
             <p>ReadifyAI</p>
-          </section>
-        </NavLink>
+          </Link>
+        </section>
         {/* <p>PDFPal</p> */}
         <nav className={styles.navLinks}>
           <ul>

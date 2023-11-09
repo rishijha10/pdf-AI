@@ -4,6 +4,7 @@
   color: white;
   padding: 0.6vw 0vw;
   position: fixed;
+  display: flex;
 }
 .innerContainer {
   width: 95%;
