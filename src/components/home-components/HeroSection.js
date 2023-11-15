@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./HeroSection.module.css";
+import heroImage1 from "./../../assets/pdf.png.png"
 const HeroSection = () => {
   return (
     <div className={styles.container}>
@@ -13,6 +14,10 @@ const HeroSection = () => {
           for you.
         </p>
         <button>Get started -{">"}</button>
+
+        <div className={styles.heroSectionImg}>
+          <img src={heroImage1}></img>
+        </div>
       </section>
     </div>
   );
