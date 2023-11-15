@@ -45,7 +45,13 @@ const Trial = () => {
   return (
     <div className={styles.container}>
       <div className={styles.inner}>
-        <iframe width={"100%"} height={"100%"} src={pdfFile} />
+        <div className={styles.innerLeft}>
+          <iframe width={"100%"} height={"100%"} src={pdfFile} />
+        </div>
+        <div className={styles.innerRight}>
+          <section className={styles.upperSection}></section>
+          <section className={styles.lowerSection}></section>
+        </div>
       </div>
     </div>
   );
