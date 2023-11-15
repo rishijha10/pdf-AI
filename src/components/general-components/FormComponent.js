@@ -2,6 +2,7 @@ import React, { useReducer, useState } from "react";
 import styles from "./FormComponent.module.css";
 import { FcGoogle } from "react-icons/fc";
 import { collection, addDoc, setDoc, doc } from "firebase/firestore";
+
 import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
@@ -9,7 +10,7 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { auth, db, provider } from "../../firebase/firebase";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, redirect, useSearchParams, useNavigate } from "react-router-dom";
 const initialStates = {
   email: "",
   password: "",
@@ -29,6 +30,7 @@ const reducer = (state, action) => {
 const FormComponent = () => {
   const [state, dispatch] = useReducer(reducer, initialStates);
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
   const isSignIn = searchParams.get("mode") === "signIn";
   function signInGoogle() {
     signInWithPopup(auth, provider)
@@ -43,6 +45,7 @@ const FormComponent = () => {
         // console.log(token);
       })
       .then((result) => addData(result))
+      .then(() => navigate("/trial"))
       .catch((error) => {
         // Handle Errors here.
         const errorCode = error.code;
@@ -95,6 +98,7 @@ const FormComponent = () => {
     console.log(state.email);
     console.log(state.password);
     dispatch({ type: "reset" });
+    redirect("/trial");
   }
 
   return (

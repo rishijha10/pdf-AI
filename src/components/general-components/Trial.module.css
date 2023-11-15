@@ -3,13 +3,13 @@
   display: inline-block;
   width: 50%;
   height: 100vh;
-  /* overflow: auto; */
 }
 .inner {
-  margin-top: 69px;
-  height: 100%;
+  margin-top: 71px;
+  height: 90.7%;
   width: 100%;
+  border: 1px solid black;
 }
 .inner iframe {
-  background-color: blue;
+  border: none;
 }
