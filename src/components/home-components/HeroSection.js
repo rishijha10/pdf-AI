@@ -16,7 +16,7 @@ const HeroSection = () => {
         <button>Get started -{">"}</button>
 
         <div className={styles.heroSectionImg}>
-          <img src={heroImage1}></img>
+          <img src={heroImage1}  data-aos="fade-up" data-aos-once="true"></img>
         </div>
       </section>
     </div>
