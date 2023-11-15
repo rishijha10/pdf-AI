@@ -1,11 +1,12 @@
 import React from "react";
+import HeroSection from "../components/home-components/HeroSection";
+import Trial from "../components/general-components/Trial";
+import ReactPDF from "@react-pdf/renderer";
 
 const HomePage = () => {
   return (
     <div>
-      <h1 style={{ margin: "100px auto", display: "inline-block" }}>
-        This is the home Page
-      </h1>
+      <HeroSection />
     </div>
   );
 };

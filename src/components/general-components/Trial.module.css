@@ -1,0 +1,15 @@
+.container {
+  /* margin: 100px auto; */
+  display: inline-block;
+  width: 50%;
+  height: 100vh;
+  /* overflow: auto; */
+}
+.inner {
+  margin-top: 69px;
+  height: 100%;
+  width: 100%;
+}
+.inner iframe {
+  background-color: blue;
+}

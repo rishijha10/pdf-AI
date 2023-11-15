@@ -1,13 +1,14 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useReducer, useState } from "react";
 import styles from "./FormComponent.module.css";
 import { FcGoogle } from "react-icons/fc";
+import { collection, addDoc, setDoc, doc } from "firebase/firestore";
 import {
+  GoogleAuthProvider,
   createUserWithEmailAndPassword,
-  onAuthStateChanged,
   signInWithEmailAndPassword,
-  signOut,
+  signInWithPopup,
 } from "firebase/auth";
-import { auth } from "../../firebase/firebase";
+import { auth, db, provider } from "../../firebase/firebase";
 import { Link, useSearchParams } from "react-router-dom";
 const initialStates = {
   email: "",
@@ -26,19 +27,56 @@ const reducer = (state, action) => {
   }
 };
 const FormComponent = () => {
-  const [userAuth, setUserAuth] = useState(null);
   const [state, dispatch] = useReducer(reducer, initialStates);
   const [searchParams] = useSearchParams();
   const isSignIn = searchParams.get("mode") === "signIn";
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUserAuth(user.email);
-      } else {
-        setUserAuth(null);
-      }
+  function signInGoogle() {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user;
+        // setUserId(user.uid);
+        console.log(user);
+        // const credentials = GoogleAuthProvider.credentialFromResult(result);
+        console.log(user.uid);
+        return user;
+        // const token = credentials.accessToken;
+        // console.log(token);
+      })
+      .then((result) => addData(result))
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
+      });
+  }
+  async function addData(result) {
+    await setDoc(doc(db, "users", result.uid), {
+      name: result.displayName,
+      email: result.email,
+      phototUrl: result.photoURL,
     });
-  }, []);
+    // await db.collection("users").doc(result).set({
+    //   name: "Los Angeles",
+    //   state: "CA",
+    //   country: "USA",
+    // });
+    // try {
+    //   const docRef = await addDoc(collection(db, "users"), {
+    //     first: "Muzammil",
+    //     last: "Malik",
+    //     born: 2002,
+    //   });
+    //   console.log("Document written with ID: ", docRef.id);
+    // } catch (e) {
+    //   console.error("Error adding document: ", e);
+    // }
+  }
+
   function formSubmit(e) {
     e.preventDefault();
     {
@@ -58,11 +96,7 @@ const FormComponent = () => {
     console.log(state.password);
     dispatch({ type: "reset" });
   }
-  function signOutUser() {
-    signOut(auth)
-      .then(console.log("Signout successful"))
-      .catch((err) => console.log(err));
-  }
+
   return (
     <div className={styles.outerContainer}>
       <div className={styles.innerContainer}>
@@ -98,7 +132,7 @@ const FormComponent = () => {
             <span>or</span>
           </h4>
         </section>
-        <button className={styles.googleLoginBtn}>
+        <button className={styles.googleLoginBtn} onClick={signInGoogle}>
           Sign in with Google <FcGoogle className={styles.googleIcon} />
         </button>
         <Link to={`?mode=${isSignIn ? "signUp" : "signIn"}`}>
@@ -106,8 +140,6 @@ const FormComponent = () => {
             {isSignIn ? "Sign up" : "Sign in"}
           </button>
         </Link>
-        <p>{userAuth && `User's email id: ${userAuth}`}</p>
-        <button onClick={signOutUser}>Sign Out</button>
       </div>
     </div>
   );

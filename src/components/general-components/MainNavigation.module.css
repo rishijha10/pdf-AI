@@ -5,6 +5,7 @@
   padding: 0.6vw 0vw;
   position: fixed;
   display: flex;
+  z-index: 100;
 }
 .innerContainer {
   width: 95%;
