@@ -1,15 +1,15 @@
 .container {
   /* margin: 100px auto; */
   display: inline-block;
-  width: 50%;
+  width: 100%;
   height: 100vh;
 }
 .inner {
-  margin-top: 71px;
-  height: 90.7%;
-  width: 100%;
+  margin-top: 72px;
+  height: 90.2%;
+  width: 50%;
   border: 1px solid black;
 }
 .inner iframe {
-  border: none;
+  border: 1px solid transparent;
 }
