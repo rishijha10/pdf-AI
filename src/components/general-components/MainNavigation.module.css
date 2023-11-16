@@ -6,17 +6,22 @@
   position: fixed;
   display: flex;
   z-index: 100;
+  transition: all ease-in-out 1s;
 }
+.white {
+  background-color: white;
+  color: black;
+  transition: all ease-in-out 1s;
+}
+
 .innerContainer {
   width: 95%;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
-  /* font-family: Arial, Helvetica, sans-serif; */
   font-family: Inter;
 }
 .innerContainer p {
-  /* flex: 1; */
   font-size: 17px;
 }
 .navButtons {
@@ -77,10 +82,32 @@ a {
 .first {
   transform: rotate(20deg);
 }
-.logo p {
+.logo .defaultLogo {
   margin: 0 5px;
   font-family: Kanit;
   font-weight: 500;
   font-size: 35px;
   color: white;
+}
+.logo .black {
+  margin: 0 5px;
+  font-family: Kanit;
+  font-weight: 500;
+  font-size: 35px;
+  color: #062427;
+  /* background: -webkit-linear-gradient(
+    rgb(43, 105, 111) 40%,
+    rgba(156, 213, 197, 1) 90%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; */
+}
+.trial {
+  /* background-color: #062427; */
+  background: rgb(67, 134, 141);
+  background: linear-gradient(
+    225deg,
+    rgba(67, 134, 141, 1) 40%,
+    rgba(156, 213, 197, 1) 90%
+  );
 }

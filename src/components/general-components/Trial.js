@@ -2,6 +2,7 @@
 import styles from "./Trial.module.css";
 import pdfFile from "../../assets/zz.pdf";
 import React from "react";
+import { IoIosSend } from "react-icons/io";
 import {
   Page,
   Text,
@@ -50,7 +51,12 @@ const Trial = () => {
         </div>
         <div className={styles.innerRight}>
           <section className={styles.upperSection}></section>
-          <section className={styles.lowerSection}></section>
+          <section className={styles.lowerSection}>
+            <form className={styles.promptForm}>
+              <IoIosSend className={styles.sendIcon} />
+              <input placeholder="Enter your question (max 1,000 words)" />
+            </form>
+          </section>
         </div>
       </div>
     </div>
