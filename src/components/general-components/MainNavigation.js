@@ -27,10 +27,6 @@ const MainNavigation = () => {
       .then(console.log("Signout successful"))
       .catch((err) => console.log(err));
   }
-  // {`${isScrolled ? styles.black : undefined}`}
-  // ${
-  //   isScrolled ? styles.black : undefined
-  // }
   return (
     <div
       className={`${styles.container} ${isScrolled ? styles.white : undefined}`}

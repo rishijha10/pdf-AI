@@ -21,6 +21,7 @@
 .upperSection {
   height: 85%;
   border-left: 1px solid #e5e3da;
+  overflow: auto;
 }
 .lowerSection {
   height: 15%;
@@ -55,4 +56,23 @@
 }
 .lowerSection input::placeholder {
   color: #9ca3af;
+}
+.userQuery {
+  /* width: 100%; */
+  padding: 30px 25px;
+  border-bottom: 1px solid rgb(229, 227, 218);
+  display: flex;
+  align-items: flex-start;
+  gap: 30px;
+}
+.userQuery p {
+  width: 90%;
+  margin: 0;
+  font-family: Inter;
+  font-size: 18px;
+  font-weight: 500;
+}
+.userIcon {
+  /* width: 10%; */
+  font-size: 23px;
 }

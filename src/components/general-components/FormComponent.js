@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react";
+import React, { useContext, useReducer, useState } from "react";
 import styles from "./FormComponent.module.css";
 import { FcGoogle } from "react-icons/fc";
 import { collection, addDoc, setDoc, doc } from "firebase/firestore";
@@ -11,6 +11,7 @@ import {
 } from "firebase/auth";
 import { auth, db, provider } from "../../firebase/firebase";
 import { Link, redirect, useSearchParams, useNavigate } from "react-router-dom";
+import { MainContext } from "../../store/MainContext";
 const initialStates = {
   email: "",
   password: "",
@@ -31,6 +32,7 @@ const FormComponent = () => {
   const [state, dispatch] = useReducer(reducer, initialStates);
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const ctxMain = useContext(MainContext);
   const isSignIn = searchParams.get("mode") === "signIn";
   function signInGoogle() {
     signInWithPopup(auth, provider)
@@ -58,6 +60,7 @@ const FormComponent = () => {
       });
   }
   async function addData(result) {
+    ctxMain.setUserId(result.uid);
     await setDoc(doc(db, "users", result.uid), {
       name: result.displayName,
       email: result.email,
