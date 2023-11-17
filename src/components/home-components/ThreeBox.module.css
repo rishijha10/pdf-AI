@@ -30,7 +30,7 @@
 
 .downBox {
   margin-top: 30px;
-  margin-left: 150px;
+  margin-left: 24%;
   width: 60%;
   height: 600px;
   padding: 50px;
@@ -82,25 +82,24 @@
   box-shadow: 0px 0px 15px 5px lightgray;
 }
 .upBox img {
-    border-radius: 15px;
-    position: absolute;
-    width: 100%;
-    right: -12%;
-    bottom: -2%;
-    transform: scale(1.1);
-  }
+  border-radius: 15px;
+  position: absolute;
+  width: 100%;
+  right: -12%;
+  bottom: -2%;
+  transform: scale(1.1);
+}
 .downBox img {
-    border-radius: 15px;
-    position: absolute;
-    width: 100%;
-    right: -8%;
-    bottom: -8%;
-  }
+  border-radius: 15px;
+  position: absolute;
+  width: 100%;
+  right: -8%;
+  bottom: -8%;
+}
 .right img {
   border-radius: 15px;
   position: absolute;
   width: 100%;
   right: -8%;
   bottom: -8%;
-  
 }
