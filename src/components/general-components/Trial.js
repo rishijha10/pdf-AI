@@ -60,7 +60,14 @@ const Trial = () => {
     if (promptQuery === "") {
       return;
     }
-    setQueryList([...queryList, promptQuery]);
+    setQueryList([
+      ...queryList,
+      {
+        question: promptQuery,
+        answer:
+          "The connection to our AI endpoint is currently unavailable; please attempt your request again later.",
+      },
+    ]);
     // const messageRef = doc(db, "users", `${ctxMain.userId}`, "chats", "hello");
     // const docRef = await addDoc(collection(db, `users/${ctxMain.userId}/chats}`))
     // const chatCollectionRef = db
@@ -99,19 +106,42 @@ const Trial = () => {
         </div>
         <div className={styles.innerRight}>
           <section className={styles.upperSection}>
-            <div className={styles.userQuery}>
+            {/* <div className={styles.userQuery}>
               <FaUser className={styles.userIcon} />
               <p>Please explain</p>
             </div>
-            <div></div>
-            {/* {queryList.map((query) => {
+            <div className={styles.userQuery}>
+              <section className={styles.logo}>
+                <div className={`${styles.first} `}></div>
+                <div className={`${styles.second}`}></div>
+                <div className={`${styles.third} `}></div>
+              </section>
+              <p>
+                React has been designed from the start for gradual adoption. You
+                can use as little or as much React as you need. Whether you want
+                to get a taste of React, add some interactivity to an HTML page,
+                or start a complex React-powered app, this section will help you
+                get started.
+              </p>
+            </div> */}
+            {queryList.map((query) => {
               return (
-                <div className={styles.userQuery}>
-                  <FaUser className={styles.userIcon} />
-                  <p>{query}</p>
-                </div>
+                <>
+                  <div className={styles.userQuery}>
+                    <FaUser className={styles.userIcon} />
+                    <p>{query.question}</p>
+                  </div>
+                  <div className={styles.userQuery}>
+                    <section className={styles.logo}>
+                      <div className={`${styles.first} `}></div>
+                      <div className={`${styles.second}`}></div>
+                      <div className={`${styles.third} `}></div>
+                    </section>
+                    <p>{query.answer}</p>
+                  </div>
+                </>
               );
-            })} */}
+            })}
           </section>
           <section className={styles.lowerSection}>
             <form className={styles.promptForm} onSubmit={submitPromptHandler}>
