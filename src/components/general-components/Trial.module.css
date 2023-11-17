@@ -4,7 +4,7 @@
   height: 99vh;
 }
 .inner {
-  margin-top: 73px;
+  margin-top: 70px;
   height: 90.9%;
   display: flex;
 }
@@ -21,6 +21,7 @@
 .upperSection {
   height: 85%;
   border-left: 1px solid #e5e3da;
+  overflow: auto;
 }
 .lowerSection {
   height: 15%;
@@ -55,4 +56,53 @@
 }
 .lowerSection input::placeholder {
   color: #9ca3af;
+}
+.userQuery {
+  padding: 30px 25px;
+  border-bottom: 1px solid rgb(229, 227, 218);
+  display: flex;
+  align-items: flex-start;
+  gap: 30px;
+}
+.userQuery p {
+  margin: 0;
+  font-family: Inter;
+  font-size: 18px;
+  font-weight: 500;
+}
+.userIcon {
+  width: 6%;
+  font-size: 25px;
+}
+.logo {
+  /* margin: 0 5px; */
+  font-family: Kanit;
+  font-weight: 500;
+  font-size: 35px;
+  width: 6%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  /* width: 50px;
+  height: 50px;
+  border-radius: 50%; */
+}
+
+.first,
+.second,
+.third {
+  width: 7px;
+  height: 27px;
+  background: rgb(67, 134, 141);
+  background: linear-gradient(
+    225deg,
+    rgba(67, 134, 141, 1) 40%,
+    rgba(156, 213, 197, 1) 90%
+  );
+  margin: 0 3px;
+  border-radius: 2px;
+}
+.first {
+  transform: rotate(20deg);
 }

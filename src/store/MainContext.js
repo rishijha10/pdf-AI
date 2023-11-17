@@ -6,6 +6,8 @@ export const MainContext = createContext(null);
 
 const MainContextProvider = (props) => {
   const [userAuth, setUserAuth] = useState(null);
+  const [userId, setUserId] = useState(null);
+  console.log("User id is ", userId);
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -16,7 +18,7 @@ const MainContextProvider = (props) => {
     });
   }, []);
   return (
-    <MainContext.Provider value={{ userAuth }}>
+    <MainContext.Provider value={{ userAuth, userId, setUserId }}>
       {props.children}
     </MainContext.Provider>
   );
