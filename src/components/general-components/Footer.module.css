@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
+/* *{
+    margin: 0;
+    padding: 0;
+} */
+.container{
+    background-color: #062427;
+    padding: 8rem 0.8rem 2.4rem;
+    font-family: 'Inter', sans-serif;
+}
+
+.innercontainer{
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+.one{
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    font-weight: 500;
+}
+.one p{
+    margin: 0;
+    font-size: 1.5rem;
+}
+.logo_full{
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    align-items: center;
+}
+.list{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+}
+.line1{
+    width: 100%;
+    border: 1px solid rgba(229, 227, 218, 0.2);
+
+}
+.line2{
+    border: 1px solid rgba(229, 227, 218, 0.2);
+    margin-bottom: 2rem;
+}
+.social{
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    font-size: 1.5rem;
+}
+.two{
+    color: #667085;
+    text-align: center;
+}
+.logo {
+    /* margin: 0 5px; */
+    font-family: Kanit;
+    font-weight: 500;
+    font-size: 35px;
+    width: 6%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background-color: white; */
+    /* width: 50px;
+    height: 50px;
+    border-radius: 50%; */
+  }
+  
+  .first,
+  .second,
+  .third {
+    width: 7px;
+    height: 27px;
+    background: rgb(67, 134, 141);
+    background: linear-gradient(
+      225deg,
+      rgba(67, 134, 141, 1) 40%,
+      rgba(156, 213, 197, 1) 90%
+    );
+    margin: 0 3px;
+    border-radius: 2px;
+  }
+  .first {
+    transform: rotate(20deg);
+  }
