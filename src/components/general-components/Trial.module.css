@@ -67,8 +67,8 @@
 .userQuery p {
   margin: 0;
   font-family: Inter;
-  font-size: 18px;
-  font-weight: 500;
+  font-size: 17px;
+  font-weight: 400;
 }
 .userIcon {
   width: 6%;
@@ -105,4 +105,7 @@
 }
 .first {
   transform: rotate(20deg);
+}
+.botQuery {
+  background-color: #f8f5ee;
 }

@@ -24,6 +24,13 @@ function App() {
       ],
     },
   ]);
+  // const a = {
+  //   prompt: {
+  //     text: "Write a story about a magic backpack.",
+  //   },
+  //   temperature: 1.0,
+  //   candidateCount: 2,
+  // };
   return (
     // <QueryClientProvider client={queryClient}>
     <RouterProvider router={router} />

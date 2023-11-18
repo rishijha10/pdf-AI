@@ -1,7 +1,7 @@
 // import React from "react";
 import styles from "./Trial.module.css";
 import pdfFile from "../../assets/zz.pdf";
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { IoIosSend } from "react-icons/io";
 import {
   Page,
@@ -47,12 +47,17 @@ import { FaUser } from "react-icons/fa6";
 // export default Trial;
 
 const Trial = () => {
+  const promptRef = useRef();
   const ctxMain = useContext(MainContext);
   //Stores the query written in input field
   const [queryList, setQueryList] = useState([]);
   const [promptQuery, setPromptQuery] = useState("");
+  const [messages, setMessages] = useState([]);
+  // function
+  console.log("Messages ", messages);
   function promptHandler(e) {
     e.preventDefault();
+
     setPromptQuery(e.target.value);
   }
   async function submitPromptHandler(e) {
@@ -60,14 +65,26 @@ const Trial = () => {
     if (promptQuery === "") {
       return;
     }
-    setQueryList([
-      ...queryList,
+    const response = await fetch(`http://localhost:8000/trial/${promptQuery}`);
+    // setPromptQuery("");
+    const data = await response.json();
+    console.log("data: ", data);
+    setMessages([
+      ...messages,
       {
-        question: promptQuery,
-        answer:
-          "The connection to our AI endpoint is currently unavailable; please attempt your request again later.",
+        author: data.messages[0].content,
+        bot: data.candidates[0].content,
       },
     ]);
+    // promptRef.current.value = "";
+    // setQueryList([
+    //   ...queryList,
+    //   {
+    //     question: promptQuery,
+    //     answer:
+    //       "The connection to our AI endpoint is currently unavailable; please attempt your request again later.",
+    //   },
+    // ]);
     // const messageRef = doc(db, "users", `${ctxMain.userId}`, "chats", "hello");
     // const docRef = await addDoc(collection(db, `users/${ctxMain.userId}/chats}`))
     // const chatCollectionRef = db
@@ -97,7 +114,7 @@ const Trial = () => {
     // });
     // addDoc(chatCollectionRef, )
   }
-  console.log("This is the query ", promptQuery);
+  // console.log("This is the query ", promptQuery);
   return (
     <div className={styles.container}>
       <div className={styles.inner}>
@@ -124,7 +141,7 @@ const Trial = () => {
                 get started.
               </p>
             </div> */}
-            {queryList.map((query) => {
+            {/* {queryList.map((query) => {
               return (
                 <>
                   <div className={styles.userQuery}>
@@ -141,6 +158,24 @@ const Trial = () => {
                   </div>
                 </>
               );
+            })} */}
+            {messages.map((query) => {
+              return (
+                <>
+                  <div className={styles.userQuery}>
+                    <FaUser className={styles.userIcon} />
+                    <p>{query.author}</p>
+                  </div>
+                  <div className={`${styles.userQuery} ${styles.botQuery}`}>
+                    <section className={styles.logo}>
+                      <div className={`${styles.first} `}></div>
+                      <div className={`${styles.second}`}></div>
+                      <div className={`${styles.third} `}></div>
+                    </section>
+                    <p>{query.bot}</p>
+                  </div>
+                </>
+              );
             })}
           </section>
           <section className={styles.lowerSection}>
@@ -152,6 +187,7 @@ const Trial = () => {
               <input
                 placeholder="Enter your question (max 1,000 words)"
                 name="prompt"
+                // value={promptQuery}
                 onChange={promptHandler}
               />
             </form>
