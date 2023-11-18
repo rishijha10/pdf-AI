@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./HeroSection.module.css";
-import heroImage1 from "./../../assets/pdf.png.png"
+import heroImage1 from "./../../assets/pdf.png.png";
 const HeroSection = () => {
   return (
     <div className={styles.container}>
@@ -16,7 +16,12 @@ const HeroSection = () => {
         <button>Get started -{">"}</button>
 
         <div className={styles.heroSectionImg}>
-          <img src={heroImage1}  data-aos="fade-up" data-aos-once="true"></img>
+          <img
+            src={heroImage1}
+            data-aos="fade-up"
+            data-aos-once="true"
+            data-aos-duration="1000"
+          ></img>
         </div>
       </section>
     </div>

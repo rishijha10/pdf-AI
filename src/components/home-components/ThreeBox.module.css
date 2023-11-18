@@ -24,11 +24,11 @@
 .upBox h1 {
   font-family: Eudoxus Sans;
   margin: 0;
-  font-size: 38px;
+  font-size: 36px;
 }
 .upBox p {
   font-family: Eudoxus Sans;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.5;
 }
 
@@ -40,16 +40,15 @@
   padding: 50px;
   border-radius: 15px;
   position: relative;
-  
 }
 .downBox h1 {
   font-family: Eudoxus Sans;
   margin: 0;
-  font-size: 38px;
+  font-size: 36px;
 }
 .downBox p {
   font-family: Eudoxus Sans;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.5;
 }
 
@@ -65,11 +64,11 @@
 .right h1 {
   font-family: Eudoxus Sans;
   margin: 0;
-  font-size: 38px;
+  font-size: 36px;
 }
 .right p {
   font-family: Eudoxus Sans;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.5;
 }
 

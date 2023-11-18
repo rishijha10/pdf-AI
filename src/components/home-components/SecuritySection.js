@@ -9,8 +9,9 @@ const SecuritySection = () => {
       <div className={styles.innerContainer}>
         <div
           className={styles.threeCards}
-          data-aos="fade-up"
+          data-aos="fade-right"
           data-aos-once="true"
+          data-aos-duration="1000"
         >
           <IoDocumentLockOutline className={styles.icon} />
           <hr className={styles.hrLine} />
@@ -23,9 +24,10 @@ const SecuritySection = () => {
         </div>
         <div
           className={styles.threeCards}
-          data-aos="fade-up"
+          data-aos="fade-right"
           data-aos-once="true"
           data-aos-delay="50"
+          data-aos-duration="1000"
         >
           <BsDatabaseLock className={styles.icon} />
           <hr className={styles.hrLine} />
@@ -38,17 +40,18 @@ const SecuritySection = () => {
         </div>
         <div
           className={styles.threeCards}
-          data-aos="fade-up"
+          data-aos="fade-right"
           data-aos-once="true"
           data-aos-delay="100"
+          data-aos-duration="1000"
         >
           <RiChatPrivateLine className={styles.icon} />
           <hr className={styles.hrLine} />
           <h1>Privacy Controls for Chat Interactions:</h1>
           <p>
-            OfficeGPT ensures data integrity, preventing changes. Trust
-            accurate, unaltered information, reflecting our commitment to
-            end-to-end security.
+            OfficeGPT's chat ensures privacy. Designed for sensitive
+            information, you control shared details, ensuring secure,
+            confidential communication.
           </p>
         </div>
       </div>
