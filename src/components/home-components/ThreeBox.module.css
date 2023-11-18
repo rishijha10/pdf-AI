@@ -10,6 +10,10 @@
 }
 .left {
   width: 55%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 .upBox {
   height: 400px;
@@ -30,12 +34,13 @@
 
 .downBox {
   margin-top: 30px;
-  margin-left: 24%;
+  /* margin-left: 24%; */
   width: 60%;
   height: 600px;
   padding: 50px;
   border-radius: 15px;
   position: relative;
+  
 }
 .downBox h1 {
   font-family: Eudoxus Sans;

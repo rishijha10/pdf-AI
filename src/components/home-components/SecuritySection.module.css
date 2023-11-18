@@ -1,31 +1,47 @@
 .container {
   width: 100%;
   height: 100%;
-  margin: 120px 0px;
-  background-color: lightpink;
+  padding: 240px 0px;
+  background-color: #f8f5ee;
 }
 
 .innerContainer {
-  background-color: lightskyblue;
+  /* background-color: lightskyblue; */
   width: 75%;
   height: 100%;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
+  
 }
 .threeCards {
-  height: 370px;
-  width: 370px;
-  border: 1px solid white;
+  width: 380px;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
-  /* align-items: center; */
-}
-.threeCards img {
-    width: 100%;
+  gap: 20px;
 }
 .hrLine {
-    border: 1px solid black;
-    width: 100%;
+  border: 1px solid black;
+  width: 100%;
+}
+.threeCards h1 {
+  font-family: Eudoxus Sans;
+  margin: 0;
+}
+.threeCards p {
+  /* font-family: Eudoxus Sans; */
+  font-family: Inter;
+  line-height: 1.5;
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+}
+.icon {
+  font-size: 60px;
+  color: white;
+  background-color: #062427;
+  padding: 18px;
+  border-radius: 50%;
+  text-align: center;
+ 
 }
