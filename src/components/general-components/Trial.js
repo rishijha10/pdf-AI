@@ -119,7 +119,11 @@ const Trial = () => {
     <div className={styles.container}>
       <div className={styles.inner}>
         <div className={styles.innerLeft}>
-          <iframe width={"100%"} height={"100%"} src={pdfFile} />
+          <iframe
+            width={"100%"}
+            height={"100%"}
+            src={`${pdfFile}#toolbar=0`}
+          />
         </div>
         <div className={styles.innerRight}>
           <section className={styles.upperSection}>

@@ -1,0 +1,44 @@
+.container {
+    height: 100%;
+    width: 100%;
+    /* margin-top: 120px; */
+    transform: translateY(20%);
+}
+.innerContainer {
+    height: 100%;
+    width: 75%;
+    margin: 0 auto;
+    background: rgb(67, 134, 141);
+    background: linear-gradient(
+      225deg,
+      rgba(67, 134, 141, 1) 0%,
+      rgba(156, 213, 197, 1) 70%
+    );
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 0px;
+    border-radius: 7.5px;
+}
+
+.innerContainer h1 {
+    font-size: 38px;
+    font-family: Eudoxus Sans;
+}
+.container button {
+    border: none;
+    outline: none;
+    font-family: Inter;
+    font-weight: 600;
+    font-size: 18px;
+    border-radius: 8px;
+    background-color: #062427;
+    color: white;
+    padding: 0.8vw;
+    margin: 30px 0px;
+    cursor: pointer;
+  }
+  
