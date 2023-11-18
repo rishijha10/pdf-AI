@@ -6,7 +6,6 @@
 }
 
 .innerContainer {
-  /* background-color: lightskyblue; */
   width: 75%;
   height: 100%;
   margin: 0 auto;
@@ -25,18 +24,17 @@
   width: 100%;
 }
 .threeCards h1 {
-  font-family: Montserrat;
+  font-family: Eudoxus sans;
   font-size: 30px;
   font-weight: 400;
   margin: 0;
 }
 .threeCards p {
-  /* font-family: Eudoxus Sans; */
   font-family: Inter;
   line-height: 1.5;
   margin: 0;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 400;
 }
 .icon {
   font-size: 40px;
