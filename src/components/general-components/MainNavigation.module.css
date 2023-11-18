@@ -22,7 +22,7 @@
   font-family: Inter;
 }
 .innerContainer p {
-  font-size: 17px;
+  font-size: 16px;
 }
 .navButtons {
   flex: 1;
@@ -37,7 +37,7 @@ nav ul {
   display: flex;
   list-style: none;
   gap: 4vw;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 500;
 }
 .navButtons button {
@@ -46,7 +46,7 @@ nav ul {
   font-family: Inter;
   font-weight: 600;
   font-size: 16px;
-  border-radius: 8px;
+  border-radius: 6px;
   background-color: white;
   padding: 0.7vw;
   margin-left: 1vw;
