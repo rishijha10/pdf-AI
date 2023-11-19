@@ -32,9 +32,9 @@ function App() {
   //   candidateCount: 2,
   // };
   return (
-    // <QueryClientProvider client={queryClient}>
-    <RouterProvider router={router} />
-    // </QueryClientProvider>
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   );
 }
 

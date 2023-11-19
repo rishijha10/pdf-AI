@@ -5,7 +5,7 @@ import { auth } from "../firebase/firebase";
 export const MainContext = createContext(null);
 
 const MainContextProvider = (props) => {
-  const [userAuth, setUserAuth] = useState(null);
+  const [userAuth, setUserAuth] = useState(null); // stores whether a user is logged in or not
   const [userId, setUserId] = useState(null);
   console.log("User id is ", userId);
   useEffect(() => {

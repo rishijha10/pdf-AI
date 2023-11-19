@@ -1,21 +1,11 @@
 // import React from "react";
 import styles from "./Trial.module.css";
 import pdfFile from "../../assets/zz.pdf";
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { IoIosSend } from "react-icons/io";
-import {
-  Page,
-  Text,
-  View,
-  Document,
-  StyleSheet,
-  PDFViewer,
-} from "@react-pdf/renderer";
-import { DocumentReference, addDoc, collection, doc } from "firebase/firestore";
-import { db } from "../../firebase/firebase";
 import { MainContext } from "../../store/MainContext";
 import { FaUser } from "react-icons/fa6";
-
+import { useNavigate, useNavigation } from "react-router-dom";
 // const Trial = () => {
 //   return (
 //     <div className={styles.container}>
@@ -47,8 +37,15 @@ import { FaUser } from "react-icons/fa6";
 // export default Trial;
 
 const Trial = () => {
-  const promptRef = useRef();
   const ctxMain = useContext(MainContext);
+  const navigate = useNavigate();
+  useEffect(() => {
+    navigate("/auth");
+  }, []);
+  // if (ctxMain.userAuth === null) {
+  //   navigate("/auth");
+  // }
+  // const promptRef = useRef();
   //Stores the query written in input field
   const [queryList, setQueryList] = useState([]);
   const [promptQuery, setPromptQuery] = useState("");
@@ -57,17 +54,38 @@ const Trial = () => {
   console.log("Messages ", messages);
   function promptHandler(e) {
     e.preventDefault();
-
     setPromptQuery(e.target.value);
   }
+  // const {
+  //   mutate,
+  //   isLoading,
+  //   isError,
+  //   data: chatData,
+  // } = useMutation({
+  //   mutationFn: getMessage,
+  // });
+
   async function submitPromptHandler(e) {
     e.preventDefault();
     if (promptQuery === "") {
       return;
     }
-    const response = await fetch(`http://localhost:8000/trial/${promptQuery}`);
-    // setPromptQuery("");
+    const text = promptQuery;
+    setPromptQuery("");
+    // mutate(text);
+    // const {
+    //   data: chatData,
+    //   isLoading,
+    //   isError,
+    // } = useQuery({
+    //   queryKey: ["prompt"],
+    //   queryFn: getMessage(text),
+    // });
+    // console.log("Mutate ", chatData);
+    const response = await fetch(`http://localhost:8000/trial/${text}`);
+
     const data = await response.json();
+
     console.log("data: ", data);
     setMessages([
       ...messages,
@@ -76,6 +94,7 @@ const Trial = () => {
         bot: data.candidates[0].content,
       },
     ]);
+    setPromptQuery("");
     // promptRef.current.value = "";
     // setQueryList([
     //   ...queryList,
@@ -119,11 +138,7 @@ const Trial = () => {
     <div className={styles.container}>
       <div className={styles.inner}>
         <div className={styles.innerLeft}>
-          <iframe
-            width={"100%"}
-            height={"100%"}
-            src={`${pdfFile}#toolbar=0`}
-          />
+          <iframe width={"100%"} height={"100%"} src={`${pdfFile}#toolbar=0`} />
         </div>
         <div className={styles.innerRight}>
           <section className={styles.upperSection}>
@@ -190,8 +205,9 @@ const Trial = () => {
               />
               <input
                 placeholder="Enter your question (max 1,000 words)"
+                autoComplete="off"
                 name="prompt"
-                // value={promptQuery}
+                value={promptQuery}
                 onChange={promptHandler}
               />
             </form>
