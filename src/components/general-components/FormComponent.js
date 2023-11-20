@@ -1,7 +1,7 @@
 import React, { useContext, useReducer, useState } from "react";
 import styles from "./FormComponent.module.css";
 import { FcGoogle } from "react-icons/fc";
-import { collection, addDoc, setDoc, doc } from "firebase/firestore";
+import { setDoc, doc } from "firebase/firestore";
 
 import {
   GoogleAuthProvider,
@@ -40,14 +40,11 @@ const FormComponent = () => {
         const user = result.user;
         // setUserId(user.uid);
         console.log(user);
-        // const credentials = GoogleAuthProvider.credentialFromResult(result);
         console.log(user.uid);
         return user;
-        // const token = credentials.accessToken;
-        // console.log(token);
       })
-      .then((result) => addData(result))
-      .then(() => navigate("/trial"))
+      // .then((result) => addData(result))
+      .then(() => navigate("/pdf-ai-gen1"))
       .catch((error) => {
         // Handle Errors here.
         const errorCode = error.code;
@@ -66,21 +63,6 @@ const FormComponent = () => {
       email: result.email,
       phototUrl: result.photoURL,
     });
-    // await db.collection("users").doc(result).set({
-    //   name: "Los Angeles",
-    //   state: "CA",
-    //   country: "USA",
-    // });
-    // try {
-    //   const docRef = await addDoc(collection(db, "users"), {
-    //     first: "Muzammil",
-    //     last: "Malik",
-    //     born: 2002,
-    //   });
-    //   console.log("Document written with ID: ", docRef.id);
-    // } catch (e) {
-    //   console.error("Error adding document: ", e);
-    // }
   }
 
   function formSubmit(e) {
@@ -132,7 +114,6 @@ const FormComponent = () => {
             className={styles.submitButton}
             value={isSignIn ? "Sign In" : "Sign Up"}
           />
-          {/* <button className={styles.submitButton}>Sign In</button> */}
         </form>
         <section>
           <h4>

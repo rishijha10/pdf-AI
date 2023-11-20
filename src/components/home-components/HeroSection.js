@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./HeroSection.module.css";
 import heroImage1 from "./../../assets/pdf.png.png";
+import { NavLink } from "react-router-dom";
 const HeroSection = () => {
   return (
     <div className={styles.container}>
@@ -13,7 +14,9 @@ const HeroSection = () => {
           Chat your way through long documents. Command our PDF AI to summarize
           for you.
         </p>
-        <button>Get started -{">"}</button>
+        <NavLink to={`/pdf-ai-gen1`}>
+          <button>Get started -{">"}</button>
+        </NavLink>
 
         <div className={styles.heroSectionImg}>
           <img

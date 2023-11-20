@@ -20,7 +20,7 @@ function App() {
       children: [
         { index: true, element: <HomePage /> },
         { path: "/auth", element: <RegisterPage /> },
-        { path: "/trial", element: <Trial /> },
+        { path: "/pdf-ai-gen1", element: <Trial /> },
       ],
     },
   ]);
@@ -32,9 +32,9 @@ function App() {
   //   candidateCount: 2,
   // };
   return (
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-    </QueryClientProvider>
+    // <QueryClientProvider client={queryClient}>
+    <RouterProvider router={router} />
+    // </QueryClientProvider>
   );
 }
 

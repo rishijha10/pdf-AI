@@ -1,7 +1,7 @@
 // import React from "react";
 import styles from "./Trial.module.css";
 import pdfFile from "../../assets/zz.pdf";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useState } from "react";
 import { IoIosSend } from "react-icons/io";
 import { MainContext } from "../../store/MainContext";
 import { FaUser } from "react-icons/fa6";
@@ -38,10 +38,12 @@ import { useNavigate, useNavigation } from "react-router-dom";
 
 const Trial = () => {
   const ctxMain = useContext(MainContext);
-  const navigate = useNavigate();
-  useEffect(() => {
-    navigate("/auth");
-  }, []);
+  // const navigate = useNavigate();
+  // useEffect(() => {
+  //   if (!ctxMain.userAuth) {
+  //     navigate("/auth?mode=signIn");
+  //   }
+  // }, [ctxMain.userAuth]);
   // if (ctxMain.userAuth === null) {
   //   navigate("/auth");
   // }
@@ -56,14 +58,6 @@ const Trial = () => {
     e.preventDefault();
     setPromptQuery(e.target.value);
   }
-  // const {
-  //   mutate,
-  //   isLoading,
-  //   isError,
-  //   data: chatData,
-  // } = useMutation({
-  //   mutationFn: getMessage,
-  // });
 
   async function submitPromptHandler(e) {
     e.preventDefault();
@@ -72,16 +66,6 @@ const Trial = () => {
     }
     const text = promptQuery;
     setPromptQuery("");
-    // mutate(text);
-    // const {
-    //   data: chatData,
-    //   isLoading,
-    //   isError,
-    // } = useQuery({
-    //   queryKey: ["prompt"],
-    //   queryFn: getMessage(text),
-    // });
-    // console.log("Mutate ", chatData);
     const response = await fetch(`http://localhost:8000/trial/${text}`);
 
     const data = await response.json();

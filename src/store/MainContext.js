@@ -5,9 +5,9 @@ import { auth } from "../firebase/firebase";
 export const MainContext = createContext(null);
 
 const MainContextProvider = (props) => {
-  const [userAuth, setUserAuth] = useState(null); // stores whether a user is logged in or not
-  const [userId, setUserId] = useState(null);
-  console.log("User id is ", userId);
+  const [userAuth, setUserAuth] = useState(null); // stores the email of a user when they are logged in, its null otherwise
+  const [userId, setUserId] = useState(null); //stores unique user id of a user which is guven by firebase
+  console.log("Users email id is ", userAuth);
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -16,7 +16,7 @@ const MainContextProvider = (props) => {
         setUserAuth(null);
       }
     });
-  }, []);
+  }, [userAuth]);
   return (
     <MainContext.Provider value={{ userAuth, userId, setUserId }}>
       {props.children}
