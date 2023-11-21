@@ -1,6 +1,6 @@
 // import React from "react";
 import styles from "./Trial.module.css";
-import pdfFile from "../../assets/zz.pdf";
+import pdfFile from "../../assets/Lion.pdf";
 import React, { useContext, useEffect, useState } from "react";
 import { IoIosSend } from "react-icons/io";
 import { MainContext } from "../../store/MainContext";
@@ -68,32 +68,32 @@ const Trial = () => {
 
     const text = promptQuery;
     setPromptQuery("");
-    // fetch("https://genai-video-analyzer-rrcr7xvxjq-uc.a.run.app/api/chat", {
-    //   headers: {
-    //     "Content-type": "application/json",
-    //   },
-    //   method: "POST",
-    //   body: JSON.stringify({ urls: [], question: text }),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) =>
-    //     setQueryList((prevQueries) => [
-    //       ...prevQueries,
-    //       { author: text, bot: data.answer },
-    //     ])
-    //   );
-    const response = await fetch(`http://localhost:8000/trial/${text}`);
-
-    const data = await response.json();
-
-    console.log("data: ", data);
-    setMessages([
-      ...messages,
-      {
-        author: data.messages[0].content,
-        bot: data.candidates[0].content,
+    fetch("https://genai-video-analyzer-rrcr7xvxjq-uc.a.run.app/api/chat", {
+      headers: {
+        "Content-type": "application/json",
       },
-    ]);
+      method: "POST",
+      body: JSON.stringify({ urls: [], question: text }),
+    })
+      .then((res) => res.json())
+      .then((data) =>
+        setQueryList((prevQueries) => [
+          ...prevQueries,
+          { author: text, bot: data.answer },
+        ])
+      );
+    // const response = await fetch(`http://localhost:8000/trial/${text}`);
+
+    // const data = await response.json();
+
+    // console.log("data: ", data);
+    // setMessages([
+    //   ...messages,
+    //   {
+    //     author: data.messages[0].content,
+    //     bot: data.candidates[0].content,
+    //   },
+    // ]);
     // setPromptQuery("");
     // promptRef.current.value = "";
     // setQueryList([
@@ -178,7 +178,7 @@ const Trial = () => {
                 </>
               );
             })} */}
-            {messages.map((query) => {
+            {queryList.map((query) => {
               return (
                 <>
                   <div className={styles.userQuery}>
