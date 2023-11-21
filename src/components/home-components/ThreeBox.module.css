@@ -9,7 +9,7 @@
   display: flex;
 }
 .left {
-  width: 55%;
+  width: 50%;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -53,6 +53,7 @@
 }
 
 .right {
+  width: 50%;
   height: 600px;
   padding: 50px;
   margin-left: 30px;
@@ -98,7 +99,7 @@
   position: absolute;
   width: 100%;
   right: -8%;
-  bottom: -8%;
+  bottom: -4%;
 }
 .right img {
   border-radius: 15px;

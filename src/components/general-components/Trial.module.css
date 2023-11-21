@@ -22,6 +22,7 @@
   height: 85%;
   border-left: 1px solid #e5e3da;
   overflow: auto;
+  scroll-behavior: smooth;
 }
 .lowerSection {
   height: 15%;
