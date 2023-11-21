@@ -95,19 +95,126 @@ a {
   font-weight: 500;
   font-size: 35px;
   color: #062427;
-  /* background: -webkit-linear-gradient(
-    rgb(43, 105, 111) 40%,
-    rgba(156, 213, 197, 1) 90%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent; */
 }
 .trial {
-  /* background-color: #062427; */
   background: rgb(67, 134, 141);
   background: linear-gradient(
     225deg,
     rgba(67, 134, 141, 1) 40%,
     rgba(156, 213, 197, 1) 90%
   );
+}
+
+.hamburgerIcon {
+  display: none;
+}
+
+.dropDown .menuList {
+  display: none;
+}
+.cross {
+  display: none;
+}
+/* ------------- mediaqueries--------------------
+ --------------------------------------------------------------- */
+
+@media (max-width: 1100px) {
+  .hamburgerIcon {
+    display: block;
+    font-size: 40px;
+  }
+  .navButtons button {
+    margin: 0;
+  }
+  .vibrant {
+    margin: 0 15px;
+  }
+  .navButtons {
+    gap: 16px;
+  }
+  .navLinks {
+    display: none;
+  }
+  .dropDown .menuList {
+    display: block;
+  }
+  .dropDown {
+    background-color: #fff;
+    position: fixed;
+    top: 0%;
+    left: 0;
+    /* height: 50vh; */
+    width: 100%;
+  }
+  .dropInnercontainer {
+    padding: 16px 20px 0px 20px;
+  }
+  .menuList {
+    text-align: left;
+    display: flex;
+    padding: 15px 0px ;
+  }
+  .menuList li {
+    list-style: none;
+    color: black;
+    padding: 12px 0px;
+    font-size: 18px;
+    font-weight: 500;
+    font-family: Inter;
+  }
+  .cross {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .closeMenu {
+    font-size: 35px;
+    font-weight: 600;
+    color: #062427;
+    text-align: right;
+  }
+  .logo_full {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  .logo {
+    font-family: Kanit;
+    font-weight: 500;
+    font-size: 35px;
+    display: flex;
+    align-items: center;
+  }
+
+  .first,
+  .second,
+  .third {
+    width: 8px;
+    height: 30px;
+    background: rgb(67, 134, 141);
+    background: linear-gradient(
+      225deg,
+      rgba(67, 134, 141, 1) 40%,
+      rgba(156, 213, 197, 1) 90%
+    );
+    margin: 0 3px;
+    border-radius: 2px;
+  }
+  .first {
+    transform: rotate(20deg);
+  }
+
+  .logo_full p {
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin: 0;
+    font-family: Kanit;
+    font-size: 35px;
+    font-weight: 500;
+    color: #062427;
+  }
 }
