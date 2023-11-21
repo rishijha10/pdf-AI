@@ -1,7 +1,7 @@
 // import React from "react";
 import styles from "./Trial.module.css";
 import pdfFile from "../../assets/zz.pdf";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { IoIosSend } from "react-icons/io";
 import { MainContext } from "../../store/MainContext";
 import { FaUser } from "react-icons/fa6";
@@ -38,34 +38,50 @@ import { useNavigate, useNavigation } from "react-router-dom";
 
 const Trial = () => {
   const ctxMain = useContext(MainContext);
-  // const navigate = useNavigate();
-  // useEffect(() => {
-  //   if (!ctxMain.userAuth) {
-  //     navigate("/auth?mode=signIn");
-  //   }
-  // }, [ctxMain.userAuth]);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!ctxMain.userAuth) {
+      navigate("/auth?mode=signIn");
+    }
+  }, [ctxMain.userAuth]);
   // if (ctxMain.userAuth === null) {
   //   navigate("/auth");
   // }
   // const promptRef = useRef();
-  //Stores the query written in input field
-  const [queryList, setQueryList] = useState([]);
-  const [promptQuery, setPromptQuery] = useState("");
+
+  const [queryList, setQueryList] = useState([]); //stores the objects of questions and answers in pair
+  const [promptQuery, setPromptQuery] = useState(""); //Stores the question written in input field
   const [messages, setMessages] = useState([]);
-  // function
-  console.log("Messages ", messages);
+  const [currentQuestion, setcurrentQuestion] = useState(""); //used to store the current question that was asked, it will be displayed on the screen
+  const [currentAnswer, setCurrentAnswer] = useState(""); //used to store the current answer that was returned, it will be displayed on the screen
+  // console.log("Messages ", messages);
   function promptHandler(e) {
     e.preventDefault();
     setPromptQuery(e.target.value);
   }
-
+  console.log("Query list: ", queryList);
   async function submitPromptHandler(e) {
     e.preventDefault();
     if (promptQuery === "") {
       return;
     }
+
     const text = promptQuery;
     setPromptQuery("");
+    // fetch("https://genai-video-analyzer-rrcr7xvxjq-uc.a.run.app/api/chat", {
+    //   headers: {
+    //     "Content-type": "application/json",
+    //   },
+    //   method: "POST",
+    //   body: JSON.stringify({ urls: [], question: text }),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) =>
+    //     setQueryList((prevQueries) => [
+    //       ...prevQueries,
+    //       { author: text, bot: data.answer },
+    //     ])
+    //   );
     const response = await fetch(`http://localhost:8000/trial/${text}`);
 
     const data = await response.json();
@@ -78,7 +94,7 @@ const Trial = () => {
         bot: data.candidates[0].content,
       },
     ]);
-    setPromptQuery("");
+    // setPromptQuery("");
     // promptRef.current.value = "";
     // setQueryList([
     //   ...queryList,
@@ -167,7 +183,7 @@ const Trial = () => {
                 <>
                   <div className={styles.userQuery}>
                     <FaUser className={styles.userIcon} />
-                    <p>{query.author}</p>
+                    <p>{query?.author}</p>
                   </div>
                   <div className={`${styles.userQuery} ${styles.botQuery}`}>
                     <section className={styles.logo}>
@@ -175,7 +191,7 @@ const Trial = () => {
                       <div className={`${styles.second}`}></div>
                       <div className={`${styles.third} `}></div>
                     </section>
-                    <p>{query.bot}</p>
+                    <p>{query?.bot}</p>
                   </div>
                 </>
               );

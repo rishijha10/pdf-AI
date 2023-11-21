@@ -1,4 +1,4 @@
-import React, { useContext, useReducer, useState } from "react";
+import React, { useContext, useEffect, useReducer, useState } from "react";
 import styles from "./FormComponent.module.css";
 import { FcGoogle } from "react-icons/fc";
 import { setDoc, doc } from "firebase/firestore";
@@ -29,10 +29,16 @@ const reducer = (state, action) => {
   }
 };
 const FormComponent = () => {
-  const [state, dispatch] = useReducer(reducer, initialStates);
-  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const ctxMain = useContext(MainContext);
+  useEffect(() => {
+    if (ctxMain.userAuth) {
+      navigate("/pdf-ai-gen1");
+    }
+  }, [ctxMain.userAuth]);
+  const [state, dispatch] = useReducer(reducer, initialStates);
+  const [searchParams] = useSearchParams();
+
   const isSignIn = searchParams.get("mode") === "signIn";
   function signInGoogle() {
     signInWithPopup(auth, provider)
@@ -56,6 +62,7 @@ const FormComponent = () => {
         // ...
       });
   }
+
   async function addData(result) {
     ctxMain.setUserId(result.uid);
     await setDoc(doc(db, "users", result.uid), {

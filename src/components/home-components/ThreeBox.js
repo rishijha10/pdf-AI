@@ -16,10 +16,10 @@ const ThreeBox = () => {
           >
             <h1>1. Easily Upload your PDF</h1>
             <p>
-              Drag and drop or just upload your PDF from your <br />
-              computer anything up to 50MB – and let our software <br />
-              start its wizardry! When your document has uploaded you <br />
-              are ready to chat with the PDF AI reader.
+              Drag and drop or just upload your PDF from your computer anything
+              up to 50MB – and let our software start its wizardry! When your
+              document has uploaded you are ready to chat with the PDF AI
+              reader.
             </p>
             <img src={boxImg1}></img>
           </div>
@@ -32,12 +32,10 @@ const ThreeBox = () => {
           >
             <h1>3. Cite the Source of Information</h1>
             <p>
-              Without needing to rescan the whole <br />
-              document again, you chat to the PDF and <br />
-              ask for the sources of its answers. The AI <br />
-              PDF reader will link straight to the page of <br />
-              the answer making your citation process a <br />
-              piece of cake!
+              Without needing to rescan the whole document again, you chat to
+              the PDF and ask for the sources of its answers. The AI PDF reader
+              will link straight to the page of the answer making your citation
+              process a piece of cake!
             </p>
             <img src={boxImg2}></img>
           </div>
@@ -53,13 +51,11 @@ const ThreeBox = () => {
           <h1>2. Ask Questions, Get Answers</h1>
 
           <p>
-            Start your chat with the PDF. Our AI PDF reader <br />
-            understands your simple language questions and scans the <br />
-            document finding answers to your questions without you <br />
-            having to manually search the document yourself. Ask more
-            <br />
-            questions and the AI PDF reader will find the answers you <br />
-            need.
+            Start your chat with the PDF. Our AI PDF reader understands your
+            simple language questions and scans the document finding answers to
+            your questions without you having to manually search the document
+            yourself. Ask more questions and the AI PDF reader will find the
+            answers you need.
           </p>
           <img src={boxImg3}></img>
         </div>
