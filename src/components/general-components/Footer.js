@@ -31,7 +31,7 @@ const Footer = () => {
             </div>
             <div className={classes.two}>
                 <hr className={classes.line2}></hr>
-                <p> &copy;2023 OfficeGPT. All rights reserved.</p>
+                <p> &copy; 2023 OfficeGPT. All rights reserved.</p>
             </div>
         </div>
     </div>

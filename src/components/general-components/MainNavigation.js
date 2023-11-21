@@ -4,10 +4,17 @@ import { Link, NavLink } from "react-router-dom";
 import { MainContext } from "../../store/MainContext";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
-
+import { HiMenu } from "react-icons/hi";
+import { RxCross2 } from "react-icons/rx";
 const MainNavigation = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
-
+  const [isOpen, setIsOpen] = useState(false);
+  function hamburgerHandler() {
+    setIsOpen(true);
+  }
+  function crossHandler() {
+    setIsOpen(false);
+  }
   useEffect(() => {
     const handleScroll = () => {
       setScrollPosition(window.scrollY);
@@ -81,6 +88,43 @@ const MainNavigation = () => {
                 <button className={styles.vibrant}>Get Started For Free</button>
               </NavLink>
             </>
+          )}
+          <HiMenu className={styles.hamburgerIcon} onClick={hamburgerHandler} />
+
+          {isOpen && (
+            <div
+              className={styles.dropDown}
+              data-aos="fade-down"
+              data-aos-duration="400"
+              data-aos-once="true"
+              data-aos-easing="ease-in-out"
+            >
+              <div className={styles.dropInnercontainer}>
+                <div className={styles.cross}>
+                  <div className={styles.logo_full}>
+                    <section className={styles.logo}>
+                      <div className={styles.first}></div>
+                      <div className={styles.second}></div>
+                      <div className={styles.third}></div>
+                    </section>
+                    <p>OfficeGPT</p>
+                  </div>
+                  <RxCross2
+                    className={styles.closeMenu}
+                    onClick={crossHandler}
+                  />
+                </div>
+
+                <div className={styles.menuList}>
+                  {/* <RxCross2 className={styles.closeMenu}/> */}
+                  <li>Product</li>
+                  <li>Solution</li>
+                  <li>Pricing</li>
+                  <li>Resources</li>
+                  <li>Partners</li>
+                </div>
+              </div>
+            </div>
           )}
         </section>
       </div>
