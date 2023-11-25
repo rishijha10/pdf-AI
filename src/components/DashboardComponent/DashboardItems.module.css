@@ -1,0 +1,12 @@
+.itemsContainer {
+  width: 75%;
+  margin: 0 auto;
+}
+.itemsContainer h1 {
+  text-align: center;
+}
+.itemsInnerContainer {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}

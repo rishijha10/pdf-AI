@@ -1,6 +1,7 @@
 // import React from "react";
 import styles from "./Trial.module.css";
 import pdfFile from "../../assets/Lion.pdf";
+import zz from "../../assets/zz.pdf";
 import React, { useContext, useEffect, useState } from "react";
 import { IoIosSend } from "react-icons/io";
 import { MainContext } from "../../store/MainContext";
@@ -40,14 +41,10 @@ const Trial = () => {
   const ctxMain = useContext(MainContext);
   const navigate = useNavigate();
   useEffect(() => {
-    if (!ctxMain.userAuth) {
+    if (!ctxMain?.user?.email) {
       navigate("/auth?mode=signIn");
     }
-  }, [ctxMain.userAuth]);
-  // if (ctxMain.userAuth === null) {
-  //   navigate("/auth");
-  // }
-  // const promptRef = useRef();
+  }, [ctxMain.user?.email]);
 
   const [queryList, setQueryList] = useState([]); //stores the objects of questions and answers in pair
   const [promptQuery, setPromptQuery] = useState(""); //Stores the question written in input field
@@ -59,7 +56,7 @@ const Trial = () => {
     e.preventDefault();
     setPromptQuery(e.target.value);
   }
-  console.log("Query list: ", queryList);
+  // console.log("Query list: ", queryList);
   async function submitPromptHandler(e) {
     e.preventDefault();
     if (promptQuery === "") {
@@ -138,7 +135,7 @@ const Trial = () => {
     <div className={styles.container}>
       <div className={styles.inner}>
         <div className={styles.innerLeft}>
-          <iframe width={"100%"} height={"100%"} src={`${pdfFile}#toolbar=0`} />
+          <iframe width={"100%"} height={"100%"} src={`${zz}#toolbar=0`} />
         </div>
         <div className={styles.innerRight}>
           <section className={styles.upperSection}>

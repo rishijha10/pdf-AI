@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./HeroSection.module.css";
 import heroImage1 from "./../../assets/pdf.png.png";
 import { NavLink } from "react-router-dom";
+import { MainContext } from "../../store/MainContext";
 const HeroSection = () => {
+  const ctxMain = useContext(MainContext);
   return (
     <div className={styles.container}>
       <section>
@@ -14,7 +16,8 @@ const HeroSection = () => {
           Chat your way through long documents. Command our PDF AI to summarize
           for you.
         </p>
-        <NavLink to={`/pdf-ai-gen1`}>
+        <NavLink to={`/${ctxMain.user?.uid}/dashboard`}>
+          {/* <NavLink to={`/pdf-ai-gen1`}> */}
           <button>Get started -{">"}</button>
         </NavLink>
 

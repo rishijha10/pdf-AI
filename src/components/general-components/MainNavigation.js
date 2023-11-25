@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import styles from "./MainNavigation.module.css";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { MainContext } from "../../store/MainContext";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
@@ -9,6 +9,7 @@ import { RxCross2 } from "react-icons/rx";
 const MainNavigation = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
   function hamburgerHandler() {
     setIsOpen(true);
   }
@@ -32,6 +33,7 @@ const MainNavigation = () => {
   function signOutUser() {
     signOut(auth)
       .then(console.log("Signout successful"))
+      .then(() => navigate("/"))
       .catch((err) => console.log(err));
   }
   return (
@@ -72,9 +74,17 @@ const MainNavigation = () => {
           </ul>
         </nav>
         <section className={styles.navButtons}>
-          {ctxMain.userAuth ? (
+          {ctxMain?.user?.email ? (
             <>
-              <p>{ctxMain.userAuth}</p>
+              <Link to={`/auth?mode=signIn`}>
+                <p
+                  className={` ${
+                    isScrolled ? styles.white : styles.defaultLogo
+                  }`}
+                >
+                  {ctxMain.user?.email}
+                </p>
+              </Link>
               <button onClick={signOutUser}>Log out</button>
             </>
           ) : (

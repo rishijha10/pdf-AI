@@ -31,11 +31,11 @@ const reducer = (state, action) => {
 const FormComponent = () => {
   const navigate = useNavigate();
   const ctxMain = useContext(MainContext);
-  useEffect(() => {
-    if (ctxMain.userAuth) {
-      navigate("/pdf-ai-gen1");
-    }
-  }, [ctxMain.userAuth]);
+  // useEffect(() => {
+  //   if (ctxMain.userAuth) {
+  //     navigate("/pdf-ai-gen1");
+  //   }
+  // }, [ctxMain.userAuth]);
   const [state, dispatch] = useReducer(reducer, initialStates);
   const [searchParams] = useSearchParams();
 
@@ -45,8 +45,8 @@ const FormComponent = () => {
       .then((result) => {
         const user = result.user;
         // setUserId(user.uid);
-        console.log(user);
-        console.log(user.uid);
+        // console.log(user);
+        // console.log(user.uid);
         return user;
       })
       // .then((result) => addData(result))
@@ -64,7 +64,6 @@ const FormComponent = () => {
   }
 
   async function addData(result) {
-    ctxMain.setUserId(result.uid);
     await setDoc(doc(db, "users", result.uid), {
       name: result.displayName,
       email: result.email,
@@ -78,17 +77,17 @@ const FormComponent = () => {
       isSignIn
         ? signInWithEmailAndPassword(auth, state.email, state.password)
             .then((userCredential) => {
-              console.log(userCredential);
+              // console.log(userCredential);
             })
             .catch((err) => console.error(err.message))
         : createUserWithEmailAndPassword(auth, state.email, state.password)
             .then((userCredential) => {
-              console.log(userCredential);
+              // console.log(userCredential);
             })
             .catch((err) => console.error(err.message));
     }
-    console.log(state.email);
-    console.log(state.password);
+    // console.log(state.email);
+    // console.log(state.password);
     dispatch({ type: "reset" });
     redirect("/trial");
   }
