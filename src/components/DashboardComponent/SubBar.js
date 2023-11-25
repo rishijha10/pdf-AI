@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import styles from "./SubBar.module.css";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { v4 } from "uuid";
 import { addDoc, collection } from "firebase/firestore";
 import { useContext } from "react";
 import { MainContext } from "../../store/MainContext";
+import { RiUploadCloud2Line } from "react-icons/ri";
+import { IoMdAddCircleOutline } from "react-icons/io";
 import { db } from "../../firebase/firebase";
+import { GrUploadOption } from "react-icons/gr";
 const SubBar = (props) => {
   const [fileName, setFileName] = useState("");
   const [pdfFile, setPdfFile] = useState(null);
@@ -19,6 +22,27 @@ const SubBar = (props) => {
     const fileRef = ref(storage, `pdfs/${pdfFile.name + v4()}`);
     console.log(pdfFile.name);
     uploadBytes(fileRef, pdfFile).then(async (snapshot) => {
+      // const data = {
+      //   createdAt: snapshot.metadata.timeCreated,
+      //   lastAccessed: new Date(),
+      //   name: snapshot.metadata.name,
+      //   uid: ctxMain.user.uid,
+      //   path: ctxMain.currentFolder,
+      // };
+      // getDownloadURL(snapshot.ref).then(async (url) => {
+      //   data.url = { url };
+      //   try {
+      //     const docRef = await addDoc(collection(db, "Pdf-Files"), data);
+      //     console.log("Document written with ID: ", docRef.id);
+      //     ctxMain.setUserFiles((prev) => [
+      //       ...prev,
+      //       { data: data, docId: data.name },
+      //     ]);
+      //     return docRef.id;
+      //   } catch (e) {
+      //     console.error("Error adding document: ", e);
+      //   }
+      // });
       const data = {
         createdAt: snapshot.metadata.timeCreated,
         lastAccessed: new Date(),
@@ -45,25 +69,37 @@ const SubBar = (props) => {
   }
   return (
     <div className={styles.container}>
-      <h1>Your Documents</h1>
+      <h1>Your documents</h1>
       <ul>
         <li>
           {/* <button>Upload file</button> */}
-          <form onSubmit={fileSubmitHandler}>
+          {/* <form onSubmit={fileSubmitHandler}>
             <input
               type="file"
               name="pdfFile"
               onChange={(e) => setPdfFile(e.target.files[0])}
             />
             <button type="submit">Upload</button>
-          </form>
+          </form> */}
         </li>
-        {/* <li>
-          <button>Create file</button>
-        </li> */}
+        {props.showCreateFolderBtn && (
+          <li>
+            <button
+              onClick={() => props.setIsCreateFolderOpen(true)}
+              className={styles.createBtn}
+            >
+              Create folder
+            </button>
+          </li>
+        )}
         <li>
-          <button onClick={() => props.setIsCreateFolderOpen(true)}>
-            Create folder
+          <button className={styles.uploadBtn}>
+            Upload PDF{" "}
+            {/* <GrUploadOption
+              className={styles.uploadIcon}
+              style={{ color: "white" }}
+            /> */}
+            <RiUploadCloud2Line className={styles.uploadIcon} />
           </button>
         </li>
       </ul>

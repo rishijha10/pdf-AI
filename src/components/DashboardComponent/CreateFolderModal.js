@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import styles from "./CreateFolderModal.module.css";
 import { MainContext } from "../../store/MainContext";
 import { db } from "../../firebase/firebase";
+import { IoClose } from "react-icons/io5";
 import {
   addDoc,
   collection,
@@ -89,20 +90,26 @@ const CreateFolderModal = (props) => {
     <>
       {props.isCreateFolderOpen && (
         <div className={styles.modalContainer}>
+          <h2>Create a folder</h2>
           <form onSubmit={submitHandler}>
             <input
               type="text"
               name="folder-name"
               value={fileName}
+              placeholder="Folder name"
               onChange={(e) => setFileName(e.target.value)}
             />
             <button type="submit" onClick={submitHandler}>
-              Submit
+              Create
             </button>
-            <button onClick={() => props.setIsCreateFolderOpen(false)}>
+            {/* <button onClick={() => props.setIsCreateFolderOpen(false)}>
               Close
-            </button>
+            </button> */}
           </form>
+          <IoClose
+            className={styles.closeIcon}
+            onClick={() => props.setIsCreateFolderOpen(false)}
+          />
         </div>
       )}
     </>

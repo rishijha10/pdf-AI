@@ -21,9 +21,9 @@ const PdfComponent = () => {
   // }
   return (
     <div style={{ marginTop: "100px", display: "inline-block", width: "100%" }}>
-      <SubBar />
-      Folder Id: {folderId}
-      <DashboardItems title={"Files"} items={ctxMain.userFiles} />
+      <SubBar showCreateFolderBtn={false} />
+      {/* Folder Id: {folderId} */}
+      <DashboardItems title={"Files"} items={ctxMain.userFiles} type={"file"} />
     </div>
   );
 };
