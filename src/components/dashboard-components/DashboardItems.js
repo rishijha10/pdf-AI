@@ -10,6 +10,14 @@ const DashboardItems = ({ title, items, type }) => {
   function doubleClickHandler(id) {
     navigate(`/folder/${id}`);
   }
+  function pdfHandler(pdfUrl) {
+    // console.log("Items: ", pdfUrl.data?.fileUrl);
+    // console.log("Items type :", typeof pdfUrl.data?.fileUrl);
+    // const modifiedUrl = pdfUrl.data?.fileUrl.replace("https://", "");
+    // console.log(modifiedUrl);
+    navigate(`/pdf-ai-gen1/${pdfUrl?.data?.name}`);
+    // navigate(`/pdf-ai-gen1/${pdfUrl.data?.fileUrl}`);
+  }
   return (
     <div className={styles.itemsContainer}>
       {/* <h1>{title}</h1> */}
@@ -18,16 +26,23 @@ const DashboardItems = ({ title, items, type }) => {
           return (
             <div
               key={index}
-              onDoubleClick={() => doubleClickHandler(item?.docId)}
+              // onDoubleClick={() => doubleClickHandler(item?.docId)}
               className={styles.file}
             >
               <div className={styles.innerFile}>
                 {type === "file" ? (
-                  <FaRegFilePdf className={styles.pdfIcon} />
+                  <>
+                    <FaRegFilePdf className={styles.pdfIcon} />
+                    <p onClick={() => pdfHandler(item)}>{item?.data?.name}</p>
+                  </>
                 ) : (
-                  <FaRegFolder className={styles.pdfIcon} />
+                  <>
+                    <FaRegFolder className={styles.pdfIcon} />
+                    <p onDoubleClick={() => doubleClickHandler(item?.docId)}>
+                      {item?.data?.name}
+                    </p>
+                  </>
                 )}
-                <p>{item?.data?.name}</p>
               </div>
               {/* <p>{item?data?.}</p> */}
               <MdDeleteOutline className={styles.pdfIcon} />

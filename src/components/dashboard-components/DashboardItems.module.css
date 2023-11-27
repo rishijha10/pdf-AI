@@ -1,6 +1,7 @@
 .itemsContainer {
   width: 75%;
   margin: 0 auto;
+  margin-bottom: 25px;
   /* border: 1px solid black; */
   border: 1px solid #e5e3da;
   border-radius: 5px;
@@ -27,6 +28,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 25px;
+  /* border-bottom: 1px solid #e5e3da; */
   /* border: 1px solid black; */
 }
 .innerFile {
@@ -39,4 +41,5 @@
   margin: 0;
   font-family: Inter;
   font-weight: 500;
+  cursor: pointer;
 }

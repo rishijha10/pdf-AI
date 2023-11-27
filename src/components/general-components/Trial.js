@@ -6,7 +6,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { IoIosSend } from "react-icons/io";
 import { MainContext } from "../../store/MainContext";
 import { FaUser } from "react-icons/fa6";
-import { useNavigate, useNavigation } from "react-router-dom";
+import { useNavigate, useNavigation, useParams } from "react-router-dom";
 // const Trial = () => {
 //   return (
 //     <div className={styles.container}>
@@ -38,7 +38,11 @@ import { useNavigate, useNavigation } from "react-router-dom";
 // export default Trial;
 
 const Trial = () => {
+  const { pdfUrl } = useParams();
+  console.log("Pdf url ", pdfUrl);
   const ctxMain = useContext(MainContext);
+  const urlObject = ctxMain.userFiles.find((item) => item.data.name === pdfUrl);
+  console.log(urlObject);
   const navigate = useNavigate();
   useEffect(() => {
     if (!ctxMain?.user?.email) {
@@ -135,7 +139,17 @@ const Trial = () => {
     <div className={styles.container}>
       <div className={styles.inner}>
         <div className={styles.innerLeft}>
-          <iframe width={"100%"} height={"100%"} src={`${zz}#toolbar=0`} />
+          {/* <iframe width={"100%"} height={"100%"} src={`${zz}#toolbar=0`} /> */}
+          <iframe
+            width={"100%"}
+            height={"100%"}
+            // src="https://www.ndvsu.org/images/StudyMaterials/LPM/Cat.pdf"
+            src={
+              urlObject?.data?.fileUrl
+                ? `${urlObject?.data?.fileUrl}#toolbar=0`
+                : `https://www.ndvsu.org/images/StudyMaterials/LPM/Cat.pdf#toolbar=0 `
+            }
+          />
         </div>
         <div className={styles.innerRight}>
           <section className={styles.upperSection}>

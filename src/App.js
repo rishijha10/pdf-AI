@@ -13,7 +13,7 @@ import {
   useMutation,
 } from "@tanstack/react-query";
 import DashboardPage from "./pages/DashboardPage";
-import PdfComponent from "./components/DashboardComponent/pdf-component/PdfComponent";
+import PdfComponent from "./components/dashboard-components/pdf-component/PdfComponent";
 
 function App() {
   const queryClient = new QueryClient();
@@ -24,7 +24,12 @@ function App() {
       children: [
         { index: true, element: <HomePage /> },
         { path: "/auth", element: <RegisterPage /> },
-        { path: "/pdf-ai-gen1", element: <Trial /> },
+        {
+          path: "/pdf-ai-gen1",
+          element: <Trial />,
+          // children: [{ path: ":pdfUrl", element: <Trial /> }],
+        },
+        { path: "/pdf-ai-gen1/:pdfUrl", element: <Trial /> },
         {
           path: "/:uid/dashboard",
           element: <DashboardPage />,

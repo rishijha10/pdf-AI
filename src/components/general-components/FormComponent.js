@@ -44,43 +44,40 @@ const FormComponent = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         const user = result.user;
-        // setUserId(user.uid);
-        // console.log(user);
-        // console.log(user.uid);
         return user;
       })
       // .then((result) => addData(result))
-      .then(() => navigate("/pdf-ai-gen1"))
+      .then((user) => navigate(`/${user.uid}/dashboard`))
       .catch((error) => {
         // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.customData.email;
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
+        // const errorCode = error.code;
+        // const errorMessage = error.message;
+        // // The email of the user's account used.
+        // const email = error.customData.email;
+        // // The AuthCredential type that was used.
+        // const credential = GoogleAuthProvider.credentialFromError(error);
         // ...
       });
   }
 
-  async function addData(result) {
-    await setDoc(doc(db, "users", result.uid), {
-      name: result.displayName,
-      email: result.email,
-      phototUrl: result.photoURL,
-    });
-  }
+  // async function addData(result) {
+  //   await setDoc(doc(db, "users", result.uid), {
+  //     name: result.displayName,
+  //     email: result.email,
+  //     phototUrl: result.photoURL,
+  //   });
+  // }
 
   function formSubmit(e) {
     e.preventDefault();
     {
       isSignIn
-        ? signInWithEmailAndPassword(auth, state.email, state.password)
+        ? signInWithEmailAndPassword(auth, state?.email, state.password)
             .then((userCredential) => {
               // console.log(userCredential);
             })
             .catch((err) => console.error(err.message))
-        : createUserWithEmailAndPassword(auth, state.email, state.password)
+        : createUserWithEmailAndPassword(auth, state?.email, state.password)
             .then((userCredential) => {
               // console.log(userCredential);
             })
@@ -89,7 +86,7 @@ const FormComponent = () => {
     // console.log(state.email);
     // console.log(state.password);
     dispatch({ type: "reset" });
-    redirect("/trial");
+    // redirect("/trial");
   }
 
   return (
@@ -103,7 +100,7 @@ const FormComponent = () => {
             id="email"
             placeholder="email@example.com"
             onChange={(e) => dispatch({ type: "email", value: e.target.value })}
-            value={state.email}
+            value={state?.email}
           />
           <input
             name="password"

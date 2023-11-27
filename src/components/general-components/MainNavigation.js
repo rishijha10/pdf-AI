@@ -33,6 +33,12 @@ const MainNavigation = () => {
   function signOutUser() {
     signOut(auth)
       .then(console.log("Signout successful"))
+      .then(() => {
+        ctxMain.setUser(null);
+        ctxMain.setCurrentFolder("root");
+        ctxMain.setUserFolders([]);
+        ctxMain.setUserFiles([]);
+      })
       .then(() => navigate("/"))
       .catch((err) => console.log(err));
   }

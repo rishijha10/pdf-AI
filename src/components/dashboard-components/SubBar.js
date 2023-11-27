@@ -93,8 +93,11 @@ const SubBar = (props) => {
           </li>
         )}
         <li>
-          <button className={styles.uploadBtn}>
-            Upload PDF{" "}
+          <button
+            className={styles.uploadBtn}
+            onClick={() => ctxMain.setIsUploadPdfOpen(true)}
+          >
+            Upload PDF
             {/* <GrUploadOption
               className={styles.uploadIcon}
               style={{ color: "white" }}

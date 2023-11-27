@@ -1,0 +1,60 @@
+.modalContainer {
+  width: 40%;
+  position: absolute;
+  background-color: white;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 30px;
+  font-family: Inter;
+  border-radius: 6px;
+}
+.modalContainer p {
+  font-weight: 500;
+}
+.closeIcon {
+  cursor: pointer;
+  position: absolute;
+  right: 2%;
+  top: 4%;
+  font-size: 25px;
+}
+.modalContainer section {
+  width: 100%;
+  height: 200px;
+  border: 1px dashed black;
+  position: relative;
+}
+.modalContainer section p {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.modalContainer form {
+  display: flex;
+  flex-direction: column;
+}
+.modalContainer form input {
+  visibility: hidden;
+}
+.modalContainer form button {
+  /* text-align: left; */
+  width: 20%;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  padding: 12px 20px;
+  font-family: Inter;
+  font-size: 16px;
+  border-radius: 6px;
+  color: white;
+  /* background-color: #553628; */
+  background-color: #ff612f;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}

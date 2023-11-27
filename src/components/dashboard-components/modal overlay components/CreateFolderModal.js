@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import styles from "./CreateFolderModal.module.css";
-import { MainContext } from "../../store/MainContext";
-import { db } from "../../firebase/firebase";
+import { MainContext } from "../../../store/MainContext";
+import { db } from "../../../firebase/firebase";
 import { IoClose } from "react-icons/io5";
 import {
   addDoc,

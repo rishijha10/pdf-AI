@@ -2,10 +2,12 @@ import { onAuthStateChanged } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import { auth, db } from "../firebase/firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
+import { useContext } from "react";
 
 export const MainContext = createContext(null);
 
 const MainContextProvider = (props) => {
+  const [isUploadPdfOpen, setIsUploadPdfOpen] = useState(false);
   const [user, setUser] = useState({});
   const [currentFolder, setCurrentFolder] = useState("root");
   const [userFolders, setUserFolders] = useState([]);
@@ -58,7 +60,7 @@ const MainContextProvider = (props) => {
           displayName: user.displayName,
           uid: user.uid,
         });
-        getData(user.uid, "Folders", "folder");
+        getData(user?.uid, "Folders", "folder");
         // getData(user.uid, "Pdf-Files", "files");
       } else {
         setUser(null);
@@ -66,7 +68,7 @@ const MainContextProvider = (props) => {
     });
   }, []);
   useEffect(() => {
-    getData(user.uid, "Pdf-Files", "files");
+    getData(user?.uid, "Pdf-Files", "files");
   }, [currentFolder]);
   console.log("User folders: ", userFolders);
   console.log("User files: ", userFiles);
@@ -77,10 +79,13 @@ const MainContextProvider = (props) => {
         userFolders,
         setUserFolders,
         user,
+        setUser,
         currentFolder,
         setCurrentFolder,
         userFiles,
         setUserFiles,
+        isUploadPdfOpen,
+        setIsUploadPdfOpen,
       }}
     >
       {props.children}

@@ -6,6 +6,8 @@ import { MainContext } from "../../../store/MainContext";
 import DashboardItems from "../DashboardItems";
 import { collection, query, where } from "firebase/firestore";
 import { db } from "../../../firebase/firebase";
+import ModalOverlay from "../modal overlay components/ModalOverlay";
+import UploadPdfModal from "../modal overlay components/UploadPdfModal";
 const PdfComponent = () => {
   const { folderId } = useParams();
   const ctxMain = useContext(MainContext);
@@ -24,6 +26,9 @@ const PdfComponent = () => {
       <SubBar showCreateFolderBtn={false} />
       {/* Folder Id: {folderId} */}
       <DashboardItems title={"Files"} items={ctxMain.userFiles} type={"file"} />
+      <ModalOverlay>
+        <UploadPdfModal />
+      </ModalOverlay>
     </div>
   );
 };

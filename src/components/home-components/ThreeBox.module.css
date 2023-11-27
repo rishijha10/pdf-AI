@@ -35,7 +35,7 @@
 .downBox {
   margin-top: 30px;
   /* margin-left: 24%; */
-  width: 60%;
+  width: 70%;
   height: 600px;
   padding: 50px;
   border-radius: 15px;
@@ -99,7 +99,7 @@
   position: absolute;
   width: 100%;
   right: -8%;
-  bottom: -4%;
+  bottom: -18%;
 }
 .right img {
   border-radius: 15px;
