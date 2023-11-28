@@ -3,20 +3,35 @@ import styles from "./UploadPdfModal.module.css";
 import { IoClose } from "react-icons/io5";
 import { MainContext } from "../../../store/MainContext";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { v4 } from "uuid";
+// import { v4 } from "uuid";
 import { addDoc, collection } from "firebase/firestore";
 import { db, storage } from "../../../firebase/firebase";
 const UploadPdfModal = (props) => {
   const [pdfFile, setPdfFile] = useState(null);
+  const fileRef = useRef(null);
+  function filtInputHandler() {
+    fileRef.current.click(); //clicks the input type file to open file window when section box is clicked
+  }
   const ctxMain = useContext(MainContext);
-  let data;
+  let data; //stores data of uploaded pdf
+  function checkDuplicateFileName(name) {
+    for (let i = 0; i < ctxMain.userFiles.length; i++) {
+      if (ctxMain.userFiles[i].data.name === name) {
+        return false;
+      }
+    }
+    return true;
+  }
+  checkDuplicateFileName();
   function fileSubmitHandler(e) {
     e.preventDefault();
     if (!pdfFile) {
       return;
     }
-    const fileRef = ref(storage, `pdfs/${pdfFile.name + v4()}`);
-    console.log(pdfFile.name);
+    if (!checkDuplicateFileName(pdfFile.name)) {
+      return alert("A file by this name already exists in the current folder");
+    }
+    const fileRef = ref(storage, `pdfs/${ctxMain?.user?.uid}/${pdfFile.name}`);
     uploadBytes(fileRef, pdfFile).then(async (snapshot) => {
       // const data = {
       //   createdAt: snapshot.metadata.timeCreated,
@@ -43,25 +58,25 @@ const UploadPdfModal = (props) => {
         createdAt: snapshot.metadata.timeCreated,
         lastAccessed: new Date(),
         name: snapshot.metadata.name,
-        uid: ctxMain.user.uid,
+        uid: ctxMain?.user?.uid,
         path: ctxMain.currentFolder,
-        // url: url,
       };
-      getDownloadURL(snapshot.ref).then(async (url) => {
-        console.log("url: ", url);
-        data.fileUrl = url;
-        try {
-          const docRef = await addDoc(collection(db, "Pdf-Files"), data);
-          console.log("Document written with ID: ", docRef.id);
-          ctxMain.setUserFiles((prev) => [
-            ...prev,
-            { data: data, docId: data.name },
-          ]);
-          return docRef.id;
-        } catch (e) {
-          console.error("Error adding document: ", e);
-        }
-      });
+      getDownloadURL(snapshot.ref)
+        .then(async (url) => {
+          data.fileUrl = url;
+          try {
+            const docRef = await addDoc(collection(db, "Pdf-Files"), data);
+            console.log("Document written with ID: ", docRef.id);
+            ctxMain.setUserFiles((prev) => [
+              ...prev,
+              { data: data, docId: data.name },
+            ]);
+            return docRef.id;
+          } catch (e) {
+            console.error("Error adding document: ", e);
+          }
+        })
+        .catch((e) => console.error(e));
       // console.log(url);
       // data = {
       //   createdAt: snapshot.metadata.timeCreated,
@@ -87,11 +102,6 @@ const UploadPdfModal = (props) => {
     //   // getDownloadURL(snapshot.ref).then((url) => setFileUrl(url));
     //   console.log("Uploaded pdf: ", snapshot);
     // });
-  }
-
-  const fileRef = useRef(null);
-  function filtInputHandler() {
-    fileRef.current.click();
   }
 
   return (

@@ -2,7 +2,6 @@ import { onAuthStateChanged } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import { auth, db } from "../firebase/firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
-import { useContext } from "react";
 
 export const MainContext = createContext(null);
 
@@ -10,10 +9,10 @@ const MainContextProvider = (props) => {
   const [isUploadPdfOpen, setIsUploadPdfOpen] = useState(false);
   const [user, setUser] = useState({});
   const [currentFolder, setCurrentFolder] = useState("root");
-  const [userFolders, setUserFolders] = useState([]);
-  const [userFiles, setUserFiles] = useState([]);
-  const [adminFolders, setAdminFolders] = useState([]);
-  const [adminFiles, setAdminFiles] = useState([]);
+  const [userFolders, setUserFolders] = useState([]); //stores all of users folders
+  const [userFiles, setUserFiles] = useState([]); //stores the files inside a particular folder
+  // const [adminFolders, setAdminFolders] = useState([]);
+  // const [adminFiles, setAdminFiles] = useState([]);
   async function getData(uid, fileName, type) {
     try {
       const docRef = collection(db, `${fileName}`);
@@ -51,7 +50,6 @@ const MainContextProvider = (props) => {
       console.log(err);
     }
   }
-  // console.log("Users email id is ", user?.email);
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {

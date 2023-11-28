@@ -43,3 +43,6 @@
   font-weight: 500;
   cursor: pointer;
 }
+.file p:hover {
+  text-decoration: underline;
+}

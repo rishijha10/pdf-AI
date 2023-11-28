@@ -1,22 +1,28 @@
-import React, { useEffect } from "react";
+import React, { useContext } from "react";
 import styles from "./DashboardItems.module.css";
 import { useNavigate } from "react-router-dom";
 import { FaRegFilePdf } from "react-icons/fa6";
 import { MdDeleteOutline } from "react-icons/md";
 import { FaRegFolder } from "react-icons/fa6";
+import { deleteDoc, doc } from "firebase/firestore";
+import { db } from "../../firebase/firebase";
+import { MainContext } from "../../store/MainContext";
 const DashboardItems = ({ title, items, type }) => {
-  // console.log("Dashboard items ", items);
+  const ctxMain = useContext(MainContext);
   const navigate = useNavigate();
   function doubleClickHandler(id) {
     navigate(`/folder/${id}`);
   }
-  function pdfHandler(pdfUrl) {
-    // console.log("Items: ", pdfUrl.data?.fileUrl);
-    // console.log("Items type :", typeof pdfUrl.data?.fileUrl);
-    // const modifiedUrl = pdfUrl.data?.fileUrl.replace("https://", "");
-    // console.log(modifiedUrl);
-    navigate(`/pdf-ai-gen1/${pdfUrl?.data?.name}`);
-    // navigate(`/pdf-ai-gen1/${pdfUrl.data?.fileUrl}`);
+  function pdfHandler(pdfData) {
+    navigate(`/pdf-ai-gen1/${pdfData?.data?.name}`);
+  }
+  async function folerDeleteHandler(pdfData) {
+    console.log(pdfData);
+    await deleteDoc(doc(db, "Folders", `${pdfData?.docId}`));
+    const updatedUserFolders = ctxMain.userFolders.filter(
+      (item) => item.docId !== pdfData?.docId
+    );
+    ctxMain.setUserFolders(updatedUserFolders);
   }
   return (
     <div className={styles.itemsContainer}>
@@ -24,11 +30,7 @@ const DashboardItems = ({ title, items, type }) => {
       <div className={styles.itemsInnerContainer}>
         {items?.map((item, index) => {
           return (
-            <div
-              key={index}
-              // onDoubleClick={() => doubleClickHandler(item?.docId)}
-              className={styles.file}
-            >
+            <div key={index} className={styles.file}>
               <div className={styles.innerFile}>
                 {type === "file" ? (
                   <>
@@ -38,14 +40,16 @@ const DashboardItems = ({ title, items, type }) => {
                 ) : (
                   <>
                     <FaRegFolder className={styles.pdfIcon} />
-                    <p onDoubleClick={() => doubleClickHandler(item?.docId)}>
+                    <p onClick={() => doubleClickHandler(item?.docId)}>
                       {item?.data?.name}
                     </p>
                   </>
                 )}
               </div>
-              {/* <p>{item?data?.}</p> */}
-              <MdDeleteOutline className={styles.pdfIcon} />
+              <MdDeleteOutline
+                className={styles.pdfIcon}
+                onClick={() => folerDeleteHandler(item)}
+              />
             </div>
           );
         })}
