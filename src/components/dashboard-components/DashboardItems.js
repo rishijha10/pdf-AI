@@ -26,7 +26,6 @@ const DashboardItems = ({ title, items, type }) => {
   }
   return (
     <div className={styles.itemsContainer}>
-      {/* <h1>{title}</h1> */}
       <div className={styles.itemsInnerContainer}>
         {items?.map((item, index) => {
           return (
@@ -48,7 +47,7 @@ const DashboardItems = ({ title, items, type }) => {
               </div>
               <MdDeleteOutline
                 className={styles.pdfIcon}
-                onClick={() => folerDeleteHandler(item)}
+                onClick={() => ctxMain.setConfirmDeleteModalOpen(true)}
               />
             </div>
           );

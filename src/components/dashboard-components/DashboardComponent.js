@@ -7,11 +7,11 @@ import { useContext } from "react";
 import { MainContext } from "../../store/MainContext";
 import ModalOverlay from "./modal overlay components/ModalOverlay";
 import UploadPdfModal from "./modal overlay components/UploadPdfModal";
+import ConfirmDeleteModal from "./modal overlay components/ConfirmDeleteModal";
 const DashboardComponent = () => {
   const ctxMain = useContext(MainContext);
   const [isCreateFolderOpen, setIsCreateFolderOpen] = useState(false); //used to open and close create folder modal
   // const [isUploadPdfOpen, setIsUploadPdfOpen] = useState(false); //used to open and close upload pdf modal
-  // const ctxMain = useContext(MainContext)
   return (
     <div className={styles.outerContainer}>
       {/* <ModalOverlay /> */}
@@ -23,28 +23,27 @@ const DashboardComponent = () => {
         // IsUploadPdfOpen={ctxMain.setIsUploadPdfOpen}
       />
       <DashboardItems title={"Folders"} items={ctxMain.userFolders} />
-      {/* <DashboardItems
-        title={"Files"}
-        items={["Files 1", "Files 2", "Files 3"]}
-      /> */}
-      <ModalOverlay
-        isCreateFolderOpen={isCreateFolderOpen}
-        setIsCreateFolderOpen={setIsCreateFolderOpen}
-      >
-        <CreateFolderModal
+      {isCreateFolderOpen && (
+        <ModalOverlay
           isCreateFolderOpen={isCreateFolderOpen}
           setIsCreateFolderOpen={setIsCreateFolderOpen}
-        />
-      </ModalOverlay>
-      <ModalOverlay
-      // isUploadPdfOpen={ctxMain.isUploadPdfOpen}
-      // setctxMain.IsUploadPdfOpen={setctxMain.IsUploadPdfOpen}
-      >
-        <UploadPdfModal
-        // ctxMain.isUploadPdfOpen={ctxMain.isUploadPdfOpen}
-        // setctxMain.IsUploadPdfOpen={setIsUploadPdfOpen}
-        />
-      </ModalOverlay>
+        >
+          <CreateFolderModal
+            isCreateFolderOpen={isCreateFolderOpen}
+            setIsCreateFolderOpen={setIsCreateFolderOpen}
+          />
+        </ModalOverlay>
+      )}
+      {ctxMain.isUploadPdfOpen && (
+        <ModalOverlay>
+          <UploadPdfModal />
+        </ModalOverlay>
+      )}
+      {ctxMain.confirmDeleteModalOpen && (
+        <ModalOverlay>
+          <ConfirmDeleteModal />
+        </ModalOverlay>
+      )}
     </div>
   );
 };

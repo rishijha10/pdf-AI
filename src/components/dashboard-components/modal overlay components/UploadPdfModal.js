@@ -105,30 +105,34 @@ const UploadPdfModal = (props) => {
   }
 
   return (
-    <div className={styles.modalContainer}>
-      <p>Upload document</p>
-      <section
-        className={styles.uploadSection}
-        onClick={filtInputHandler}
-        // onmouseover={filtInputHandler()}
-      >
-        <p>{pdfFile?.name}</p>
-      </section>
-      <IoClose
-        className={styles.closeIcon}
-        onClick={() => ctxMain.setIsUploadPdfOpen(false)}
-      />
-      <form onSubmit={fileSubmitHandler}>
-        <input
-          type="file"
-          name="pdfFile"
-          ref={fileRef}
-          accept="application/pdf"
-          onChange={(e) => setPdfFile(e.target.files[0])}
-        />
-        <button type="submit">Upload</button>
-      </form>
-    </div>
+    <>
+      {ctxMain.isUploadPdfOpen && (
+        <div className={styles.modalContainer}>
+          <p>Upload document</p>
+          <section
+            className={styles.uploadSection}
+            onClick={filtInputHandler}
+            // onmouseover={filtInputHandler()}
+          >
+            <p>{pdfFile?.name}</p>
+          </section>
+          <IoClose
+            className={styles.closeIcon}
+            onClick={() => ctxMain.setIsUploadPdfOpen(false)}
+          />
+          <form onSubmit={fileSubmitHandler}>
+            <input
+              type="file"
+              name="pdfFile"
+              ref={fileRef}
+              accept="application/pdf"
+              onChange={(e) => setPdfFile(e.target.files[0])}
+            />
+            <button type="submit">Upload</button>
+          </form>
+        </div>
+      )}
+    </>
   );
 };
 

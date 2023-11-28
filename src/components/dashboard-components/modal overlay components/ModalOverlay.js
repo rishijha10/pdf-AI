@@ -5,12 +5,16 @@ const ModalOverlay = (props) => {
   const ctxMain = useContext(MainContext);
   return (
     <>
-      {(props.isCreateFolderOpen && (
+      <div className={styles.overlay}>{props.children}</div>
+      {/* {(props.isCreateFolderOpen && (
         <div className={styles.overlay}>{props.children}</div>
       )) ||
         (ctxMain.isUploadPdfOpen && (
           <div className={styles.overlay}>{props.children}</div>
-        ))}
+        )) ||
+        (ctxMain.confirmDeleteModalOpen && (
+          <div className={styles.overlay}>{props.children}</div>
+        ))} */}
     </>
   );
 };

@@ -7,6 +7,7 @@ export const MainContext = createContext(null);
 
 const MainContextProvider = (props) => {
   const [isUploadPdfOpen, setIsUploadPdfOpen] = useState(false);
+  const [confirmDeleteModalOpen, setConfirmDeleteModalOpen] = useState(false);
   const [user, setUser] = useState({});
   const [currentFolder, setCurrentFolder] = useState("root");
   const [userFolders, setUserFolders] = useState([]); //stores all of users folders
@@ -84,6 +85,8 @@ const MainContextProvider = (props) => {
         setUserFiles,
         isUploadPdfOpen,
         setIsUploadPdfOpen,
+        confirmDeleteModalOpen,
+        setConfirmDeleteModalOpen,
       }}
     >
       {props.children}
