@@ -12,6 +12,7 @@ const MainContextProvider = (props) => {
   const [userFolders, setUserFolders] = useState([]); //stores all of users folders
   const [userFiles, setUserFiles] = useState([]); //stores the files inside a particular folder
   const [currentDocument, setCurrentDocument] = useState({});
+  const [allFileNames, setAllFileNames] = useState([]); //stores the names of every file that of the user
   console.log("Current document ", currentDocument);
   // const []
   // const [adminFolders, setAdminFolders] = useState([]);
@@ -30,7 +31,7 @@ const MainContextProvider = (props) => {
           // ctxMain.setUserFolders((prev) => [...prev, doc.data()]);
         });
         setUserFolders(folderData);
-      } else {
+      } else if (type === "files") {
         console.log("Current path: ", currentPath);
         const q = query(
           docRef,
@@ -47,6 +48,21 @@ const MainContextProvider = (props) => {
           // ctxMain.setUserFolders((prev) => [...prev, doc.data()]);
         });
         setUserFiles(filesData);
+      } else if (type === "all files") {
+        const q = query(docRef, where("uid", "==", uid));
+        const querySnapshot = await getDocs(q);
+        // console.log(querySnapshot);
+        const filesData = [];
+        querySnapshot.forEach((doc) => {
+          // doc.data() is never undefined for query doc snapshots
+          // console.log(doc.id, " => ", doc.data());
+          filesData.push({ data: doc.data(), docId: doc.id });
+          // ctxMain.setUserFolders((prev) => [...prev, doc.data()]);
+        });
+        // Use map to extract the 'name' property from each object
+        const newFilesData = filesData.map((item) => item.data.name);
+        console.log("File names: ", newFilesData);
+        setAllFileNames(newFilesData);
       }
     } catch (err) {
       console.log(err);
@@ -61,7 +77,7 @@ const MainContextProvider = (props) => {
           uid: user.uid,
         });
         getData(user?.uid, "Folders", "folder");
-        // getData(user.uid, "Pdf-Files", "files");
+        getData(user?.uid, "Pdf-Files", "all files");
       } else {
         setUser(null);
       }
@@ -72,7 +88,7 @@ const MainContextProvider = (props) => {
   }, [currentPath]);
   console.log("User folders: ", userFolders);
   console.log("User files: ", userFiles);
-
+  // console.log("All user files ", allFileNames);
   return (
     <MainContext.Provider
       value={{
@@ -90,6 +106,8 @@ const MainContextProvider = (props) => {
         setConfirmDeleteModalOpen,
         currentDocument,
         setCurrentDocument,
+        allFileNames,
+        setAllFileNames,
       }}
     >
       {props.children}

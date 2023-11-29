@@ -4,8 +4,10 @@ import { IoClose } from "react-icons/io5";
 import { MainContext } from "../../../store/MainContext";
 import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "../../../firebase/firebase";
+import { deleteObject, getStorage, ref } from "firebase/storage";
 const ConfirmDeleteModal = () => {
   const ctxMain = useContext(MainContext);
+  const storage = getStorage();
   async function folderDeleteHandler(documentData) {
     console.log(documentData);
     if (ctxMain?.userFiles) {
@@ -13,6 +15,19 @@ const ConfirmDeleteModal = () => {
         await deleteDoc(
           doc(db, "Pdf-Files", `${ctxMain?.userFiles[i]?.docId}`)
         );
+        const desertRef = ref(
+          storage,
+          `pdfs/${String(ctxMain.user.uid)}/${
+            ctxMain?.userFiles[i]?.data?.name
+          }`
+        );
+        deleteObject(desertRef)
+          .then(() => {
+            // File deleted successfully
+          })
+          .catch((error) => {
+            console.error("Could not delete document in firebase storage");
+          });
       }
       ctxMain.setUserFiles([]);
     }

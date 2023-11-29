@@ -3,8 +3,6 @@ import HomePage from "./pages/HomePage";
 import RegisterPage from "./pages/RegisterPage";
 import LayoutComponent from "./LayoutComponent";
 import Trial from "./components/general-components/Trial";
-import { useEffect } from "react";
-import { chatService } from "./store/VideoAnalyzer";
 // import "bootstrap/dist/css/bootstrap.min.css";
 // import "bootstrap/dist/js/bootstrap.bundle";
 import {
@@ -31,7 +29,8 @@ function App() {
         },
         { path: "/pdf-ai-gen1/:pdfUrl", element: <Trial /> },
         {
-          path: "/:uid/dashboard",
+          // path: "/:uid/dashboard",
+          path: "/dashboard/:uid",
           element: <DashboardPage />,
           // children: [{ path: "folder", element: <PdfComponent /> }],
         },

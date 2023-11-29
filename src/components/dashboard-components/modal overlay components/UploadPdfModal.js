@@ -3,7 +3,6 @@ import styles from "./UploadPdfModal.module.css";
 import { IoClose } from "react-icons/io5";
 import { MainContext } from "../../../store/MainContext";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-// import { v4 } from "uuid";
 import { addDoc, collection } from "firebase/firestore";
 import { db, storage } from "../../../firebase/firebase";
 const UploadPdfModal = (props) => {
@@ -15,14 +14,13 @@ const UploadPdfModal = (props) => {
   const ctxMain = useContext(MainContext);
   let data; //stores data of uploaded pdf
   function checkDuplicateFileName(name) {
-    for (let i = 0; i < ctxMain.userFiles.length; i++) {
-      if (ctxMain.userFiles[i].data.name === name) {
+    for (let i = 0; i < ctxMain?.allFileNames.length; i++) {
+      if (ctxMain.allFileNames[i] === name) {
         return false;
       }
     }
     return true;
   }
-  checkDuplicateFileName();
   function fileSubmitHandler(e) {
     e.preventDefault();
     if (!pdfFile) {
@@ -98,6 +96,8 @@ const UploadPdfModal = (props) => {
       //   console.error("Error adding document: ", e);
       // }
     });
+    ctxMain.setIsUploadPdfOpen(false);
+    setPdfFile(null);
     // uploadBytes(fileRef, pdfFile).then((snapshot) => {
     //   // getDownloadURL(snapshot.ref).then((url) => setFileUrl(url));
     //   console.log("Uploaded pdf: ", snapshot);
