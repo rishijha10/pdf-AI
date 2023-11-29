@@ -4,14 +4,16 @@ import { auth, db } from "../firebase/firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
 
 export const MainContext = createContext(null);
-
 const MainContextProvider = (props) => {
   const [isUploadPdfOpen, setIsUploadPdfOpen] = useState(false);
   const [confirmDeleteModalOpen, setConfirmDeleteModalOpen] = useState(false);
   const [user, setUser] = useState({});
-  const [currentFolder, setCurrentFolder] = useState("root");
+  const [currentPath, setCurrentPath] = useState("root"); //currentFolder changed to currentPath
   const [userFolders, setUserFolders] = useState([]); //stores all of users folders
   const [userFiles, setUserFiles] = useState([]); //stores the files inside a particular folder
+  const [currentDocument, setCurrentDocument] = useState({});
+  console.log("Current document ", currentDocument);
+  // const []
   // const [adminFolders, setAdminFolders] = useState([]);
   // const [adminFiles, setAdminFiles] = useState([]);
   async function getData(uid, fileName, type) {
@@ -20,7 +22,6 @@ const MainContextProvider = (props) => {
       if (type === "folder") {
         const q = query(docRef, where("userId", "==", uid));
         const querySnapshot = await getDocs(q);
-        // console.log(querySnapshot);
         const folderData = [];
         querySnapshot.forEach((doc) => {
           // doc.data() is never undefined for query doc snapshots
@@ -30,11 +31,11 @@ const MainContextProvider = (props) => {
         });
         setUserFolders(folderData);
       } else {
-        console.log("Current path: ", currentFolder);
+        console.log("Current path: ", currentPath);
         const q = query(
           docRef,
           where("uid", "==", uid),
-          where("path", "==", currentFolder)
+          where("path", "==", currentPath)
         );
         const querySnapshot = await getDocs(q);
         // console.log(querySnapshot);
@@ -68,7 +69,7 @@ const MainContextProvider = (props) => {
   }, []);
   useEffect(() => {
     getData(user?.uid, "Pdf-Files", "files");
-  }, [currentFolder]);
+  }, [currentPath]);
   console.log("User folders: ", userFolders);
   console.log("User files: ", userFiles);
 
@@ -79,14 +80,16 @@ const MainContextProvider = (props) => {
         setUserFolders,
         user,
         setUser,
-        currentFolder,
-        setCurrentFolder,
+        currentPath,
+        setCurrentPath,
         userFiles,
         setUserFiles,
         isUploadPdfOpen,
         setIsUploadPdfOpen,
         confirmDeleteModalOpen,
         setConfirmDeleteModalOpen,
+        currentDocument,
+        setCurrentDocument,
       }}
     >
       {props.children}

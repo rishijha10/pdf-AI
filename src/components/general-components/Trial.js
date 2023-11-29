@@ -48,13 +48,13 @@ const Trial = () => {
     if (!ctxMain?.user?.email) {
       navigate("/auth?mode=signIn");
     }
-  }, [ctxMain.user?.email]);
+  }, [ctxMain?.user?.email, navigate]);
 
   const [queryList, setQueryList] = useState([]); //stores the objects of questions and answers in pair
   const [promptQuery, setPromptQuery] = useState(""); //Stores the question written in input field
-  const [messages, setMessages] = useState([]);
-  const [currentQuestion, setcurrentQuestion] = useState(""); //used to store the current question that was asked, it will be displayed on the screen
-  const [currentAnswer, setCurrentAnswer] = useState(""); //used to store the current answer that was returned, it will be displayed on the screen
+  // const [messages, setMessages] = useState([]);
+  // const [currentQuestion, setcurrentQuestion] = useState(""); //used to store the current question that was asked, it will be displayed on the screen
+  // const [currentAnswer, setCurrentAnswer] = useState(""); //used to store the current answer that was returned, it will be displayed on the screen
   // console.log("Messages ", messages);
   function promptHandler(e) {
     e.preventDefault();

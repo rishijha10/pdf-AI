@@ -1,29 +1,13 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import styles from "./CreateFolderModal.module.css";
 import { MainContext } from "../../../store/MainContext";
 import { db } from "../../../firebase/firebase";
 import { IoClose } from "react-icons/io5";
-import {
-  addDoc,
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  query,
-  where,
-} from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 const CreateFolderModal = (props) => {
   const ctxMain = useContext(MainContext);
   const [fileName, setFileName] = useState(""); //stores name of file entered in input
-  useEffect(() => {
-    // console.log(ctxMain.user.uid);
-    // if (ctxMain.user.uid) {
-    //   getData(ctxMain.user.uid);
-    // }
-    // getData(ctxMain.user.uid);
-  }, []);
-
-  function submitHandler(e) {
+  async function submitHandler(e) {
     e.preventDefault();
     if (fileName.length > 3) {
       const isOkay = checkDuplicateFolderName(fileName); //checks to see if a folder by this name already exists
@@ -33,14 +17,16 @@ const CreateFolderModal = (props) => {
           createdBy: ctxMain.user.displayName,
           lastAccessed: null,
           name: fileName,
-          parent: ctxMain.currentFolder,
-          path: ctxMain.currentFolder === "root" ? [] : ["Parent folder path!"],
+          parent: ctxMain.currentPath,
+          path: ctxMain.currentPath === "root" ? [] : ["Parent folder path!"],
           userId: ctxMain.user.uid,
           updatedAt: new Date(),
         };
-        const docId = addToFirestore(data); //adds current data to firestore database and returns its docId
-        ctxMain.setUserFolders((prev) => [...prev, { data, docId }]); //puts the folder into the UserFolders list
-        alert(`${fileName} created`);
+        addToFirestore(data).then((id) => {
+          console.log("Document id: ", id); //adds current data to firestore database and returns its docId
+          ctxMain.setUserFolders((prev) => [...prev, { data, docId: id }]); //puts the folder into the UserFolders list
+          alert(`${fileName} created`);
+        });
       } else {
         alert("Folder by this name already exists");
         return;
@@ -61,7 +47,6 @@ const CreateFolderModal = (props) => {
   async function addToFirestore(data) {
     try {
       const docRef = await addDoc(collection(db, "Folders"), data);
-      console.log("Document written with ID: ", docRef.id);
       return docRef.id;
     } catch (e) {
       console.error("Error adding document: ", e);

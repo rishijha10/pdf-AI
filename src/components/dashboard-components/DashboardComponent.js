@@ -19,8 +19,6 @@ const DashboardComponent = () => {
         isCreateFolderOpen={isCreateFolderOpen}
         setIsCreateFolderOpen={setIsCreateFolderOpen}
         showCreateFolderBtn={true}
-        // isUploadPdfOpen={ctxMain.isUploadPdfOpen}
-        // IsUploadPdfOpen={ctxMain.setIsUploadPdfOpen}
       />
       <DashboardItems title={"Folders"} items={ctxMain.userFolders} />
       {isCreateFolderOpen && (

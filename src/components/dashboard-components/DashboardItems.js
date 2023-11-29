@@ -16,7 +16,7 @@ const DashboardItems = ({ title, items, type }) => {
   function pdfHandler(pdfData) {
     navigate(`/pdf-ai-gen1/${pdfData?.data?.name}`);
   }
-  async function folerDeleteHandler(pdfData) {
+  async function folderDeleteHandler(pdfData) {
     console.log(pdfData);
     await deleteDoc(doc(db, "Folders", `${pdfData?.docId}`));
     const updatedUserFolders = ctxMain.userFolders.filter(
@@ -47,7 +47,11 @@ const DashboardItems = ({ title, items, type }) => {
               </div>
               <MdDeleteOutline
                 className={styles.pdfIcon}
-                onClick={() => ctxMain.setConfirmDeleteModalOpen(true)}
+                onClick={() => {
+                  ctxMain.setConfirmDeleteModalOpen(true);
+                  ctxMain.setCurrentDocument(item);
+                  ctxMain.setCurrentPath(item?.docId);
+                }}
               />
             </div>
           );

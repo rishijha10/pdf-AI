@@ -59,7 +59,7 @@ const UploadPdfModal = (props) => {
         lastAccessed: new Date(),
         name: snapshot.metadata.name,
         uid: ctxMain?.user?.uid,
-        path: ctxMain.currentFolder,
+        path: ctxMain.currentPath,
       };
       getDownloadURL(snapshot.ref)
         .then(async (url) => {
@@ -109,11 +109,7 @@ const UploadPdfModal = (props) => {
       {ctxMain.isUploadPdfOpen && (
         <div className={styles.modalContainer}>
           <p>Upload document</p>
-          <section
-            className={styles.uploadSection}
-            onClick={filtInputHandler}
-            // onmouseover={filtInputHandler()}
-          >
+          <section className={styles.uploadSection} onClick={filtInputHandler}>
             <p>{pdfFile?.name}</p>
           </section>
           <IoClose

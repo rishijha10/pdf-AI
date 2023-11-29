@@ -35,7 +35,7 @@ const MainNavigation = () => {
       .then(console.log("Signout successful"))
       .then(() => {
         ctxMain.setUser(null);
-        ctxMain.setCurrentFolder("root");
+        ctxMain.setCurrentPath("root");
         ctxMain.setUserFolders([]);
         ctxMain.setUserFiles([]);
       })

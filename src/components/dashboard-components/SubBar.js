@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import styles from "./SubBar.module.css";
-import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import { getStorage, ref, uploadBytes } from "firebase/storage";
 import { v4 } from "uuid";
 import { addDoc, collection } from "firebase/firestore";
 import { useContext } from "react";
 import { MainContext } from "../../store/MainContext";
 import { RiUploadCloud2Line } from "react-icons/ri";
-import { IoMdAddCircleOutline } from "react-icons/io";
+// import { IoMdAddCircleOutline } from "react-icons/io";
 import { db } from "../../firebase/firebase";
-import { GrUploadOption } from "react-icons/gr";
+// import { GrUploadOption } from "react-icons/gr";
 const SubBar = (props) => {
-  const [fileName, setFileName] = useState("");
+  // const [fileName, setFileName] = useState("");
   const [pdfFile, setPdfFile] = useState(null);
   const ctxMain = useContext(MainContext);
   const storage = getStorage();
