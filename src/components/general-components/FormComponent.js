@@ -1,16 +1,14 @@
-import React, { useContext, useEffect, useReducer, useState } from "react";
+import React, { useContext, useReducer } from "react";
 import styles from "./FormComponent.module.css";
 import { FcGoogle } from "react-icons/fc";
-import { setDoc, doc } from "firebase/firestore";
 
 import {
-  GoogleAuthProvider,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signInWithPopup,
 } from "firebase/auth";
-import { auth, db, provider } from "../../firebase/firebase";
-import { Link, redirect, useSearchParams, useNavigate } from "react-router-dom";
+import { auth, provider } from "../../firebase/firebase";
+import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import { MainContext } from "../../store/MainContext";
 const initialStates = {
   email: "",
@@ -30,7 +28,6 @@ const reducer = (state, action) => {
 };
 const FormComponent = () => {
   const navigate = useNavigate();
-  const ctxMain = useContext(MainContext);
   // useEffect(() => {
   //   if (ctxMain.userAuth) {
   //     navigate("/pdf-ai-gen1");
@@ -47,7 +44,7 @@ const FormComponent = () => {
         return user;
       })
       // .then((result) => addData(result))
-      .then((user) => navigate(`/${user.uid}/dashboard`))
+      .then((user) => navigate(`/dashboard/${user.uid}`))
       .catch((error) => {
         // Handle Errors here.
         // const errorCode = error.code;
@@ -70,19 +67,18 @@ const FormComponent = () => {
 
   function formSubmit(e) {
     e.preventDefault();
-    {
-      isSignIn
-        ? signInWithEmailAndPassword(auth, state?.email, state.password)
-            .then((userCredential) => {
-              // console.log(userCredential);
-            })
-            .catch((err) => console.error(err.message))
-        : createUserWithEmailAndPassword(auth, state?.email, state.password)
-            .then((userCredential) => {
-              // console.log(userCredential);
-            })
-            .catch((err) => console.error(err.message));
-    }
+    isSignIn
+      ? signInWithEmailAndPassword(auth, state?.email, state.password)
+          .then((userCredential) => {
+            // console.log(userCredential);
+          })
+          .catch((err) => console.error(err.message))
+      : createUserWithEmailAndPassword(auth, state?.email, state.password)
+          .then((userCredential) => {
+            // console.log(userCredential);
+          })
+          .catch((err) => console.error(err.message));
+
     // console.log(state.email);
     // console.log(state.password);
     dispatch({ type: "reset" });

@@ -16,8 +16,13 @@ const HeroSection = () => {
           Chat your way through long documents. Command our PDF AI to summarize
           for you.
         </p>
-        <NavLink to={`/dashboard/${ctxMain.user?.uid}`}>
-          {/* <NavLink to={`/pdf-ai-gen1`}> */}
+        <NavLink
+          to={
+            ctxMain.user
+              ? `/dashboard/${ctxMain.user?.uid}`
+              : `/auth?mode=SignIn`
+          }
+        >
           <button>Get started -{">"}</button>
         </NavLink>
 
