@@ -7,6 +7,10 @@ import DashboardComponent from "../components/dashboard-components/DashboardComp
 const DashboardPage = () => {
   const navigate = useNavigate();
   const ctxMain = useContext(MainContext);
+  ctxMain.setCurrentPath("root");
+  // ctxMain.setUs
+  //reset user files to empty array when on the main dashboard with folders
+  // ctxMain.setUserFiles([]);
   useEffect(() => {
     if (!ctxMain.user) {
       navigate("/auth?mode=signIn");

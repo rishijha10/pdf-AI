@@ -21,7 +21,7 @@ const UploadPdfModal = (props) => {
     }
     return true;
   }
-  function fileSubmitHandler(e) {
+  async function fileSubmitHandler(e) {
     e.preventDefault();
     if (!pdfFile) {
       return;
@@ -52,6 +52,7 @@ const UploadPdfModal = (props) => {
       //     console.error("Error adding document: ", e);
       //   }
       // });
+      ctxMain.setAllFileNames((prev) => [...prev, pdfFile.name]);
       data = {
         createdAt: snapshot.metadata.timeCreated,
         lastAccessed: new Date(),
@@ -67,13 +68,14 @@ const UploadPdfModal = (props) => {
             console.log("Document written with ID: ", docRef.id);
             ctxMain.setUserFiles((prev) => [
               ...prev,
-              { data: data, docId: data.name },
+              { data: data, docId: docRef.id },
             ]);
             return docRef.id;
           } catch (e) {
             console.error("Error adding document: ", e);
           }
         })
+
         .catch((e) => console.error(e));
       // console.log(url);
       // data = {

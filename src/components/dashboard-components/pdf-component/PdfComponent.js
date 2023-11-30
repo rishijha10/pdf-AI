@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import SubBar from "../SubBar";
 import { useContext } from "react";
@@ -9,6 +9,7 @@ import UploadPdfModal from "../modal overlay components/UploadPdfModal";
 import ConfirmDeleteModal from "../modal overlay components/ConfirmDeleteModal";
 const PdfComponent = () => {
   const { folderId } = useParams();
+  const [deleteType, setDeleteType] = useState("");
   const ctxMain = useContext(MainContext);
   useEffect(() => {
     ctxMain.setCurrentPath(folderId);
@@ -16,7 +17,12 @@ const PdfComponent = () => {
   return (
     <div style={{ marginTop: "100px", display: "inline-block", width: "100%" }}>
       <SubBar showCreateFolderBtn={false} />
-      <DashboardItems title={"Files"} items={ctxMain.userFiles} type={"file"} />
+      <DashboardItems
+        title={"Files"}
+        items={ctxMain.userFiles}
+        type={"file"}
+        setDeleteType={setDeleteType}
+      />
       {ctxMain.isUploadPdfOpen && (
         <ModalOverlay>
           <UploadPdfModal />
@@ -24,7 +30,7 @@ const PdfComponent = () => {
       )}
       {ctxMain.confirmDeleteModalOpen && (
         <ModalOverlay>
-          <ConfirmDeleteModal />
+          <ConfirmDeleteModal type="file" />
         </ModalOverlay>
       )}
     </div>

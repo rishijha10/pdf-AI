@@ -3,6 +3,7 @@ import styles from "./ThreeBox.module.css";
 import boxImg1 from "./../../assets/boximg1.png";
 import boxImg2 from "./../../assets/boximg2.png";
 import boxImg3 from "./../../assets/boximg3.png";
+import boxImg4 from "../../../src/assets/boximg4.png";
 const ThreeBox = () => {
   return (
     <div className={styles.container}>
@@ -21,7 +22,7 @@ const ThreeBox = () => {
               document has uploaded you are ready to chat with the PDF AI
               reader.
             </p>
-            <img src={boxImg1}></img>
+            <img src={boxImg4}></img>
           </div>
           <div
             className={styles.downBox}

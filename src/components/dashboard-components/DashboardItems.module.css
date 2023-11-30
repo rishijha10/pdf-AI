@@ -20,6 +20,9 @@
   font-size: 25px;
   /* color: blue; */
 }
+.deleteIcon {
+  cursor: pointer;
+}
 .file {
   /* width: 100%;
   display: grid;

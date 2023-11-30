@@ -7,7 +7,7 @@ import { FaRegFolder } from "react-icons/fa6";
 import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
 import { MainContext } from "../../store/MainContext";
-const DashboardItems = ({ title, items, type }) => {
+const DashboardItems = (props) => {
   const ctxMain = useContext(MainContext);
   const navigate = useNavigate();
   function doubleClickHandler(id) {
@@ -27,31 +27,43 @@ const DashboardItems = ({ title, items, type }) => {
   return (
     <div className={styles.itemsContainer}>
       <div className={styles.itemsInnerContainer}>
-        {items?.map((item, index) => {
+        {props.items?.map((item, index) => {
           return (
             <div key={index} className={styles.file}>
               <div className={styles.innerFile}>
-                {type === "file" ? (
+                {props.type === "file" ? (
                   <>
                     <FaRegFilePdf className={styles.pdfIcon} />
-                    <p onClick={() => pdfHandler(item)}>{item?.data?.name}</p>
+                    <p
+                      onClick={() => {
+                        pdfHandler(item);
+                        props.setDeleteType("file");
+                      }}
+                    >
+                      {item?.data?.name}
+                    </p>
                   </>
                 ) : (
                   <>
                     <FaRegFolder className={styles.pdfIcon} />
-                    <p onClick={() => doubleClickHandler(item?.docId)}>
+                    <p
+                      onClick={() => {
+                        doubleClickHandler(item?.docId);
+                        props.setDeleteType("folder");
+                      }}
+                    >
                       {item?.data?.name}
                     </p>
                   </>
                 )}
               </div>
               <MdDeleteOutline
-                className={styles.pdfIcon}
-                onClick={() => {
-                  ctxMain.setConfirmDeleteModalOpen(true);
-                  ctxMain.setCurrentDocument(item);
-                  ctxMain.setCurrentPath(item?.docId);
-                }}
+                className={`${styles.pdfIcon} ${styles.deleteIcon}`}
+                // onClick={() => {
+                //   ctxMain.setConfirmDeleteModalOpen(true);
+                //   ctxMain.setCurrentDocument(item);
+                //   ctxMain.setCurrentPath(item?.docId);
+                // }}
               />
             </div>
           );

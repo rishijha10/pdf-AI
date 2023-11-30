@@ -78,6 +78,7 @@ const MainContextProvider = (props) => {
         });
         getData(user?.uid, "Folders", "folder");
         getData(user?.uid, "Pdf-Files", "all files");
+        getData(user?.uid, "Pdf-Files", "files");
       } else {
         setUser(null);
       }
@@ -88,7 +89,7 @@ const MainContextProvider = (props) => {
   }, [currentPath]);
   console.log("User folders: ", userFolders);
   console.log("User files: ", userFiles);
-  // console.log("All user files ", allFileNames);
+  console.log("All user files ", allFileNames);
   return (
     <MainContext.Provider
       value={{

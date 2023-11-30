@@ -5,8 +5,10 @@ import { MainContext } from "../../../store/MainContext";
 import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "../../../firebase/firebase";
 import { deleteObject, getStorage, ref } from "firebase/storage";
-const ConfirmDeleteModal = () => {
+import { useNavigate } from "react-router-dom";
+const ConfirmDeleteModal = (props) => {
   const ctxMain = useContext(MainContext);
+  const navigate = useNavigate();
   const storage = getStorage();
   async function folderDeleteHandler(documentData) {
     console.log(documentData);
@@ -15,19 +17,24 @@ const ConfirmDeleteModal = () => {
         await deleteDoc(
           doc(db, "Pdf-Files", `${ctxMain?.userFiles[i]?.docId}`)
         );
+        console.log("Doc id of user files: ", ctxMain?.userFiles[i]?.docId);
         const desertRef = ref(
           storage,
           `pdfs/${String(ctxMain.user.uid)}/${
             ctxMain?.userFiles[i]?.data?.name
           }`
         );
-        deleteObject(desertRef)
-          .then(() => {
-            // File deleted successfully
-          })
-          .catch((error) => {
-            console.error("Could not delete document in firebase storage");
-          });
+        try {
+          await deleteObject(desertRef);
+          // File deleted successfully
+          // Remove file name from allFileNames array
+          const updatedAllFileNames = ctxMain.allFileNames.filter(
+            (name) => name !== ctxMain?.userFiles[i]?.data?.name
+          );
+          ctxMain.setAllFileNames(updatedAllFileNames);
+        } catch (err) {
+          console.error("Could not delete document in firebase storage", err);
+        }
       }
       ctxMain.setUserFiles([]);
     }
@@ -36,12 +43,64 @@ const ConfirmDeleteModal = () => {
       (item) => item.docId !== documentData?.docId
     );
     ctxMain.setUserFolders(updatedUserFolders);
-    ctxMain.setConfirmDeleteModalOpen(false);
+    ctxMain.setCurrentPath("root");
+    closeModalHandler();
   }
   function closeModalHandler() {
     ctxMain.setConfirmDeleteModalOpen(false);
     ctxMain.setCurrentDocument({});
-    ctxMain.setCurrentPath("root");
+    // ctxMain.setCurrentPath("root");
+  }
+  async function fileDeleteHandler(documentData) {
+    console.log("Hello ");
+    // console.log(documentData);
+    // try {
+    //   await deleteDoc(doc(db, "Pdf-Files", `${documentData?.docId}`));
+    //   const fileRef = ref(
+    //     storage,
+    //     `pdfs/${documentData?.data?.uid}/${documentData?.data?.name}`
+    //   );
+    //   deleteObject(fileRef)
+    //     .then(() => {
+    //       const updatedUserFiles = ctxMain.userFiles.filter(
+    //         (item) => item.docId !== documentData.docId
+    //       );
+    //       ctxMain.setUserFiles(updatedUserFiles);
+    //     })
+    //     .catch((err) => {
+    //       console.error(err);
+    //     });
+    //   const updatedFileNames = ctxMain.allFileNames.filter(
+    //     (item) => item !== documentData.data.name
+    //   );
+    //   ctxMain.setAllFileNames(updatedFileNames);
+    //   closeModalHandler();
+    // } catch (error) {
+    //   console.error(error);
+    // }
+    // try {
+    //   const desertRef = ref(
+    //     storage,
+    //     `pdfs/${ctxMain.user.uid}/${documentData?.data?.name}`
+    //   );
+    //   await deleteDoc(doc(db, "Pdf-Files", `${documentData?.docId}`));
+    //   const updatedUserFiles = ctxMain.userFiles.filter(
+    //     (item) => item.docId !== documentData.docId
+    //   );
+    //   ctxMain.setUserFiles(updatedUserFiles);
+    //   deleteObject(desertRef).then(() => {
+    //     // File deleted successfully
+    //     // Remove file name from allFileNames array
+    //     const updatedAllFileNames = ctxMain.allFileNames.filter(
+    //       (item) => item !== documentData?.data?.name
+    //     );
+    //     ctxMain.setAllFileNames(updatedAllFileNames);
+    //   });
+    //   closeModalHandler();
+    //   // navigate(".");
+    // } catch (error) {
+    //   console.log(error);
+    // }
   }
   return (
     <>
@@ -54,7 +113,11 @@ const ConfirmDeleteModal = () => {
           <div className={styles.buttonConatiner}>
             <button onClick={closeModalHandler}>Cancel</button>
             <button
-              onClick={() => folderDeleteHandler(ctxMain?.currentDocument)}
+              onClick={
+                props.type === "file"
+                  ? () => fileDeleteHandler(ctxMain?.currentDocument)
+                  : () => folderDeleteHandler(ctxMain?.currentDocument)
+              }
             >
               Delete
             </button>
