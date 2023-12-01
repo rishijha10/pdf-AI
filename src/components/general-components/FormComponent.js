@@ -44,7 +44,7 @@ const FormComponent = () => {
         return user;
       })
       // .then((result) => addData(result))
-      .then((user) => navigate(`/dashboard/${user.uid}`))
+      .then((user) => navigate(`/pdf-ai-gen1/${user.uid}`))
       .catch((error) => {
         // Handle Errors here.
         // const errorCode = error.code;
@@ -69,15 +69,17 @@ const FormComponent = () => {
     e.preventDefault();
     isSignIn
       ? signInWithEmailAndPassword(auth, state?.email, state.password)
-          .then((userCredential) => {
-            // console.log(userCredential);
-          })
-          .catch((err) => console.error(err.message))
+          // .then((userCredential) => {
+          //   // console.log(userCredential);
+          // })
+          .then((user) => navigate(`/pdf-ai-gen1/${user.uid}`))
+          .catch((err) => alert(err.message))
       : createUserWithEmailAndPassword(auth, state?.email, state.password)
-          .then((userCredential) => {
-            // console.log(userCredential);
-          })
-          .catch((err) => console.error(err.message));
+          // .then((userCredential) => {
+          //   // console.log(userCredential);
+          // })
+          .then((user) => navigate(`/pdf-ai-gen1/${user.uid}`))
+          .catch((err) => alert(err.message));
 
     // console.log(state.email);
     // console.log(state.password);
@@ -122,6 +124,7 @@ const FormComponent = () => {
         <button className={styles.googleLoginBtn} onClick={signInGoogle}>
           Sign in with Google <FcGoogle className={styles.googleIcon} />
         </button>
+
         <Link to={`?mode=${isSignIn ? "signUp" : "signIn"}`}>
           <button className={styles.toggleBtn}>
             {isSignIn ? "Sign up" : "Sign in"}

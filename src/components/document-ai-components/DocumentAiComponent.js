@@ -1,13 +1,22 @@
 // import React from "react";
-import styles from "./Trial.module.css";
+import styles from "./DocumentAiComponent.module.css";
 import pdfFile from "../../assets/Lion.pdf";
 import zz from "../../assets/zz.pdf";
+// import un from "../../assets/un.pdf";
+import dummy_pdf from "../../assets/Introduction to quantum mechanics.pdf";
+import { FaRegFilePdf } from "react-icons/fa6";
 import React, { useContext, useEffect, useState } from "react";
 import { IoIosSend } from "react-icons/io";
 import { MainContext } from "../../store/MainContext";
 import { FaUser } from "react-icons/fa6";
-import { useNavigate, useNavigation, useParams } from "react-router-dom";
-// const Trial = () => {
+import { useNavigate, useParams } from "react-router-dom";
+import DashboardComponent from "../dashboard-components/DashboardComponent";
+import { MdOutlineSearch } from "react-icons/md";
+import MainNavigation from "../general-components/MainNavigation";
+import { RiUploadCloud2Line } from "react-icons/ri";
+import UploadButton from "./UploadButton";
+
+// const DocumentAiComponent = () => {
 //   return (
 //     <div className={styles.container}>
 //       {/* <Document file={pdfFile}>
@@ -20,10 +29,10 @@ import { useNavigate, useNavigation, useParams } from "react-router-dom";
 //   );
 // };
 
-// export default Trial;
+// export default DocumentAiComponent;
 
 // Create Document Component
-// const Trial = () => (
+// const DocumentAiComponent = () => (
 //   <div className={styles.container}>
 //     <div className={styles.inner}>
 //        <PDFViewer style={{ marginTop: "90px" }}>
@@ -35,9 +44,9 @@ import { useNavigate, useNavigation, useParams } from "react-router-dom";
 //     </div>
 //   </div>
 // );
-// export default Trial;
+// export default DocumentAiComponent;
 
-const Trial = () => {
+const DocumentAiComponent = () => {
   const { pdfUrl } = useParams();
   console.log("Pdf url ", pdfUrl);
   const ctxMain = useContext(MainContext);
@@ -83,7 +92,7 @@ const Trial = () => {
           { author: text, bot: data.answer },
         ])
       );
-    // const response = await fetch(`http://localhost:8000/trial/${text}`);
+    // const response = await fetch(`http://localhost:8000/DocumentAiComponent/${text}`);
 
     // const data = await response.json();
 
@@ -137,21 +146,55 @@ const Trial = () => {
   // console.log("This is the query ", promptQuery);
   return (
     <div className={styles.container}>
+      <MainNavigation onDocumentAiPage={true} />
       <div className={styles.inner}>
-        <div className={styles.innerLeft}>
+        <div className={styles.fileSection}>
+          <div className={styles.searchBar}>
+            <input
+              type="text"
+              id="file-search"
+              placeholder="Search file name."
+            />
+            <MdOutlineSearch className={styles.searchIcon} />
+          </div>
+          <DashboardComponent />
+        </div>
+        <div className={styles.pdfSection}>
           {/* <iframe width={"100%"} height={"100%"} src={`${zz}#toolbar=0`} /> */}
-          <iframe
+          {/* <iframe
             width={"100%"}
             height={"100%"}
             // src="https://www.ndvsu.org/images/StudyMaterials/LPM/Cat.pdf"
+            // #zoom=FitH#toolbar=0
             src={
-              urlObject?.data?.fileUrl
-                ? `${urlObject?.data?.fileUrl}#toolbar=0`
-                : `https://www.ndvsu.org/images/StudyMaterials/LPM/Cat.pdf#toolbar=0 `
+              urlObject?.data?.fileUrl ? `${urlObject?.data?.fileUrl}` : null
             }
-          />
+            // `${dummy_pdf}#toolbar=0`
+          /> */}
+          {urlObject?.data?.fileUrl ? (
+            <iframe
+              width={"100%"}
+              height={"100%"}
+              // src="https://www.ndvsu.org/images/StudyMaterials/LPM/Cat.pdf"
+              // #zoom=FitH#toolbar=0
+              src={`${urlObject?.data?.fileUrl}#toolbar=0&navpanes=0`}
+              // `${dummy_pdf}#toolbar=0`
+            />
+          ) : (
+            <div className={styles.noFileSelected}>
+              <FaRegFilePdf className={styles.pdfIcon} />
+              <h2>No pdf/document selected</h2>
+              {/* <UploadButton /> */}
+              {/* <button
+                className={styles.uploadBtn}
+                onClick={() => ctxMain.setIsUploadPdfOpen(true)}
+              >
+                Upload <RiUploadCloud2Line className={styles.uploadIcon} />
+              </button> */}
+            </div>
+          )}
         </div>
-        <div className={styles.innerRight}>
+        <div className={styles.botSection}>
           <section className={styles.upperSection}>
             {/* <div className={styles.userQuery}>
               <FaUser className={styles.userIcon} />
@@ -229,4 +272,4 @@ const Trial = () => {
   );
 };
 
-export default Trial;
+export default DocumentAiComponent;

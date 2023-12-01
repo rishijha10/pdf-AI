@@ -6,7 +6,8 @@ import { signOut } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
 import { HiMenu } from "react-icons/hi";
 import { RxCross2 } from "react-icons/rx";
-const MainNavigation = () => {
+import { RiUploadCloud2Line } from "react-icons/ri";
+const MainNavigation = (props) => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
@@ -69,28 +70,39 @@ const MainNavigation = () => {
             </p>
           </Link>
         </section>
-        {/* <p>PDFPal</p> */}
-        <nav className={styles.navLinks}>
-          <ul>
-            <li>Product</li>
-            <li>Solution</li>
-            <li>Pricing</li>
-            <li>Resources</li>
-            <li>Partners</li>
-          </ul>
-        </nav>
+        {!props.onDocumentAiPage && (
+          <nav className={styles.navLinks}>
+            <ul>
+              <li>Product</li>
+              <li>Solution</li>
+              <li>Pricing</li>
+              <li>Resources</li>
+              <li>Partners</li>
+            </ul>
+          </nav>
+        )}
         <section className={styles.navButtons}>
           {ctxMain?.user?.email ? (
             <>
-              <Link to={`/auth?mode=signIn`}>
-                <p
-                  className={` ${
-                    isScrolled ? styles.white : styles.defaultLogo
-                  }`}
+              {props.onDocumentAiPage && ( //only display on document ai page
+                <button
+                  className={styles.uploadBtn}
+                  onClick={() => ctxMain.setIsUploadPdfOpen(true)}
                 >
-                  {ctxMain.user?.email}
-                </p>
-              </Link>
+                  Upload <RiUploadCloud2Line className={styles.uploadIcon} />
+                </button>
+              )}
+              {!props.onDocumentAiPage && ( // dont show this when document ai page is open
+                <Link to={`/auth?mode=signIn`}>
+                  <p
+                    className={` ${
+                      isScrolled ? styles.white : styles.defaultLogo
+                    }`}
+                  >
+                    {ctxMain.user?.email}
+                  </p>
+                </Link>
+              )}
               <button onClick={signOutUser}>Log out</button>
             </>
           ) : (
@@ -130,9 +142,7 @@ const MainNavigation = () => {
                     onClick={crossHandler}
                   />
                 </div>
-
                 <div className={styles.menuList}>
-                  {/* <RxCross2 className={styles.closeMenu}/> */}
                   <li>Product</li>
                   <li>Solution</li>
                   <li>Pricing</li>

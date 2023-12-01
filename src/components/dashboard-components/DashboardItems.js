@@ -6,7 +6,10 @@ import { MdDeleteOutline } from "react-icons/md";
 import { FaRegFolder } from "react-icons/fa6";
 import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
+import { GoClock } from "react-icons/go";
 import { MainContext } from "../../store/MainContext";
+import { PiFilePdfLight } from "react-icons/pi";
+
 const DashboardItems = (props) => {
   const ctxMain = useContext(MainContext);
   const navigate = useNavigate();
@@ -28,21 +31,51 @@ const DashboardItems = (props) => {
     <div className={styles.itemsContainer}>
       <div className={styles.itemsInnerContainer}>
         {props.items?.map((item, index) => {
+          const dateObject = new Date(item?.data?.createdAt);
+          const year = dateObject.getFullYear();
+          const month = dateObject.getMonth();
+          const day = dateObject.getDate();
+          const hour = dateObject.getHours();
+          const minutes = dateObject.getMinutes();
+          const seconds = dateObject.getSeconds();
+          const title =
+            item?.data?.name.length > 22
+              ? item?.data?.name.substring(0, 22) + "..."
+              : item?.data?.name;
           return (
             <div key={index} className={styles.file}>
               <div className={styles.innerFile}>
                 {props.type === "file" ? (
-                  <>
-                    <FaRegFilePdf className={styles.pdfIcon} />
-                    <p
-                      onClick={() => {
-                        pdfHandler(item);
-                        props.setDeleteType("file");
-                      }}
-                    >
-                      {item?.data?.name}
-                    </p>
-                  </>
+                  <div className={styles.fileNameAndDateContainer}>
+                    <div className={styles.fileName}>
+                      <PiFilePdfLight className={styles.pdfIcon} />
+                      <p
+                        onClick={() => {
+                          pdfHandler(item);
+                          props.setDeleteType("file");
+                        }}
+                      >
+                        {/* {item?.data?.name} */}
+                        {title}
+                      </p>
+                    </div>
+                    <div className={styles.fileDate}>
+                      <GoClock className={styles.clockIcon} />
+                      <p>
+                        {year +
+                          "-" +
+                          month +
+                          "-" +
+                          day +
+                          " " +
+                          hour +
+                          ":" +
+                          minutes +
+                          ":" +
+                          seconds}
+                      </p>
+                    </div>
+                  </div>
                 ) : (
                   <>
                     <FaRegFolder className={styles.pdfIcon} />
@@ -58,7 +91,7 @@ const DashboardItems = (props) => {
                 )}
               </div>
               <MdDeleteOutline
-                className={`${styles.pdfIcon} ${styles.deleteIcon}`}
+                className={` ${styles.deleteIcon}`}
                 // onClick={() => {
                 //   ctxMain.setConfirmDeleteModalOpen(true);
                 //   ctxMain.setCurrentDocument(item);

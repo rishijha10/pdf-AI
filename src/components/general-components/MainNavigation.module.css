@@ -33,6 +33,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  gap: 10px;
 }
 .navLinks {
   flex: 1;
@@ -51,10 +52,22 @@ nav ul {
   font-weight: 600;
   font-size: 16px;
   border-radius: 6px;
-  background-color: white;
   padding: 0.7vw;
   margin-left: 1vw;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.uploadBtn {
+  color: white;
+  background-color: #ff612f;
+  gap: 10px;
+}
+.uploadIcon {
+  background-color: #ff612f;
+  color: white;
+  font-size: 20px;
 }
 .vibrant {
   background: rgb(67, 134, 141);
@@ -108,17 +121,16 @@ a {
     rgba(156, 213, 197, 1) 90%
   );
 }
-
 .hamburgerIcon {
   display: none;
 }
-
 .dropDown .menuList {
   display: none;
 }
 .cross {
   display: none;
 }
+
 /* ------------- mediaqueries--------------------
  --------------------------------------------------------------- */
 

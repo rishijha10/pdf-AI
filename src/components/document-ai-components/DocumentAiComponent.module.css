@@ -1,22 +1,58 @@
 .container {
   display: inline-block;
   width: 100%;
-  height: 99vh;
+  height: 98.5vh;
+  /* overflow: hidden; */
 }
 .inner {
   margin-top: 70px;
   height: 90.9%;
   display: flex;
 }
-.innerLeft {
-  height: 100%;
-  width: 50%;
+.fileSection {
+  width: 17.5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-right: 1px solid #dfdcd2;
 }
-.innerLeft iframe {
+.fileSection input {
+  margin: 0;
+  border: none;
+  outline: none;
+  /* position: absolute;
+  left: 50%;
+  transform: translateX(-50%); */
+  width: 100%;
+  padding: 6px 10px;
+  padding-right: 30px;
+  font-family: Inter;
+  border: 1px solid #dfdcd2;
+  border-radius: 3px;
+}
+.searchBar {
+  position: relative;
+  width: 95%;
+  text-align: center;
+  margin: 10px 0px;
+}
+.searchIcon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 2%;
+  font-size: 20px;
+}
+.pdfSection {
+  height: 100%;
+  width: 42.5%;
+  position: relative;
+}
+.pdfSection iframe {
   border: none;
 }
-.innerRight {
-  width: 50%;
+.botSection {
+  width: 40%;
 }
 .upperSection {
   height: 85%;
@@ -33,14 +69,15 @@
   justify-content: center;
 }
 .lowerSection form {
-  width: 85%;
+  width: 95%;
   margin: 0;
   padding: 0;
   position: relative;
 }
 .sendIcon {
   position: absolute;
-  right: -2%;
+  /* right: -5%; */
+  right: 2%;
   top: 50%;
   transform: translateY(-50%);
   font-size: 30px;
@@ -53,6 +90,7 @@
   font-size: 18px;
   font-family: Inter;
   padding: 15px;
+  padding-right: 50px;
   border-radius: 5px;
 }
 .lowerSection input::placeholder {
@@ -62,8 +100,9 @@
   padding: 30px 25px;
   border-bottom: 1px solid rgb(229, 227, 218);
   display: flex;
-  align-items: flex-start;
-  gap: 30px;
+  /* align-items: flex-start; */
+  align-items: center;
+  gap: 10px;
 }
 .userQuery p {
   margin: 0;
@@ -72,7 +111,7 @@
   font-weight: 400;
 }
 .userIcon {
-  width: 6%;
+  width: 10%;
   font-size: 25px;
 }
 .logo {
@@ -80,7 +119,7 @@
   font-family: Kanit;
   font-weight: 500;
   font-size: 35px;
-  width: 6%;
+  width: 10%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -93,8 +132,6 @@
 .first,
 .second,
 .third {
-  width: 7px;
-  height: 27px;
   background: rgb(67, 134, 141);
   background: linear-gradient(
     225deg,
@@ -103,10 +140,25 @@
   );
   margin: 0 3px;
   border-radius: 2px;
+  width: 8px;
+  height: 30px;
 }
 .first {
   transform: rotate(20deg);
 }
 .botQuery {
   background-color: #f8f5ee;
+}
+.noFileSelected {
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.noFileSelected h2 {
+  font-family: Eudoxus sans;
+}
+.pdfIcon {
+  font-size: 40px;
 }

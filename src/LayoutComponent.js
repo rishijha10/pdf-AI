@@ -5,7 +5,7 @@ import MainNavigation from "./components/general-components/MainNavigation";
 const LayoutComponent = () => {
   return (
     <Fragment>
-      <MainNavigation />
+      {/* <MainNavigation /> */}
       <Outlet />
     </Fragment>
   );

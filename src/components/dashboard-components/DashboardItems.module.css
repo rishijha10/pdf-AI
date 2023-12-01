@@ -1,9 +1,9 @@
 .itemsContainer {
-  width: 75%;
+  width: 100%;
   margin: 0 auto;
   margin-bottom: 25px;
   /* border: 1px solid black; */
-  border: 1px solid #e5e3da;
+  /* border: 1px solid #e5e3da; */
   border-radius: 5px;
   padding: 15px 0;
 }
@@ -17,35 +17,82 @@
   flex-wrap: wrap;
 }
 .pdfIcon {
-  font-size: 25px;
+  font-size: 20px;
   /* color: blue; */
 }
 .deleteIcon {
   cursor: pointer;
+  font-size: 20px;
+}
+.deleteIcon:hover {
+  color: crimson;
 }
 .file {
-  /* width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr; */
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 10px 25px;
-  /* border-bottom: 1px solid #e5e3da; */
-  /* border: 1px solid black; */
+  align-items: flex-start;
+  padding: 10px 15px;
 }
-.innerFile {
+/* .uploadBtn {
+  border: none;
+  outline: none;
+  font-family: Inter;
+  font-weight: 600;
+  font-size: 16px;
+  border-radius: 6px;
+  padding: 0.7vw;
+  margin-left: 1vw;
+  cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 20px;
+  justify-content: center;
+  color: white;
+  background-color: #ff612f;
+  gap: 10px;
 }
-.file p {
-  /* width: 80%; */
+.uploadIcon {
+  background-color: #ff612f;
+  color: white;
+  font-size: 20px;
+} */
+.innerFile {
+  display: flex;
+  gap: 10px;
+}
+.fileNameAndDateContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.fileName {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.fileName p {
   margin: 0;
   font-family: Inter;
   font-weight: 500;
+  font-size: 14px;
   cursor: pointer;
 }
-.file p:hover {
+.fileName p:hover {
   text-decoration: underline;
+}
+.fileDate {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+.fileDate p {
+  margin: 0;
+  font-family: Inter;
+  font-weight: 500;
+  font-size: 10px;
+  cursor: pointer;
+  color: gray;
+}
+.clockIcon {
+  font-size: 13px;
+  color: gray;
 }

@@ -71,17 +71,6 @@ const SubBar = (props) => {
     <div className={styles.container}>
       <h1>Your documents</h1>
       <ul>
-        <li>
-          {/* <button>Upload file</button> */}
-          {/* <form onSubmit={fileSubmitHandler}>
-            <input
-              type="file"
-              name="pdfFile"
-              onChange={(e) => setPdfFile(e.target.files[0])}
-            />
-            <button type="submit">Upload</button>
-          </form> */}
-        </li>
         {props.showCreateFolderBtn && (
           <li>
             <button

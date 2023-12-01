@@ -1,5 +1,4 @@
 {
-  "homepage": "http://Mewsxd.github.io/pdf-AI",
   "name": "pdf-ai",
   "version": "0.1.0",
   "private": true,
@@ -28,8 +27,6 @@
   "scripts": {
     "start:frontend": "react-scripts start",
     "start:backend": "nodemon ./src/server.js",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

@@ -16,23 +16,23 @@ const DashboardComponent = () => {
   return (
     <div className={styles.outerContainer}>
       {/* <ModalOverlay /> */}
-      <SubBar
+      {/* <SubBar
         isCreateFolderOpen={isCreateFolderOpen}
         setIsCreateFolderOpen={setIsCreateFolderOpen}
         showCreateFolderBtn={true}
-      />
+      /> */}
       <DashboardItems
         // title={"Folders"}
         items={ctxMain.userFiles}
         type={"file"}
         setDeleteType={setDeleteType}
       />
-      <DashboardItems
+      {/* <DashboardItems
         // title={"Folders"}
         type={"folder"}
         items={ctxMain.userFolders}
         setDeleteType={setDeleteType}
-      />
+      /> */}
 
       {isCreateFolderOpen && (
         <ModalOverlay
