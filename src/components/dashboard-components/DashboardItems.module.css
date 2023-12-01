@@ -32,6 +32,8 @@
   justify-content: space-between;
   align-items: flex-start;
   padding: 10px 15px;
+  white-space: nowrap;
+
 }
 /* .uploadBtn {
   border: none;
