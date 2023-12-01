@@ -15,6 +15,8 @@ import { MdOutlineSearch } from "react-icons/md";
 import MainNavigation from "../general-components/MainNavigation";
 import { RiUploadCloud2Line } from "react-icons/ri";
 import UploadButton from "./UploadButton";
+import { IoIosArrowDroprightCircle } from "react-icons/io";
+
 
 // const DocumentAiComponent = () => {
 //   return (
@@ -47,6 +49,10 @@ import UploadButton from "./UploadButton";
 // export default DocumentAiComponent;
 
 const DocumentAiComponent = () => {
+  const [sidebarWidth, setSidebarWidth] = useState('20%');
+  function sidebarWidthHandler(){
+    sidebarWidth === '20%' ? setSidebarWidth('0%') : setSidebarWidth('20%')
+  }
   const { pdfUrl } = useParams();
   console.log("Pdf url ", pdfUrl);
   const ctxMain = useContext(MainContext);
@@ -148,7 +154,8 @@ const DocumentAiComponent = () => {
     <div className={styles.container}>
       <MainNavigation onDocumentAiPage={true} />
       <div className={styles.inner}>
-        <div className={styles.fileSection}>
+        <div className={styles.fileSection} style={{width:`${sidebarWidth}`}}>
+          {/* <p className={styles.arrow}>{'>'}</p> */}
           <div className={styles.searchBar}>
             <input
               type="text"
@@ -159,9 +166,12 @@ const DocumentAiComponent = () => {
           </div>
           <DashboardComponent />
         </div>
-        <div className={styles.pdfSection}>
-          {/* <iframe width={"100%"} height={"100%"} src={`${zz}#toolbar=0`} /> */}
-          {/* <iframe
+        {/* <p className={styles.arrow} onClick={sidebarWidthHandler}>{'>'}</p> */}
+        <IoIosArrowDroprightCircle className={styles.arrow} onClick={sidebarWidthHandler}/>
+        <section className={styles.chatHolder}>
+          <div className={styles.pdfSection}>
+            {/* <iframe width={"100%"} height={"100%"} src={`${zz}#toolbar=0`} /> */}
+            {/* <iframe
             width={"100%"}
             height={"100%"}
             // src="https://www.ndvsu.org/images/StudyMaterials/LPM/Cat.pdf"
@@ -171,32 +181,32 @@ const DocumentAiComponent = () => {
             }
             // `${dummy_pdf}#toolbar=0`
           /> */}
-          {urlObject?.data?.fileUrl ? (
-            <iframe
-              width={"100%"}
-              height={"100%"}
-              // src="https://www.ndvsu.org/images/StudyMaterials/LPM/Cat.pdf"
-              // #zoom=FitH#toolbar=0
-              src={`${urlObject?.data?.fileUrl}#toolbar=0&navpanes=0`}
-              // `${dummy_pdf}#toolbar=0`
-            />
-          ) : (
-            <div className={styles.noFileSelected}>
-              <FaRegFilePdf className={styles.pdfIcon} />
-              <h2>No pdf/document selected</h2>
-              {/* <UploadButton /> */}
-              {/* <button
+            {urlObject?.data?.fileUrl ? (
+              <iframe
+                width={"100%"}
+                height={"100%"}
+                // src="https://www.ndvsu.org/images/StudyMaterials/LPM/Cat.pdf"
+                // #zoom=FitH#toolbar=0
+                src={`${urlObject?.data?.fileUrl}#toolbar=0&navpanes=0`}
+                // `${dummy_pdf}#toolbar=0`
+              />
+            ) : (
+              <div className={styles.noFileSelected}>
+                <FaRegFilePdf className={styles.pdfIcon} />
+                <h2>No pdf/document selected</h2>
+                {/* <UploadButton /> */}
+                {/* <button
                 className={styles.uploadBtn}
                 onClick={() => ctxMain.setIsUploadPdfOpen(true)}
               >
                 Upload <RiUploadCloud2Line className={styles.uploadIcon} />
               </button> */}
-            </div>
-          )}
-        </div>
-        <div className={styles.botSection}>
-          <section className={styles.upperSection}>
-            {/* <div className={styles.userQuery}>
+              </div>
+            )}
+          </div>
+          <div className={styles.botSection}>
+            <section className={styles.upperSection}>
+              {/* <div className={styles.userQuery}>
               <FaUser className={styles.userIcon} />
               <p>Please explain</p>
             </div>
@@ -214,7 +224,7 @@ const DocumentAiComponent = () => {
                 get started.
               </p>
             </div> */}
-            {/* {queryList.map((query) => {
+              {/* {queryList.map((query) => {
               return (
                 <>
                   <div className={styles.userQuery}>
@@ -232,41 +242,45 @@ const DocumentAiComponent = () => {
                 </>
               );
             })} */}
-            {queryList.map((query) => {
-              return (
-                <>
-                  <div className={styles.userQuery}>
-                    <FaUser className={styles.userIcon} />
-                    <p>{query?.author}</p>
-                  </div>
-                  <div className={`${styles.userQuery} ${styles.botQuery}`}>
-                    <section className={styles.logo}>
-                      <div className={`${styles.first} `}></div>
-                      <div className={`${styles.second}`}></div>
-                      <div className={`${styles.third} `}></div>
-                    </section>
-                    <p>{query?.bot}</p>
-                  </div>
-                </>
-              );
-            })}
-          </section>
-          <section className={styles.lowerSection}>
-            <form className={styles.promptForm} onSubmit={submitPromptHandler}>
-              <IoIosSend
-                className={styles.sendIcon}
-                onClick={submitPromptHandler}
-              />
-              <input
-                placeholder="Enter your question (max 1,000 words)"
-                autoComplete="off"
-                name="prompt"
-                value={promptQuery}
-                onChange={promptHandler}
-              />
-            </form>
-          </section>
-        </div>
+              {queryList.map((query) => {
+                return (
+                  <>
+                    <div className={styles.userQuery}>
+                      <FaUser className={styles.userIcon} />
+                      <p>{query?.author}</p>
+                    </div>
+                    <div className={`${styles.userQuery} ${styles.botQuery}`}>
+                      <section className={styles.logo}>
+                        <div className={`${styles.first} `}></div>
+                        <div className={`${styles.second}`}></div>
+                        <div className={`${styles.third} `}></div>
+                      </section>
+                      <p>{query?.bot}</p>
+                    </div>
+                  </>
+                );
+              })}
+            </section>
+            <section className={styles.lowerSection}>
+              <form
+                className={styles.promptForm}
+                onSubmit={submitPromptHandler}
+              >
+                <IoIosSend
+                  className={styles.sendIcon}
+                  onClick={submitPromptHandler}
+                />
+                <input
+                  placeholder="Enter your question (max 1,000 words)"
+                  autoComplete="off"
+                  name="prompt"
+                  value={promptQuery}
+                  onChange={promptHandler}
+                />
+              </form>
+            </section>
+          </div>
+        </section>
       </div>
     </div>
   );

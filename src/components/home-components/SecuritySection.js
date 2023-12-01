@@ -47,7 +47,7 @@ const SecuritySection = () => {
         >
           <RiChatPrivateLine className={styles.icon} />
           <hr className={styles.hrLine} />
-          <h1>Privacy Controls for Chat Interactions:</h1>
+          <h1>Privacy Controls For Chat Interactions:</h1>
           <p>
             OfficeGPT's chat ensures privacy. Designed for sensitive
             information, you control shared details, ensuring secure,

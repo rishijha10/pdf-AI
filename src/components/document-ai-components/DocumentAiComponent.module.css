@@ -9,12 +9,27 @@
   height: 90.9%;
   display: flex;
 }
+.chatHolder {
+  width: 100%;
+  display: flex;
+}
 .fileSection {
-  width: 17.5%;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s ;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-right: 1px solid #dfdcd2;
+  /* border-right: 1px solid #dfdcd2; */
+}
+.arrow {
+  font-size: 40px;
+  /* position: absolute; */
+  /* top: 50%; */
+  /* transform: translateY(-50%); */
+  /* right: -5%; */
+  z-index: 1000;
+  height: 100%;
 }
 .fileSection input {
   margin: 0;
@@ -45,14 +60,14 @@
 }
 .pdfSection {
   height: 100%;
-  width: 42.5%;
+  width: 50%;
   position: relative;
 }
 .pdfSection iframe {
   border: none;
 }
 .botSection {
-  width: 40%;
+  width: 50%;
 }
 .upperSection {
   height: 85%;
