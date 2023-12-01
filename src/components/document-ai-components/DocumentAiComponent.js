@@ -2,7 +2,6 @@
 import styles from "./DocumentAiComponent.module.css";
 import pdfFile from "../../assets/Lion.pdf";
 import zz from "../../assets/zz.pdf";
-// import un from "../../assets/un.pdf";
 import dummy_pdf from "../../assets/Introduction to quantum mechanics.pdf";
 import { FaRegFilePdf } from "react-icons/fa6";
 import React, { useContext, useEffect, useState } from "react";
@@ -14,7 +13,6 @@ import DashboardComponent from "../dashboard-components/DashboardComponent";
 import { MdOutlineSearch } from "react-icons/md";
 import MainNavigation from "../general-components/MainNavigation";
 import { RiUploadCloud2Line } from "react-icons/ri";
-import UploadButton from "./UploadButton";
 
 // const DocumentAiComponent = () => {
 //   return (
@@ -178,13 +176,11 @@ const DocumentAiComponent = () => {
               // src="https://www.ndvsu.org/images/StudyMaterials/LPM/Cat.pdf"
               // #zoom=FitH#toolbar=0
               src={`${urlObject?.data?.fileUrl}#toolbar=0&navpanes=0`}
-              // `${dummy_pdf}#toolbar=0`
             />
           ) : (
             <div className={styles.noFileSelected}>
               <FaRegFilePdf className={styles.pdfIcon} />
               <h2>No pdf/document selected</h2>
-              {/* <UploadButton /> */}
               {/* <button
                 className={styles.uploadBtn}
                 onClick={() => ctxMain.setIsUploadPdfOpen(true)}
