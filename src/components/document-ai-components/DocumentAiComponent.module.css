@@ -173,7 +173,10 @@
 }
 .noFileSelected h2 {
   font-family: Eudoxus sans;
+  font-weight: 400;
+  color: lightgray;
 }
 .pdfIcon {
   font-size: 40px;
+  color: lightgray;
 }

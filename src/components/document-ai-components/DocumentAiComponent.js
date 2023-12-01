@@ -2,7 +2,6 @@
 import styles from "./DocumentAiComponent.module.css";
 import pdfFile from "../../assets/Lion.pdf";
 import zz from "../../assets/zz.pdf";
-// import un from "../../assets/un.pdf";
 import dummy_pdf from "../../assets/Introduction to quantum mechanics.pdf";
 import { FaRegFilePdf } from "react-icons/fa6";
 import React, { useContext, useEffect, useState } from "react";
@@ -15,7 +14,6 @@ import { MdOutlineSearch } from "react-icons/md";
 import MainNavigation from "../general-components/MainNavigation";
 import { RiUploadCloud2Line } from "react-icons/ri";
 import UploadButton from "./UploadButton";
-import { IoIosArrowDroprightCircle } from "react-icons/io";
 
 
 // const DocumentAiComponent = () => {
@@ -195,7 +193,7 @@ const DocumentAiComponent = () => {
                 <FaRegFilePdf className={styles.pdfIcon} />
                 <h2>No pdf/document selected</h2>
                 {/* <UploadButton /> */}
-                {/* <button
+
                 className={styles.uploadBtn}
                 onClick={() => ctxMain.setIsUploadPdfOpen(true)}
               >
