@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import styles from "./CreateFolderModal.module.css";
 import { MainContext } from "../../../store/MainContext";
 import { db } from "../../../firebase/firebase";

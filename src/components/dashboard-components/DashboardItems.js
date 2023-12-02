@@ -1,14 +1,15 @@
 import React, { useContext } from "react";
 import styles from "./DashboardItems.module.css";
 import { useNavigate } from "react-router-dom";
-import { FaRegFilePdf } from "react-icons/fa6";
+// import { FaRegFilePdf } from "react-icons/fa6";
 import { MdDeleteOutline } from "react-icons/md";
 import { FaRegFolder } from "react-icons/fa6";
-import { Timestamp, deleteDoc, doc } from "firebase/firestore";
+import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
 import { GoClock } from "react-icons/go";
 import { MainContext } from "../../store/MainContext";
 import { PiFilePdfLight } from "react-icons/pi";
+import { IoAddOutline } from "react-icons/io5";
 
 const DashboardItems = (props) => {
   const ctxMain = useContext(MainContext);
@@ -43,8 +44,8 @@ const DashboardItems = (props) => {
           const minutes = dateObject?.getMinutes();
           const seconds = dateObject?.getSeconds();
           const title =
-            item?.data?.name.length > 22
-              ? item?.data?.name.substring(0, 22) + "..."
+            item?.data?.name.length > 12
+              ? item?.data?.name.substring(0, 18) + "..."
               : item?.data?.name;
           return (
             <section>
@@ -58,7 +59,7 @@ const DashboardItems = (props) => {
                           <p
                             onClick={() => {
                               pdfHandler(item);
-                              props.setDeleteType("file");
+                              // props.setDeleteType("file");
                             }}
                           >
                             {title}
@@ -70,10 +71,10 @@ const DashboardItems = (props) => {
                           <p
                             onClick={() => {
                               doubleClickHandler(item?.docId);
-                              props.setDeleteType("folder");
+                              // props.setDeleteType("folder");
                             }}
                           >
-                            {item?.data?.name}
+                            {title}
                           </p>
                         </>
                       )}
@@ -96,30 +97,32 @@ const DashboardItems = (props) => {
                     </div>
                   </div>
                 </div>
-                <MdDeleteOutline
-                  className={` ${styles.deleteIcon}`}
-                  // onClick={() => {
-                  //   ctxMain.setConfirmDeleteModalOpen(true);
-                  //   ctxMain.setCurrentDocument(item);
-                  //   ctxMain.setCurrentPath(item?.docId);
-                  // }}
-                />
+                <div className={styles.addDeleteIcons}>
+                  {props.type === "folder" && (
+                    <IoAddOutline
+                      className={styles.addIcon}
+                      onClick={() => {
+                        ctxMain.setIsUploadPdfOpen(true);
+                        ctxMain.setCurrentPath(item?.docId);
+                      }}
+                    />
+                  )}
+                  <MdDeleteOutline
+                    className={` ${styles.deleteIcon}`}
+                    // onClick={() => {
+                    //   ctxMain.setConfirmDeleteModalOpen(true);
+                    //   ctxMain.setCurrentDocument(item);
+                    //   ctxMain.setCurrentPath(item?.docId);
+                    // }}
+                  />
+                </div>
               </div>
+              {/* ctxMain.userFiles[0]?.data?.path checks the path of the first file in the userFiles array and compares it with the docId of current folder, if its true then it means the userFiles belongs to the current folder and it should be rendered */}
               {props.type === "folder" &&
                 ctxMain.userFiles.length !== 0 &&
-                ctxMain.userFiles[0].data.path === item.data.path &&
+                ctxMain.userFiles[0]?.data?.path === item?.docId &&
                 (<DashboardItems items={ctxMain.userFiles} type={"file"} /> ||
                   null)}
-              {/* {props.type === "folder" ? (
-
-                <DashboardItems
-                  items={
-                    // ctxMain.userFolders.length !== 0 &&
-                    // ctxMain.userFolders[0].data.path === item.data.path
-                  }
-                  type="file"
-                />
-              ) : null} */}
             </section>
           );
         })}

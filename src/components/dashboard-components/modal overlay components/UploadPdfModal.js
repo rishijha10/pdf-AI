@@ -3,7 +3,7 @@ import styles from "./UploadPdfModal.module.css";
 import { IoClose } from "react-icons/io5";
 import { MainContext } from "../../../store/MainContext";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 import { db, storage } from "../../../firebase/firebase";
 const UploadPdfModal = (props) => {
   const [pdfFile, setPdfFile] = useState(null);
@@ -11,6 +11,16 @@ const UploadPdfModal = (props) => {
   function filtInputHandler() {
     fileRef.current.click(); //clicks the input type file to open file window when section box is clicked
   }
+  // async function updateUserFiles() {
+  //   const docRef = collection(db, "Pdf-Files");
+  //   const q = query(docRef, where("uid", "==", ctxMain.user.uid));
+  //   const querySnapshot = await getDocs(q);
+  //   const filesData = [];
+  //   querySnapshot.forEach((doc) => {
+  //     filesData.push({ data: doc.data(), docId: doc.id });
+  //   });
+  //   ctxMain.setAllUserFiles(filesData);
+  // }
   const ctxMain = useContext(MainContext);
   let data; //stores data of uploaded pdf
   function checkDuplicateFileName(name) {
@@ -66,7 +76,12 @@ const UploadPdfModal = (props) => {
           try {
             const docRef = await addDoc(collection(db, "Pdf-Files"), data);
             console.log("Document written with ID: ", docRef.id);
+            // updateUserFiles();
             ctxMain.setUserFiles((prev) => [
+              ...prev,
+              { data: data, docId: docRef.id },
+            ]);
+            ctxMain.setAllUserFiles((prev) => [
               ...prev,
               { data: data, docId: docRef.id },
             ]);

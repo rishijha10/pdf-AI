@@ -48,7 +48,7 @@ const ConfirmDeleteModal = (props) => {
   }
   function closeModalHandler() {
     ctxMain.setConfirmDeleteModalOpen(false);
-    ctxMain.setCurrentDocument({});
+    // ctxMain.setCurrentDocument({});
     // ctxMain.setCurrentPath("root");
   }
   async function fileDeleteHandler(documentData) {

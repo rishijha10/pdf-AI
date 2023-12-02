@@ -1,7 +1,7 @@
 .itemsContainer {
   width: 100%;
   margin: 0 auto;
-  margin-bottom: 25px;
+  /* margin-bottom: 25px; */
   /* border: 1px solid black; */
   /* border: 1px solid #e5e3da; */
   border-radius: 5px;
@@ -97,4 +97,16 @@
 .clockIcon {
   font-size: 13px;
   color: gray;
+}
+.addDeleteIcons {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.addIcon {
+  font-size: 20px;
+  cursor: pointer;
+}
+.addIcon:hover {
+  color: green;
 }

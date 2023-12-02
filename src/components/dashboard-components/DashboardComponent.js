@@ -42,12 +42,12 @@ const DashboardComponent = () => {
       <DashboardItems
         items={rootFiles}
         type={"file"}
-        setDeleteType={setDeleteType}
+        // setDeleteType={setDeleteType}
       />
       <DashboardItems
         items={ctxMain.userFolders}
         type="folder"
-        setDeleteType={setDeleteType}
+        // setDeleteType={setDeleteType}
       />
       {ctxMain.isCreateFolderOpen && (
         <ModalOverlay>

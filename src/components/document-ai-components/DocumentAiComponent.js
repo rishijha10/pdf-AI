@@ -12,9 +12,9 @@ import DashboardComponent from "../dashboard-components/DashboardComponent";
 import { MdOutlineSearch } from "react-icons/md";
 import MainNavigation from "../general-components/MainNavigation";
 const DocumentAiComponent = () => {
-  const [sidebarWidth, setSidebarWidth] = useState("20%");
+  const [sidebarWidth, setSidebarWidth] = useState("22%");
   function sidebarWidthHandler() {
-    sidebarWidth === "20%" ? setSidebarWidth("0%") : setSidebarWidth("20%");
+    sidebarWidth === "22%" ? setSidebarWidth("0%") : setSidebarWidth("22%");
   }
   const { pdfUrl } = useParams();
   console.log("Pdf url ", pdfUrl);

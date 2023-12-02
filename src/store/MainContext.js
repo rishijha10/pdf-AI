@@ -16,6 +16,7 @@ const MainContextProvider = (props) => {
   const [currentDocument, setCurrentDocument] = useState({});
   const [allFileNames, setAllFileNames] = useState([]); //stores the names of every file that of the user
   console.log("Current document ", currentDocument);
+  console.log("Current path: ", currentPath);
   async function getData(uid, fileName, type) {
     try {
       const docRef = collection(db, `${fileName}`);
@@ -97,7 +98,8 @@ const MainContextProvider = (props) => {
   }, [currentPath]);
   console.log("User folders: ", userFolders);
   console.log("User files: ", userFiles);
-  console.log("All user files ", allFileNames);
+  console.log("All user file name ", allFileNames);
+  console.log("All user files ", allUserFiles);
   return (
     <MainContext.Provider
       value={{
@@ -120,6 +122,7 @@ const MainContextProvider = (props) => {
         isCreateFolderOpen,
         setIsCreateFolderOpen,
         allUserFiles,
+        setAllUserFiles,
       }}
     >
       {props.children}
