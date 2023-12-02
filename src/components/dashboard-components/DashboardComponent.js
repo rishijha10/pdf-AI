@@ -11,7 +11,7 @@ import ConfirmDeleteModal from "./modal overlay components/ConfirmDeleteModal";
 const DashboardComponent = () => {
   const ctxMain = useContext(MainContext);
   const [deleteType, setDeleteType] = useState("");
-  const [isCreateFolderOpen, setIsCreateFolderOpen] = useState(false); //used to open and close create folder modal
+  // const [isCreateFolderOpen, setIsCreateFolderOpen] = useState(false); //used to open and close create folder modal
   // const [isUploadPdfOpen, setIsUploadPdfOpen] = useState(false); //used to open and close upload pdf modal
   return (
     <div className={styles.outerContainer}>
@@ -27,6 +27,11 @@ const DashboardComponent = () => {
         type={"file"}
         setDeleteType={setDeleteType}
       />
+      <DashboardItems
+        items={ctxMain.userFolders}
+        type="folder"
+        setDeleteType={setDeleteType}
+      />
       {/* <DashboardItems
         // title={"Folders"}
         type={"folder"}
@@ -34,15 +39,9 @@ const DashboardComponent = () => {
         setDeleteType={setDeleteType}
       /> */}
 
-      {isCreateFolderOpen && (
-        <ModalOverlay
-          isCreateFolderOpen={isCreateFolderOpen}
-          setIsCreateFolderOpen={setIsCreateFolderOpen}
-        >
-          <CreateFolderModal
-            isCreateFolderOpen={isCreateFolderOpen}
-            setIsCreateFolderOpen={setIsCreateFolderOpen}
-          />
+      {ctxMain.isCreateFolderOpen && (
+        <ModalOverlay>
+          <CreateFolderModal />
         </ModalOverlay>
       )}
       {ctxMain.isUploadPdfOpen && (

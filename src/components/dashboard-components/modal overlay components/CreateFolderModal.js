@@ -31,7 +31,7 @@ const CreateFolderModal = (props) => {
         alert("Folder by this name already exists");
         return;
       }
-      props.setIsCreateFolderOpen(false);
+      ctxMain.setIsCreateFolderOpen(false);
     } else {
       alert("Folder name must be atleast 3 characters");
     }
@@ -91,7 +91,7 @@ const CreateFolderModal = (props) => {
       </form>
       <IoClose
         className={styles.closeIcon}
-        onClick={() => props.setIsCreateFolderOpen(false)}
+        onClick={() => ctxMain.setIsCreateFolderOpen(false)}
       />
     </div>
   );

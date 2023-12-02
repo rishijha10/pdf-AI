@@ -5,7 +5,7 @@ import zz from "../../assets/zz.pdf";
 import dummy_pdf from "../../assets/Introduction to quantum mechanics.pdf";
 import { FaRegFilePdf } from "react-icons/fa6";
 import React, { useContext, useEffect, useState } from "react";
-import { IoIosSend } from "react-icons/io";
+import { IoIosArrowDroprightCircle, IoIosSend } from "react-icons/io";
 import { MainContext } from "../../store/MainContext";
 import { FaUser } from "react-icons/fa6";
 import { useNavigate, useParams } from "react-router-dom";
@@ -14,7 +14,6 @@ import { MdOutlineSearch } from "react-icons/md";
 import MainNavigation from "../general-components/MainNavigation";
 import { RiUploadCloud2Line } from "react-icons/ri";
 import UploadButton from "./UploadButton";
-
 
 // const DocumentAiComponent = () => {
 //   return (
@@ -47,9 +46,9 @@ import UploadButton from "./UploadButton";
 // export default DocumentAiComponent;
 
 const DocumentAiComponent = () => {
-  const [sidebarWidth, setSidebarWidth] = useState('20%');
-  function sidebarWidthHandler(){
-    sidebarWidth === '20%' ? setSidebarWidth('0%') : setSidebarWidth('20%')
+  const [sidebarWidth, setSidebarWidth] = useState("20%");
+  function sidebarWidthHandler() {
+    sidebarWidth === "20%" ? setSidebarWidth("0%") : setSidebarWidth("20%");
   }
   const { pdfUrl } = useParams();
   console.log("Pdf url ", pdfUrl);
@@ -152,7 +151,10 @@ const DocumentAiComponent = () => {
     <div className={styles.container}>
       <MainNavigation onDocumentAiPage={true} />
       <div className={styles.inner}>
-        <div className={styles.fileSection} style={{width:`${sidebarWidth}`}}>
+        <div
+          className={styles.fileSection}
+          style={{ width: `${sidebarWidth}` }}
+        >
           {/* <p className={styles.arrow}>{'>'}</p> */}
           <div className={styles.searchBar}>
             <input
@@ -165,7 +167,10 @@ const DocumentAiComponent = () => {
           <DashboardComponent />
         </div>
         {/* <p className={styles.arrow} onClick={sidebarWidthHandler}>{'>'}</p> */}
-        <IoIosArrowDroprightCircle className={styles.arrow} onClick={sidebarWidthHandler}/>
+        <IoIosArrowDroprightCircle
+          className={styles.arrow}
+          onClick={sidebarWidthHandler}
+        />
         <section className={styles.chatHolder}>
           <div className={styles.pdfSection}>
             {/* <iframe width={"100%"} height={"100%"} src={`${zz}#toolbar=0`} /> */}
@@ -192,13 +197,6 @@ const DocumentAiComponent = () => {
               <div className={styles.noFileSelected}>
                 <FaRegFilePdf className={styles.pdfIcon} />
                 <h2>No pdf/document selected</h2>
-                {/* <UploadButton /> */}
-
-                className={styles.uploadBtn}
-                onClick={() => ctxMain.setIsUploadPdfOpen(true)}
-              >
-                Upload <RiUploadCloud2Line className={styles.uploadIcon} />
-              </button> */}
               </div>
             )}
           </div>

@@ -74,7 +74,7 @@ const SubBar = (props) => {
         {props.showCreateFolderBtn && (
           <li>
             <button
-              onClick={() => props.setIsCreateFolderOpen(true)}
+              onClick={() => ctxMain.setIsCreateFolderOpen(true)}
               className={styles.createBtn}
             >
               Create folder
@@ -87,10 +87,6 @@ const SubBar = (props) => {
             onClick={() => ctxMain.setIsUploadPdfOpen(true)}
           >
             Upload PDF
-            {/* <GrUploadOption
-              className={styles.uploadIcon}
-              style={{ color: "white" }}
-            /> */}
             <RiUploadCloud2Line className={styles.uploadIcon} />
           </button>
         </li>

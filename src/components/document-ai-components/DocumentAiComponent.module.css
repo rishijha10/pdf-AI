@@ -16,7 +16,7 @@
 .fileSection {
   position: relative;
   overflow: hidden;
-  transition: all 0.5s ;
+  transition: all 0.5s ease-in;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,10 +24,6 @@
 }
 .arrow {
   font-size: 40px;
-  /* position: absolute; */
-  /* top: 50%; */
-  /* transform: translateY(-50%); */
-  /* right: -5%; */
   z-index: 1000;
   height: 100%;
 }
@@ -35,9 +31,6 @@
   margin: 0;
   border: none;
   outline: none;
-  /* position: absolute;
-  left: 50%;
-  transform: translateX(-50%); */
   width: 100%;
   padding: 6px 10px;
   padding-right: 30px;

@@ -112,7 +112,7 @@ const UploadPdfModal = (props) => {
         <div className={styles.modalContainer}>
           <p>Upload document</p>
           <section className={styles.uploadSection} onClick={filtInputHandler}>
-            <p>{pdfFile?.name}</p>
+            <p>{pdfFile?.name ? pdfFile.name : "Click here to upload file"}</p>
           </section>
           <IoClose
             className={styles.closeIcon}

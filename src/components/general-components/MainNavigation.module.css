@@ -69,6 +69,10 @@ nav ul {
   color: white;
   font-size: 20px;
 }
+.createBtn {
+  background-color: #7f56d9;
+  color: white;
+}
 .vibrant {
   background: rgb(67, 134, 141);
   background: linear-gradient(

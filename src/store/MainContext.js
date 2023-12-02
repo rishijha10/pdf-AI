@@ -5,7 +5,9 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 
 export const MainContext = createContext(null);
 const MainContextProvider = (props) => {
-  const [isUploadPdfOpen, setIsUploadPdfOpen] = useState(false);
+  const [isUploadPdfOpen, setIsUploadPdfOpen] = useState(false); //used to open and close pdf modal
+
+  const [isCreateFolderOpen, setIsCreateFolderOpen] = useState(false); //used to open and close create folder modal
   const [confirmDeleteModalOpen, setConfirmDeleteModalOpen] = useState(false);
   const [user, setUser] = useState({});
   const [currentPath, setCurrentPath] = useState("root"); //currentFolder changed to currentPath
@@ -109,6 +111,8 @@ const MainContextProvider = (props) => {
         setCurrentDocument,
         allFileNames,
         setAllFileNames,
+        isCreateFolderOpen,
+        setIsCreateFolderOpen,
       }}
     >
       {props.children}

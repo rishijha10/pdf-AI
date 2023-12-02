@@ -85,12 +85,20 @@ const MainNavigation = (props) => {
           {ctxMain?.user?.email ? (
             <>
               {props.onDocumentAiPage && ( //only display on document ai page
-                <button
-                  className={styles.uploadBtn}
-                  onClick={() => ctxMain.setIsUploadPdfOpen(true)}
-                >
-                  Upload <RiUploadCloud2Line className={styles.uploadIcon} />
-                </button>
+                <>
+                  <button
+                    onClick={() => ctxMain.setIsCreateFolderOpen(true)}
+                    className={styles.createBtn}
+                  >
+                    Create folder
+                  </button>
+                  <button
+                    className={styles.uploadBtn}
+                    onClick={() => ctxMain.setIsUploadPdfOpen(true)}
+                  >
+                    Upload <RiUploadCloud2Line className={styles.uploadIcon} />
+                  </button>
+                </>
               )}
               {!props.onDocumentAiPage && ( // dont show this when document ai page is open
                 <Link to={`/auth?mode=signIn`}>

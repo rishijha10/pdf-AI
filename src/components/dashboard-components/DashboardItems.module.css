@@ -17,7 +17,7 @@
   flex-wrap: wrap;
 }
 .pdfIcon {
-  font-size: 20px;
+  font-size: 15px;
   /* color: blue; */
 }
 .deleteIcon {
@@ -33,7 +33,6 @@
   align-items: flex-start;
   padding: 10px 15px;
   white-space: nowrap;
-
 }
 /* .uploadBtn {
   border: none;
