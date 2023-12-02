@@ -16,6 +16,13 @@
   gap: 15px;
   flex-wrap: wrap;
 }
+.file {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 10px 15px;
+  white-space: nowrap;
+}
 .pdfIcon {
   font-size: 15px;
   /* color: blue; */
@@ -27,13 +34,7 @@
 .deleteIcon:hover {
   color: crimson;
 }
-.file {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 10px 15px;
-  white-space: nowrap;
-}
+
 /* .uploadBtn {
   border: none;
   outline: none;

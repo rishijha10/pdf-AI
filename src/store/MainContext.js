@@ -6,19 +6,16 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 export const MainContext = createContext(null);
 const MainContextProvider = (props) => {
   const [isUploadPdfOpen, setIsUploadPdfOpen] = useState(false); //used to open and close pdf modal
-
   const [isCreateFolderOpen, setIsCreateFolderOpen] = useState(false); //used to open and close create folder modal
   const [confirmDeleteModalOpen, setConfirmDeleteModalOpen] = useState(false);
   const [user, setUser] = useState({});
   const [currentPath, setCurrentPath] = useState("root"); //currentFolder changed to currentPath
   const [userFolders, setUserFolders] = useState([]); //stores all of users folders
+  const [allUserFiles, setAllUserFiles] = useState([]); //stores all files of the user
   const [userFiles, setUserFiles] = useState([]); //stores the files inside a particular folder
   const [currentDocument, setCurrentDocument] = useState({});
   const [allFileNames, setAllFileNames] = useState([]); //stores the names of every file that of the user
   console.log("Current document ", currentDocument);
-  // const []
-  // const [adminFolders, setAdminFolders] = useState([]);
-  // const [adminFiles, setAdminFiles] = useState([]);
   async function getData(uid, fileName, type) {
     try {
       const docRef = collection(db, `${fileName}`);
@@ -65,6 +62,14 @@ const MainContextProvider = (props) => {
         const newFilesData = filesData.map((item) => item.data.name);
         console.log("File names: ", newFilesData);
         setAllFileNames(newFilesData);
+      } else if (type === "all user files") {
+        const q = query(docRef, where("uid", "==", uid));
+        const querySnapshot = await getDocs(q);
+        const filesData = [];
+        querySnapshot.forEach((doc) => {
+          filesData.push({ data: doc.data(), docId: doc.id });
+        });
+        setAllUserFiles(filesData);
       }
     } catch (err) {
       console.log(err);
@@ -81,6 +86,7 @@ const MainContextProvider = (props) => {
         getData(user?.uid, "Folders", "folder");
         getData(user?.uid, "Pdf-Files", "all files");
         getData(user?.uid, "Pdf-Files", "files");
+        getData(user?.uid, "Pdf-Files", "all user files");
       } else {
         setUser(null);
       }
@@ -113,6 +119,7 @@ const MainContextProvider = (props) => {
         setAllFileNames,
         isCreateFolderOpen,
         setIsCreateFolderOpen,
+        allUserFiles,
       }}
     >
       {props.children}

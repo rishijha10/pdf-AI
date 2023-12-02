@@ -16,35 +16,30 @@ const DashboardComponent = () => {
   const [rootFiles, setRootFiles] = useState([]);
   async function getFileByPathRoot() {
     //get all files that are not inside a folder, they have path set to root
-    const docRef = collection(db, "Pdf-Files");
-    const q = query(
-      docRef,
-      where("uid", "==", ctxMain.user.uid),
-      where("path", "==", "root")
-    );
-    const querySnapshot = await getDocs(q);
-    const filesData = [];
-    querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
-      // console.log(doc.id, " => ", doc.data());
-      filesData.push({ data: doc.data(), docId: doc.id });
-      // ctxMain.setUserFolders((prev) => [...prev, doc.data()]);
-    });
-    setRootFiles(filesData);
+    try {
+      const docRef = collection(db, "Pdf-Files");
+      const q = query(
+        docRef,
+        where("uid", "==", ctxMain.user.uid),
+        where("path", "==", "root")
+      );
+      const querySnapshot = await getDocs(q);
+      const filesData = [];
+      querySnapshot.forEach((doc) => {
+        // console.log(doc.id, " => ", doc.data());
+        filesData.push({ data: doc.data(), docId: doc.id });
+      });
+      setRootFiles(filesData);
+    } catch (error) {
+      console.error(error.message);
+    }
   }
   useEffect(() => {
     getFileByPathRoot();
   }, []);
   return (
     <div className={styles.outerContainer}>
-      {/* <ModalOverlay /> */}
-      {/* <SubBar
-        isCreateFolderOpen={isCreateFolderOpen}
-        setIsCreateFolderOpen={setIsCreateFolderOpen}
-        showCreateFolderBtn={true}
-      /> */}
       <DashboardItems
-        // title={"Folders"}
         items={rootFiles}
         type={"file"}
         setDeleteType={setDeleteType}
@@ -54,13 +49,6 @@ const DashboardComponent = () => {
         type="folder"
         setDeleteType={setDeleteType}
       />
-      {/* <DashboardItems
-        // title={"Folders"}
-        type={"folder"}
-        items={ctxMain.userFolders}
-        setDeleteType={setDeleteType}
-      /> */}
-
       {ctxMain.isCreateFolderOpen && (
         <ModalOverlay>
           <CreateFolderModal />

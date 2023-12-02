@@ -15,7 +15,7 @@
 }
 .fileSection {
   position: relative;
-  overflow: hidden;
+  overflow: auto;
   transition: all 0.5s ease-in;
   display: flex;
   flex-direction: column;

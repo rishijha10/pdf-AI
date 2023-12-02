@@ -14,7 +14,8 @@ const DashboardItems = (props) => {
   const ctxMain = useContext(MainContext);
   const navigate = useNavigate();
   function doubleClickHandler(id) {
-    navigate(`/folder/${id}`);
+    // navigate(`/folder/${id}`);
+    ctxMain.setCurrentPath(id);
   }
   function pdfHandler(pdfData) {
     navigate(`/pdf-ai-gen1/${pdfData?.data?.name}`);
@@ -35,74 +36,91 @@ const DashboardItems = (props) => {
             props.type === "file"
               ? new Date(item?.data?.createdAt)
               : item?.data?.createdAt.toDate();
-          const year = dateObject.getFullYear();
-          const month = dateObject.getMonth();
-          const day = dateObject.getDate();
-          const hour = dateObject.getHours();
-          const minutes = dateObject.getMinutes();
-          const seconds = dateObject.getSeconds();
+          const year = dateObject?.getFullYear();
+          const month = dateObject?.getMonth();
+          const day = dateObject?.getDate();
+          const hour = dateObject?.getHours();
+          const minutes = dateObject?.getMinutes();
+          const seconds = dateObject?.getSeconds();
           const title =
             item?.data?.name.length > 22
               ? item?.data?.name.substring(0, 22) + "..."
               : item?.data?.name;
           return (
-            <div key={index} className={styles.file}>
-              <div className={styles.innerFile}>
-                <div className={styles.fileNameAndDateContainer}>
-                  <div className={styles.fileName}>
-                    {props.type === "file" ? (
-                      <>
-                        <PiFilePdfLight className={styles.pdfIcon} />
-                        <p
-                          onClick={() => {
-                            pdfHandler(item);
-                            props.setDeleteType("file");
-                          }}
-                        >
-                          {title}
-                        </p>
-                      </>
-                    ) : (
-                      <>
-                        <FaRegFolder className={styles.pdfIcon} />
-                        <p
-                          onClick={() => {
-                            doubleClickHandler(item?.docId);
-                            props.setDeleteType("folder");
-                          }}
-                        >
-                          {item?.data?.name}
-                        </p>
-                      </>
-                    )}
-                  </div>
-                  <div className={styles.fileDate}>
-                    <GoClock className={styles.clockIcon} />
-                    <p>
-                      {year +
-                        "-" +
-                        month +
-                        "-" +
-                        day +
-                        " " +
-                        hour +
-                        ":" +
-                        minutes +
-                        ":" +
-                        seconds}
-                    </p>
+            <section>
+              <div key={index} className={styles.file}>
+                <div className={styles.innerFile}>
+                  <div className={styles.fileNameAndDateContainer}>
+                    <div className={styles.fileName}>
+                      {props.type === "file" ? (
+                        <>
+                          <PiFilePdfLight className={styles.pdfIcon} />
+                          <p
+                            onClick={() => {
+                              pdfHandler(item);
+                              props.setDeleteType("file");
+                            }}
+                          >
+                            {title}
+                          </p>
+                        </>
+                      ) : (
+                        <>
+                          <FaRegFolder className={styles.pdfIcon} />
+                          <p
+                            onClick={() => {
+                              doubleClickHandler(item?.docId);
+                              props.setDeleteType("folder");
+                            }}
+                          >
+                            {item?.data?.name}
+                          </p>
+                        </>
+                      )}
+                    </div>
+                    <div className={styles.fileDate}>
+                      <GoClock className={styles.clockIcon} />
+                      <p>
+                        {year +
+                          "-" +
+                          month +
+                          "-" +
+                          day +
+                          " " +
+                          hour +
+                          ":" +
+                          minutes +
+                          ":" +
+                          seconds}
+                      </p>
+                    </div>
                   </div>
                 </div>
+                <MdDeleteOutline
+                  className={` ${styles.deleteIcon}`}
+                  // onClick={() => {
+                  //   ctxMain.setConfirmDeleteModalOpen(true);
+                  //   ctxMain.setCurrentDocument(item);
+                  //   ctxMain.setCurrentPath(item?.docId);
+                  // }}
+                />
               </div>
-              <MdDeleteOutline
-                className={` ${styles.deleteIcon}`}
-                // onClick={() => {
-                //   ctxMain.setConfirmDeleteModalOpen(true);
-                //   ctxMain.setCurrentDocument(item);
-                //   ctxMain.setCurrentPath(item?.docId);
-                // }}
-              />
-            </div>
+              {props.type === "folder" &&
+                ctxMain.userFiles.length !== 0 &&
+                ctxMain.userFiles[0].data.path === item.data.path &&
+                (<DashboardItems items={ctxMain.userFiles} type={"file"} /> ||
+                  null)}
+              {/* {props.type === "folder" ? (
+
+                <DashboardItems
+                  items={
+                    // ctxMain.userFolders.length !== 0 &&
+                    // ctxMain.userFolders[0].data.path === item.data.path
+                  }
+                  type="file"
+                />
+              ) : null} */}
+            </section>
           );
         })}
       </div>

@@ -1,4 +1,3 @@
-// import React from "react";
 import styles from "./DocumentAiComponent.module.css";
 import pdfFile from "../../assets/Lion.pdf";
 import zz from "../../assets/zz.pdf";
@@ -12,9 +11,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import DashboardComponent from "../dashboard-components/DashboardComponent";
 import { MdOutlineSearch } from "react-icons/md";
 import MainNavigation from "../general-components/MainNavigation";
-// import { RiUploadCloud2Line } from "react-icons/ri";
-// import UploadButton from "./UploadButton";
-
 const DocumentAiComponent = () => {
   const [sidebarWidth, setSidebarWidth] = useState("20%");
   function sidebarWidthHandler() {
@@ -23,7 +19,9 @@ const DocumentAiComponent = () => {
   const { pdfUrl } = useParams();
   console.log("Pdf url ", pdfUrl);
   const ctxMain = useContext(MainContext);
-  const urlObject = ctxMain.userFiles.find((item) => item.data.name === pdfUrl);
+  const urlObject = ctxMain.allUserFiles.find(
+    (item) => item.data.name === pdfUrl
+  );
   console.log(urlObject);
   const navigate = useNavigate();
   useEffect(() => {
