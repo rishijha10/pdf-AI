@@ -12,8 +12,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import DashboardComponent from "../dashboard-components/DashboardComponent";
 import { MdOutlineSearch } from "react-icons/md";
 import MainNavigation from "../general-components/MainNavigation";
-import { RiUploadCloud2Line } from "react-icons/ri";
-import UploadButton from "./UploadButton";
+// import { RiUploadCloud2Line } from "react-icons/ri";
+// import UploadButton from "./UploadButton";
 
 const DocumentAiComponent = () => {
   const [sidebarWidth, setSidebarWidth] = useState("20%");
@@ -34,10 +34,6 @@ const DocumentAiComponent = () => {
 
   const [queryList, setQueryList] = useState([]); //stores the objects of questions and answers in pair
   const [promptQuery, setPromptQuery] = useState(""); //Stores the question written in input field
-  // const [messages, setMessages] = useState([]);
-  // const [currentQuestion, setcurrentQuestion] = useState(""); //used to store the current question that was asked, it will be displayed on the screen
-  // const [currentAnswer, setCurrentAnswer] = useState(""); //used to store the current answer that was returned, it will be displayed on the screen
-  // console.log("Messages ", messages);
   function promptHandler(e) {
     e.preventDefault();
     setPromptQuery(e.target.value);
