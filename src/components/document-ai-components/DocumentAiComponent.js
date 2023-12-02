@@ -15,36 +15,6 @@ import MainNavigation from "../general-components/MainNavigation";
 import { RiUploadCloud2Line } from "react-icons/ri";
 import UploadButton from "./UploadButton";
 
-// const DocumentAiComponent = () => {
-//   return (
-//     <div className={styles.container}>
-//       {/* <Document file={pdfFile}>
-//         <Page pageNumber={1} />
-//       </Document> */}
-//       <div className={styles.inner}>
-//         <iframe src={pdfFile} width="100%" height="100%"></iframe>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default DocumentAiComponent;
-
-// Create Document Component
-// const DocumentAiComponent = () => (
-//   <div className={styles.container}>
-//     <div className={styles.inner}>
-//        <PDFViewer style={{ marginTop: "90px" }}>
-//      <Document file={pdfFile}>
-//        <Page size="A4" style={styles.page}>
-//        </Page>
-//      </Document>
-//   </PDFViewer>
-//     </div>
-//   </div>
-// );
-// export default DocumentAiComponent;
-
 const DocumentAiComponent = () => {
   const [sidebarWidth, setSidebarWidth] = useState("20%");
   function sidebarWidthHandler() {
