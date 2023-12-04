@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styles from "./DashboardComponent.module.css";
-import SubBar from "./SubBar";
 import DashboardItems from "./DashboardItems";
 import CreateFolderModal from "./modal overlay components/CreateFolderModal";
 import { useContext } from "react";
@@ -12,7 +11,6 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
 const DashboardComponent = () => {
   const ctxMain = useContext(MainContext);
-  const [deleteType, setDeleteType] = useState("");
   const [rootFiles, setRootFiles] = useState([]);
   async function getFileByPathRoot() {
     //get all files that are not inside a folder, they have path set to root
@@ -36,19 +34,11 @@ const DashboardComponent = () => {
   }
   useEffect(() => {
     getFileByPathRoot();
-  }, []);
+  }, [ctxMain.userFiles]);
   return (
     <div className={styles.outerContainer}>
-      <DashboardItems
-        items={rootFiles}
-        type={"file"}
-        // setDeleteType={setDeleteType}
-      />
-      <DashboardItems
-        items={ctxMain.userFolders}
-        type="folder"
-        // setDeleteType={setDeleteType}
-      />
+      <DashboardItems items={rootFiles} type={"file"} />
+      <DashboardItems items={ctxMain.userFolders} type="folder" />
       {ctxMain.isCreateFolderOpen && (
         <ModalOverlay>
           <CreateFolderModal />
@@ -61,7 +51,10 @@ const DashboardComponent = () => {
       )}
       {ctxMain.confirmDeleteModalOpen && (
         <ModalOverlay>
-          <ConfirmDeleteModal type={deleteType} />
+          <ConfirmDeleteModal
+            rootPathFiles={rootFiles}
+            rootPathFilesHandler={(updatedFiles) => setRootFiles(updatedFiles)}
+          />
         </ModalOverlay>
       )}
     </div>

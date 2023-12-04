@@ -8,7 +8,6 @@ import { deleteObject, getStorage, ref } from "firebase/storage";
 // import { useNavigate } from "react-router-dom";
 const ConfirmDeleteModal = (props) => {
   const ctxMain = useContext(MainContext);
-  // const navigate = useNavigate();
   const storage = getStorage();
   async function folderDeleteHandler(documentData) {
     console.log(documentData);
@@ -40,8 +39,8 @@ const ConfirmDeleteModal = (props) => {
             (name) => name !== ctxMain?.userFiles[i]?.data?.name
           );
           ctxMain.setAllFileNames(updatedAllFileNames);
-        } catch (err) {
-          console.error("Could not delete document in firebase storage", err);
+        } catch (error) {
+          console.error("Could not delete document in firebase storage", error);
         }
       }
       ctxMain.setUserFiles([]);
@@ -59,8 +58,52 @@ const ConfirmDeleteModal = (props) => {
     ctxMain.setConfirmDeleteModalOpen(false);
   }
   async function fileDeleteHandler(documentData) {
-    delete (await deleteDoc(doc(db, "Pdf-Files", `${documentData.docId}`)));
+    try {
+      await deleteDoc(doc(db, "Pdf-Files", `${documentData.docId}`));
+    } catch (error) {
+      alert(error.message);
+      return;
+    }
 
+    try {
+      const fileRef = ref(
+        storage,
+        `pdfs/${String(ctxMain.user.uid)}/${String(documentData?.data?.name)}`
+      );
+      deleteObject(fileRef);
+    } catch (error) {
+      alert(error.message);
+    }
+    //Update root path files by passing state up to parent prop
+    if (ctxMain.currentPath === "root") {
+      const updatedFiles = props.rootPathFiles.filter(
+        (item) => item.docId !== documentData?.docId
+      );
+      props.rootPathFilesHandler(updatedFiles);
+    }
+
+    //Update user files of current folder
+    const updatedUserFiles = ctxMain.userFiles.filter(
+      (item) => item.docId !== documentData?.docId
+    );
+    ctxMain.setUserFiles(updatedUserFiles);
+
+    //Update all user files
+    const updatedAllUserFiles = ctxMain.allUserFiles.filter(
+      (item) => item.docId !== documentData?.docId
+    );
+    ctxMain.setAllUserFiles(updatedAllUserFiles);
+
+    //Update all user file names
+    const updatedAllFileNames = ctxMain.allFileNames.filter(
+      (name) => name !== documentData?.data?.name
+    );
+    ctxMain.setAllFileNames(updatedAllFileNames);
+    ctxMain.setCurrentDocument({});
+    ctxMain.setCurrentPath("");
+    ctxMain.setConfirmDeleteModalOpen(false);
+
+    //
     // console.log(documentData);
     // try {
     //   await deleteDoc(doc(db, "Pdf-Files", `${documentData?.docId}`));

@@ -92,7 +92,6 @@ const UploadPdfModal = (props) => {
             console.error("Error adding document: ", e);
           }
         })
-
         .catch((e) => console.error(e));
       // console.log(url);
       // data = {
