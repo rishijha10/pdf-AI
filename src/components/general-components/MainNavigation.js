@@ -94,7 +94,10 @@ const MainNavigation = (props) => {
                   </button>
                   <button
                     className={styles.uploadBtn}
-                    onClick={() => ctxMain.setIsUploadPdfOpen(true)}
+                    onClick={() => {
+                      ctxMain.setCurrentPath("root");
+                      ctxMain.setIsUploadPdfOpen(true);
+                    }}
                   >
                     Upload <RiUploadCloud2Line className={styles.uploadIcon} />
                   </button>

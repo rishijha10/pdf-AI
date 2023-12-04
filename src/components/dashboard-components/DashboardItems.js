@@ -59,7 +59,7 @@ const DashboardItems = (props) => {
                           <p
                             onClick={() => {
                               pdfHandler(item);
-                              // props.setDeleteType("file");
+                              ctxMain.setDeleteType("file");
                             }}
                           >
                             {title}
@@ -71,7 +71,7 @@ const DashboardItems = (props) => {
                           <p
                             onClick={() => {
                               doubleClickHandler(item?.docId);
-                              // props.setDeleteType("folder");
+                              ctxMain.setDeleteType("folder");
                             }}
                           >
                             {title}
@@ -109,11 +109,14 @@ const DashboardItems = (props) => {
                   )}
                   <MdDeleteOutline
                     className={` ${styles.deleteIcon}`}
-                    // onClick={() => {
-                    //   ctxMain.setConfirmDeleteModalOpen(true);
-                    //   ctxMain.setCurrentDocument(item);
-                    //   ctxMain.setCurrentPath(item?.docId);
-                    // }}
+                    onClick={() => {
+                      ctxMain.setConfirmDeleteModalOpen(true);
+                      ctxMain.setCurrentDocument(item);
+                      ctxMain.setCurrentPath(item?.docId);
+                      ctxMain.setDeleteType(
+                        props.type === "file" ? "file" : "folder"
+                      );
+                    }}
                   />
                 </div>
               </div>

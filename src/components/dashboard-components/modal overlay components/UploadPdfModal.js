@@ -7,6 +7,7 @@ import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 import { db, storage } from "../../../firebase/firebase";
 const UploadPdfModal = (props) => {
   const [pdfFile, setPdfFile] = useState(null);
+  const [loading, setLoading] = useState(false);
   const fileRef = useRef(null);
   function filtInputHandler() {
     fileRef.current.click(); //clicks the input type file to open file window when section box is clicked
@@ -31,7 +32,7 @@ const UploadPdfModal = (props) => {
     }
     return true;
   }
-  async function fileSubmitHandler(e) {
+  function fileSubmitHandler(e) {
     e.preventDefault();
     if (!pdfFile) {
       return;
@@ -39,6 +40,7 @@ const UploadPdfModal = (props) => {
     if (!checkDuplicateFileName(pdfFile.name)) {
       return alert("A file by this name already exists in the current folder");
     }
+    setLoading(true);
     const fileRef = ref(storage, `pdfs/${ctxMain?.user?.uid}/${pdfFile.name}`);
     uploadBytes(fileRef, pdfFile).then(async (snapshot) => {
       // const data = {
@@ -113,6 +115,7 @@ const UploadPdfModal = (props) => {
       //   console.error("Error adding document: ", e);
       // }
     });
+    setLoading(false);
     ctxMain.setIsUploadPdfOpen(false);
     setPdfFile(null);
     // uploadBytes(fileRef, pdfFile).then((snapshot) => {
@@ -141,7 +144,7 @@ const UploadPdfModal = (props) => {
               accept="application/pdf"
               onChange={(e) => setPdfFile(e.target.files[0])}
             />
-            <button type="submit">Upload</button>
+            <button type="submit">{loading ? "Uploading..." : "Upload"}</button>
           </form>
         </div>
       )}

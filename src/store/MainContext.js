@@ -15,6 +15,7 @@ const MainContextProvider = (props) => {
   const [userFiles, setUserFiles] = useState([]); //stores the files inside a particular folder
   const [currentDocument, setCurrentDocument] = useState({});
   const [allFileNames, setAllFileNames] = useState([]); //stores the names of every file that of the user
+  const [deleteType, setDeleteType] = useState(""); //sets whether the we are deleting a file or a folder
   console.log("Current document ", currentDocument);
   console.log("Current path: ", currentPath);
   async function getData(uid, fileName, type) {
@@ -100,6 +101,7 @@ const MainContextProvider = (props) => {
   console.log("User files: ", userFiles);
   console.log("All user file name ", allFileNames);
   console.log("All user files ", allUserFiles);
+  console.log("Delete type: ", deleteType);
   return (
     <MainContext.Provider
       value={{
@@ -123,6 +125,8 @@ const MainContextProvider = (props) => {
         setIsCreateFolderOpen,
         allUserFiles,
         setAllUserFiles,
+        deleteType,
+        setDeleteType,
       }}
     >
       {props.children}
