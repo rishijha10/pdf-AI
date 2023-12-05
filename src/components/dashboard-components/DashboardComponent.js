@@ -37,8 +37,14 @@ const DashboardComponent = () => {
   }, [ctxMain.userFiles]);
   return (
     <div className={styles.outerContainer}>
-      <DashboardItems items={rootFiles} type={"file"} />
-      <DashboardItems items={ctxMain.userFolders} type="folder" />
+      {rootFiles.map((item) => (
+        <DashboardItems item={item} type="file" />
+      ))}
+      {ctxMain.userFolders.map((item) => (
+        <DashboardItems item={item} type="folder" />
+      ))}
+      {/* <DashboardItems items={rootFiles} type={"file"} />
+      <DashboardItems items={ctxMain.userFolders} type="folder" /> */}
       {ctxMain.isCreateFolderOpen && (
         <ModalOverlay>
           <CreateFolderModal />

@@ -22,7 +22,6 @@ const DocumentAiComponent = () => {
   const urlObject = ctxMain.allUserFiles.find(
     (item) => item.data.name === pdfUrl
   );
-  console.log(urlObject);
   const navigate = useNavigate();
   useEffect(() => {
     if (!ctxMain?.user?.email) {
@@ -36,7 +35,6 @@ const DocumentAiComponent = () => {
     e.preventDefault();
     setPromptQuery(e.target.value);
   }
-  // console.log("Query list: ", queryList);
   async function submitPromptHandler(e) {
     e.preventDefault();
     if (promptQuery === "") {

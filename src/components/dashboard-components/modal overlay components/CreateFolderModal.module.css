@@ -23,7 +23,8 @@
   /* border: 1px solid #d7d4c9; */
   border: none;
   /* box-shadow: 10px 10px 10px 0px rgba(0, 0, 0, 0.5); */
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+  /* box-shadow: 0 0 4px rgba(0, 0, 0, 0.3); */
+  border: 1px solid rgb(222, 219, 208);
   outline: none;
   width: 100%;
   font-size: 16px;
