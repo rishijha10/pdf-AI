@@ -61,17 +61,18 @@ nav ul {
 }
 .uploadBtn {
   color: white;
-  background-color: #ff612f;
-  gap: 10px;
+  background-color: #7f56d9;
+  gap: 5px;
 }
 .uploadIcon {
-  background-color: #ff612f;
+  background-color: #7f56d9;
   color: white;
   font-size: 20px;
 }
 .createBtn {
-  /* background-color: #7f56d9; */
-  background-color: #ff9900;
+  background-color: #ff612f;
+
+  /* background-color: #ff9900; */
   color: white;
 }
 .vibrant {

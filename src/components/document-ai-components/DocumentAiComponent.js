@@ -209,7 +209,7 @@ const DocumentAiComponent = () => {
                       <FaUser className={styles.userIcon} />
                       <p>{query?.author}</p>
                     </div>
-                    <div className={`${styles.userQuery} ${styles.botQuery}`}>
+                    <div className={` ${styles.botQuery}`}>
                       <section className={styles.logo}>
                         <div className={`${styles.first} `}></div>
                         <div className={`${styles.second}`}></div>

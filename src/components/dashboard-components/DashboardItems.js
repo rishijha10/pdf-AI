@@ -1,10 +1,17 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./DashboardItems.module.css";
 import { useNavigate } from "react-router-dom";
 // import { FaRegFilePdf } from "react-icons/fa6";
 import { MdDeleteOutline } from "react-icons/md";
 import { FaRegFolder } from "react-icons/fa6";
-import { deleteDoc, doc } from "firebase/firestore";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
 import { db } from "../../firebase/firebase";
 import { GoClock } from "react-icons/go";
 import { MainContext } from "../../store/MainContext";
@@ -13,11 +20,9 @@ import { IoAddOutline } from "react-icons/io5";
 
 const DashboardItems = (props) => {
   const ctxMain = useContext(MainContext);
+  // const [subFiles, setSubFiles] = useState([]); //stores files inside folders, if there are any
+  // console.log("Subfiles: ", subFiles);
   const navigate = useNavigate();
-  function doubleClickHandler(id) {
-    // navigate(`/folder/${id}`);
-    ctxMain.setCurrentPath(id);
-  }
   function pdfHandler(pdfData) {
     navigate(`/pdf-ai-gen1/${pdfData?.data?.name}`);
   }
@@ -29,10 +34,59 @@ const DashboardItems = (props) => {
     );
     ctxMain.setUserFolders(updatedUserFolders);
   }
+  // async function fetchSubFiles(id) {
+  //   const docRef = collection(db, "Pdf-Files");
+  //   const q = query(
+  //     docRef,
+  //     where("uid", "==", ctxMain?.user?.uid),
+  //     where("path", "==", id)
+  //   );
+  //   const querySnapshot = await getDocs(q);
+  //   const filesData = [];
+  //   querySnapshot.forEach((doc) => {
+  //     filesData.push({ data: doc.data(), docId: doc.id });
+  //   });
+  //   setSubFiles(filesData);
+  // }
+  async function fetchSubFiles(uid) {
+    // setLoading(true); // Set loading to true before fetching
+    if (!props.type === "folder") {
+      return;
+    }
+    const docRef = collection(db, "Pdf-Files");
+    const q = query(
+      docRef,
+      where("uid", "==", ctxMain?.user?.uid),
+      where("path", "==", uid)
+    );
+    try {
+      const querySnapshot = await getDocs(q);
+      const filesData = [];
+      querySnapshot.forEach((doc) => {
+        filesData.push({ data: doc.data(), docId: doc.id });
+      });
+      return filesData;
+      // setSubFiles(filesData);
+    } catch (error) {
+      console.error("Error fetching subfiles:", error);
+    } finally {
+      // setLoading(false); // Set loading to false after fetching, regardless of success or failure
+    }
+  }
+  // useEffect(() => {
+  //   fetchSubFiles(props?.items);
+  // }, []);
+  function folderClickHandler(id) {
+    ctxMain.setCurrentPath(id);
+    ctxMain.setDeleteType("folder");
+  }
   return (
     <div className={styles.itemsContainer}>
       <div className={styles.itemsInnerContainer}>
-        {props.items?.map((item, index) => {
+        {props.items?.map((item) => {
+          const subFiles =
+            props.type === "folder" &&
+            fetchSubFiles(item?.docId).then((data) => console.log(data));
           const dateObject =
             props.type === "file"
               ? new Date(item?.data?.createdAt)
@@ -48,8 +102,8 @@ const DashboardItems = (props) => {
               ? item?.data?.name.substring(0, 18) + "..."
               : item?.data?.name;
           return (
-            <section>
-              <div key={index} className={styles.file}>
+            <section key={item.docId}>
+              <div className={styles.file}>
                 <div className={styles.innerFile}>
                   <div className={styles.fileNameAndDateContainer}>
                     <div className={styles.fileName}>
@@ -68,12 +122,7 @@ const DashboardItems = (props) => {
                       ) : (
                         <>
                           <FaRegFolder className={styles.pdfIcon} />
-                          <p
-                            onClick={() => {
-                              doubleClickHandler(item?.docId);
-                              ctxMain.setDeleteType("folder");
-                            }}
-                          >
+                          <p onClick={() => folderClickHandler(item?.docId)}>
                             {title}
                           </p>
                         </>
@@ -123,9 +172,9 @@ const DashboardItems = (props) => {
               {/* ctxMain.userFiles[0]?.data?.path checks the path of the first file in the userFiles array and compares it with the docId of current folder, if its true then it means the userFiles belongs to the current folder and it should be rendered */}
               {props.type === "folder" &&
                 ctxMain.userFiles.length !== 0 &&
-                ctxMain.userFiles[0]?.data?.path === item?.docId &&
-                (<DashboardItems items={ctxMain.userFiles} type={"file"} /> ||
-                  null)}
+                ctxMain.userFiles[0]?.data?.path === item?.docId && (
+                  <DashboardItems items={ctxMain.userFiles} type={"file"} />
+                )}
             </section>
           );
         })}
