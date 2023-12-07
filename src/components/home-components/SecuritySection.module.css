@@ -16,12 +16,14 @@
   width: 35rem;
   display: flex;
   flex-direction: column;
+  /* align-items: flex-start; */
   gap: 2rem;
 }
 .hrLine {
   border: 1px solid black;
   opacity: 0.3;
   width: 100%;
+  /* text-align: left; */
 }
 .threeCards h1 {
   font-family: Eudoxus sans;
@@ -54,5 +56,50 @@
   }
   .threeCards p {
     width: 90%;
+  }
+}
+@media (max-width: 820px) {
+  .container {
+    padding: 15rem 0;
+  }
+  .innerContainer {
+    flex-direction: column;
+    align-items: center;
+    gap: 5rem;
+  }
+  .threeCards {
+    min-width: 40rem;
+  }
+  .threeCards p {
+    width: 100%;
+  }
+}
+@media (max-width: 460px) {
+  /* .innerContainer {
+    width: 95%;
+  } */
+  .threeCards {
+    min-width: 30rem;
+  }
+  .threeCards p {
+    width: 95%;
+  }
+}
+@media (max-width: 385px) {
+  .threeCards {
+    /* min-width: 20rem; */
+    min-width: none;
+    max-width: 50%;
+  }
+  .threeCards h1 {
+    font-family: Eudoxus sans;
+    font-size: 2.5rem;
+  }
+  .threeCards p {
+    font-family: Inter;
+    line-height: 1.5;
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 400;
   }
 }

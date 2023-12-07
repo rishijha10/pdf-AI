@@ -29,7 +29,8 @@
   font-family: Inter;
   font-weight: 600;
   font-size: 1.8rem;
-  border-radius: 0.8rem;
+  /* border-radius: 0.8rem; */
+  border-radius: 0.5rem;
   background-color: #ff612f;
   color: white;
   padding: 1.2rem;
@@ -62,12 +63,15 @@
 }
 @media (max-width: 460px) {
   .container section {
-    width: 95%;
+    margin: 15rem auto;
   }
   .container h1 {
     font-size: 3.5rem;
   }
   .container p {
     font-size: 1.6rem;
+  }
+  .heroSectionImg img {
+    margin-top: 10rem;
   }
 }

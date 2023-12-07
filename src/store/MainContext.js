@@ -2,7 +2,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import { app, auth, db } from "../firebase/firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
-import Cookies from "universal-cookie";
+// import Cookies from "universal-cookie";
 
 export const MainContext = createContext(null);
 const MainContextProvider = (props) => {
@@ -83,11 +83,11 @@ const MainContextProvider = (props) => {
       // auth.currentUser
       //   .getIdToken(true)
       //   .then((idToken) => console.log("Id token: ", idToken));
-      const cookie = new Cookies();
-      cookie.set("jwt_auth", user.uid, {
-        expires: new Date().getMinutes * 10,
-      });
-      console.log("Cookie: ", cookie);
+      // const cookie = new Cookies();
+      // cookie.set("jwt_auth", user.uid, {
+      //   expires: new Date().getMinutes * 10,
+      // });
+      // console.log("Cookie: ", cookie);
       if (user) {
         setUser({
           email: user.email,

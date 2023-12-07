@@ -13,7 +13,6 @@ import {
 import DashboardPage from "./pages/DashboardPage";
 import PdfComponent from "./components/dashboard-components/pdf-component/PdfComponent";
 import DocumentAi from "./pages/DocumentAi";
-import Cookies from "universal-cookie";
 import { useContext } from "react";
 import { MainContext } from "./store/MainContext";
 
