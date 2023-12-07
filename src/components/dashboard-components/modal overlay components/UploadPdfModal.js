@@ -77,7 +77,7 @@ const UploadPdfModal = (props) => {
           data.fileUrl = url;
           try {
             const docRef = await addDoc(collection(db, "Pdf-Files"), data);
-            console.log("Document written with ID: ", docRef.id);
+            // console.log("Document written with ID: ", docRef.id);
             // updateUserFiles();
             ctxMain.setUserFiles((prev) => [
               ...prev,

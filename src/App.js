@@ -13,8 +13,20 @@ import {
 import DashboardPage from "./pages/DashboardPage";
 import PdfComponent from "./components/dashboard-components/pdf-component/PdfComponent";
 import DocumentAi from "./pages/DocumentAi";
+import Cookies from "universal-cookie";
+import { useContext } from "react";
+import { MainContext } from "./store/MainContext";
 
 function App() {
+  // const arr = [
+  //   { question: "who are you", answer: "i am palm" },
+  //   { question: "i am who", answer: "you are muzammil" },
+  //   { question: "who are you", answer: "i am palm" },
+  //   { question: "incomplete" },
+  // ];
+  // arr[arr.length - 1].answer = "complete";
+  // console.log(arr);
+
   const queryClient = new QueryClient();
   const router = createBrowserRouter([
     {

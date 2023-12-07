@@ -40,7 +40,7 @@ const CreateFolderModal = (props) => {
         };
         addToFirestore(data).then((id) => {
           getAllFolders();
-          console.log("Document id: ", id); //adds current data to firestore database and returns its docId
+          // console.log("Document id: ", id); //adds current data to firestore database and returns its docId
           // ctxMain.setUserFolders((prev) => [...prev, { data:[
           //   createdAt:
           // ], docId: id }]); //puts the folder into the UserFolders list

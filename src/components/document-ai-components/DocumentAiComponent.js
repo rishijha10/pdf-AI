@@ -11,8 +11,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import DashboardComponent from "../dashboard-components/DashboardComponent";
 import { MdOutlineSearch } from "react-icons/md";
 import MainNavigation from "../general-components/MainNavigation";
+import { MdOutlineKeyboardArrowRight } from "react-icons/md";
+
 const DocumentAiComponent = () => {
   const [sidebarWidth, setSidebarWidth] = useState("22%");
+  const [queryList, setQueryList] = useState([]); //stores the objects of questions and answers in pair
+  const [promptQuery, setPromptQuery] = useState(""); //Stores the question written in input field
+  const [isFetching, setIsFetching] = useState(false);
   function sidebarWidthHandler() {
     sidebarWidth === "22%" ? setSidebarWidth("0%") : setSidebarWidth("22%");
   }
@@ -29,18 +34,20 @@ const DocumentAiComponent = () => {
     }
   }, [ctxMain?.user?.email, navigate]);
 
-  const [queryList, setQueryList] = useState([]); //stores the objects of questions and answers in pair
-  const [promptQuery, setPromptQuery] = useState(""); //Stores the question written in input field
   function promptHandler(e) {
     e.preventDefault();
     setPromptQuery(e.target.value);
   }
   async function submitPromptHandler(e) {
     e.preventDefault();
-    if (promptQuery === "") {
+    if (promptQuery === "" || isFetching === true) {
       return;
     }
-
+    setIsFetching(true);
+    const newQueryList = [...queryList];
+    // Update the copy with the new query
+    newQueryList.push({ author: promptQuery, bot: "Loading..." });
+    setQueryList(newQueryList);
     const text = promptQuery;
     setPromptQuery("");
     fetch("https://genai-video-analyzer-rrcr7xvxjq-uc.a.run.app/api/chat", {
@@ -51,12 +58,36 @@ const DocumentAiComponent = () => {
       body: JSON.stringify({ urls: [], question: text }),
     })
       .then((res) => res.json())
-      .then((data) =>
-        setQueryList((prevQueries) => [
-          ...prevQueries,
-          { author: text, bot: data.answer },
-        ])
-      );
+      .then((data) => {
+        if (data.answer === "") {
+          newQueryList[newQueryList.length - 1].bot =
+            "Sorry, we're experiencing technical difficulties. Please try again later.";
+        } else {
+          newQueryList[newQueryList.length - 1].bot = data.answer;
+          console.log(newQueryList);
+        }
+        // Update the copy with the bot's response
+
+        // Update the state with the modified copy
+        setQueryList([...newQueryList]);
+        setIsFetching(false);
+        // setQueryList([]);
+        // newQueryList[newQueryList.length - 1].bot = data.answer;
+        // setQueryList((prevQueries) => [
+        //   ...prevQueries,
+        //   { author: text, bot: data.answer },
+        // ]);
+        // setQueryList(newQueryList);
+      })
+      .catch((error) => {
+        //set error as the bots reply when there is an error
+        newQueryList[newQueryList.length - 1].bot =
+          error.message +
+          ". Sorry, we're experiencing technical difficulties. Please try again later.";
+        // Update the state with the modified copy
+        setQueryList([...newQueryList]);
+        setIsFetching(false);
+      });
     // const response = await fetch(`http://localhost:8000/DocumentAiComponent/${text}`);
 
     // const data = await response.json();
@@ -129,10 +160,13 @@ const DocumentAiComponent = () => {
           <DashboardComponent />
         </div>
         {/* <p className={styles.arrow} onClick={sidebarWidthHandler}>{'>'}</p> */}
-        <IoIosArrowDroprightCircle
+        {/* <MdOutlineKeyboardArrowRight
           className={styles.arrow}
           onClick={sidebarWidthHandler}
-        />
+        /> */}
+        <p onClick={sidebarWidthHandler} className={styles.arrow}>
+          ❱
+        </p>
         <section className={styles.chatHolder}>
           <div className={styles.pdfSection}>
             {/* <iframe width={"100%"} height={"100%"} src={`${zz}#toolbar=0`} /> */}

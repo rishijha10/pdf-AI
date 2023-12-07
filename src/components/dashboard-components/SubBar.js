@@ -20,7 +20,7 @@ const SubBar = (props) => {
       return;
     }
     const fileRef = ref(storage, `pdfs/${pdfFile.name + v4()}`);
-    console.log(pdfFile.name);
+    // console.log(pdfFile.name);
     uploadBytes(fileRef, pdfFile).then(async (snapshot) => {
       // const data = {
       //   createdAt: snapshot.metadata.timeCreated,
@@ -52,7 +52,7 @@ const SubBar = (props) => {
       };
       try {
         const docRef = await addDoc(collection(db, "Pdf-Files"), data);
-        console.log("Document written with ID: ", docRef.id);
+        // console.log("Document written with ID: ", docRef.id);
         ctxMain.setUserFiles((prev) => [
           ...prev,
           { data: data, docId: data.name },

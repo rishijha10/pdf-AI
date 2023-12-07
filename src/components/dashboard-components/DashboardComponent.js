@@ -43,6 +43,9 @@ const DashboardComponent = () => {
       {ctxMain.userFolders.map((item) => (
         <DashboardItems item={item} type="folder" />
       ))}
+      {rootFiles.length === 0 && ctxMain?.userFolders.length === 0 && (
+        <DashboardItems item={[]} type={"empty"} />
+      )}
       {/* <DashboardItems items={rootFiles} type={"file"} />
       <DashboardItems items={ctxMain.userFolders} type="folder" /> */}
       {ctxMain.isCreateFolderOpen && (

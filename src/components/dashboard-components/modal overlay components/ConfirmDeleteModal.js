@@ -10,13 +10,13 @@ const ConfirmDeleteModal = (props) => {
   const ctxMain = useContext(MainContext);
   const storage = getStorage();
   async function folderDeleteHandler(documentData) {
-    console.log(documentData);
+    // console.log(documentData);
     if (ctxMain?.userFiles) {
       for (let i = 0; i < ctxMain?.userFiles.length; i++) {
         await deleteDoc(
           doc(db, "Pdf-Files", `${ctxMain?.userFiles[i]?.docId}`)
         );
-        console.log("Doc id of user files: ", ctxMain?.userFiles[i]?.docId);
+        // console.log("Doc id of user files: ", ctxMain?.userFiles[i]?.docId);
 
         //update allUserFiles state by removing current file
         const updatedAllUserFiles = ctxMain.allUserFiles.filter(

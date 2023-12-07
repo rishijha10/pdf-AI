@@ -213,7 +213,6 @@ const DashboardItems = ({ item, type }) => {
   const ctxMain = useContext(MainContext);
   const [subFiles, setSubFiles] = useState([]); //stores files inside folders, if there are any
   const [openFolder, setOpenFolder] = useState(false);
-  console.log("Subfiles: ", subFiles);
   const navigate = useNavigate();
   function pdfHandler(pdfData) {
     navigate(`/pdf-ai-gen1/${pdfData?.data?.name}`);
@@ -289,7 +288,16 @@ const DashboardItems = ({ item, type }) => {
     item?.data?.name.length > 12
       ? item?.data?.name.substring(0, 18) + "..."
       : item?.data?.name;
-
+  if (type === "empty") {
+    return (
+      <div className={styles.emptyFolderContainer}>
+        <p>
+          Your dashboard is empty. Click 'Upload' to add files or 'Create
+          Folder' to organize your documents
+        </p>
+      </div>
+    );
+  }
   return (
     <div className={styles.itemsContainer}>
       <div className={styles.itemsInnerContainer}>
@@ -374,6 +382,8 @@ const DashboardItems = ({ item, type }) => {
             subFiles.map((item) => (
               <DashboardItems item={item} type={"file"} />
             ))}
+          {/* {type === "empty" && <p>No file or folder</p>} */}
+          {/* <p>No file or folder</p> */}
         </section>
       </div>
     </div>

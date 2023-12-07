@@ -1,7 +1,8 @@
-import { onAuthStateChanged } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
-import { auth, db } from "../firebase/firebase";
+import { app, auth, db } from "../firebase/firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
+import Cookies from "universal-cookie";
 
 export const MainContext = createContext(null);
 const MainContextProvider = (props) => {
@@ -16,8 +17,8 @@ const MainContextProvider = (props) => {
   const [currentDocument, setCurrentDocument] = useState({});
   const [allFileNames, setAllFileNames] = useState([]); //stores the names of every file that of the user
   const [deleteType, setDeleteType] = useState(""); //sets whether the we are deleting a file or a folder
-  console.log("Current document ", currentDocument);
-  console.log("Current path: ", currentPath);
+  // console.log("Current document ", currentDocument);
+  // console.log("Current path: ", currentPath);
   async function getData(uid, fileName, type) {
     try {
       const docRef = collection(db, `${fileName}`);
@@ -79,6 +80,14 @@ const MainContextProvider = (props) => {
   }
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
+      // auth.currentUser
+      //   .getIdToken(true)
+      //   .then((idToken) => console.log("Id token: ", idToken));
+      const cookie = new Cookies();
+      cookie.set("jwt_auth", user.uid, {
+        expires: new Date().getMinutes * 10,
+      });
+      console.log("Cookie: ", cookie);
       if (user) {
         setUser({
           email: user.email,
@@ -97,11 +106,11 @@ const MainContextProvider = (props) => {
   useEffect(() => {
     getData(user?.uid, "Pdf-Files", "files");
   }, [currentPath]);
-  console.log("User folders: ", userFolders);
-  console.log("User files: ", userFiles);
-  console.log("All user file name ", allFileNames);
-  console.log("All user files ", allUserFiles);
-  console.log("Delete type: ", deleteType);
+  // console.log("User folders: ", userFolders);
+  // console.log("User files: ", userFiles);
+  // console.log("All user file name ", allFileNames);
+  // console.log("All user files ", allUserFiles);
+  // console.log("Delete type: ", deleteType);
   return (
     <MainContext.Provider
       value={{

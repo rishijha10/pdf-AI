@@ -7,6 +7,10 @@ import { auth } from "../../firebase/firebase";
 import { HiMenu } from "react-icons/hi";
 import { RxCross2 } from "react-icons/rx";
 import { RiUploadCloud2Line } from "react-icons/ri";
+import { RiArrowGoBackFill } from "react-icons/ri";
+import { TiArrowBack } from "react-icons/ti";
+import { MdArrowBackIos } from "react-icons/md";
+
 const MainNavigation = (props) => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
@@ -33,7 +37,7 @@ const MainNavigation = (props) => {
   const ctxMain = useContext(MainContext);
   function signOutUser() {
     signOut(auth)
-      .then(console.log("Signout successful"))
+      // .then(console.log("Signout successful"))
       .then(() => {
         ctxMain.setUser(null);
         ctxMain.setCurrentPath("root");
@@ -48,6 +52,15 @@ const MainNavigation = (props) => {
       className={`${styles.container} ${isScrolled ? styles.white : undefined}`}
     >
       <div className={styles.innerContainer}>
+        {/* {props.onDocumentAiPage || ( */}
+        {props.onDocumentAiPage && (
+          <div className={styles.goBack}>
+            <Link to="/">
+              <TiArrowBack className={styles.goBackIcon} />
+            </Link>
+            <p>|</p>
+          </div>
+        )}
         <section className={styles.logo}>
           <div
             className={`${styles.first} ${
@@ -70,7 +83,9 @@ const MainNavigation = (props) => {
             </p>
           </Link>
         </section>
-        {!props.onDocumentAiPage && (
+        {/* )} */}
+
+        {props.onDocumentAiPage || (
           <nav className={styles.navLinks}>
             <ul>
               <li>Product</li>

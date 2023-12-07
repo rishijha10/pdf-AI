@@ -5,6 +5,7 @@ import { getAuth } from "firebase/auth";
 import { GoogleAuthProvider } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
+// import { initializeApp as adminInitializeApp } from "firebase-admin/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -28,3 +29,6 @@ export const provider = new GoogleAuthProvider();
 export const db = getFirestore(app);
 export const auth = getAuth();
 export const storage = getStorage(app);
+// export const adminApp = adminInitializeApp();
+export const OPEN_AI_KEY =
+  "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";

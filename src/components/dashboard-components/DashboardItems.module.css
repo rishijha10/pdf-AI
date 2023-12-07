@@ -1,11 +1,9 @@
 .itemsContainer {
   width: 100%;
   margin: 0 auto;
-  /* margin-bottom: 25px; */
-  /* border: 1px solid black; */
-  /* border: 1px solid #e5e3da; */
   border-radius: 5px;
   padding: 5px 0;
+  position: relative;
 }
 .itemsContainer h1 {
   text-align: center;
@@ -34,29 +32,6 @@
 .deleteIcon:hover {
   color: crimson;
 }
-
-/* .uploadBtn {
-  border: none;
-  outline: none;
-  font-family: Inter;
-  font-weight: 600;
-  font-size: 16px;
-  border-radius: 6px;
-  padding: 0.7vw;
-  margin-left: 1vw;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  background-color: #ff612f;
-  gap: 10px;
-}
-.uploadIcon {
-  background-color: #ff612f;
-  color: white;
-  font-size: 20px;
-} */
 .innerFile {
   display: flex;
   gap: 10px;
@@ -90,11 +65,8 @@
 .yearText {
   margin: 0;
   font-family: Inter;
-  /* font-family: Eudoxus Sans; */
   font-weight: 500;
-  /* font-size: 10px; */
   cursor: pointer;
-  /* color: gray; */
 }
 .fileLengthText {
   font-size: 12px;
@@ -119,4 +91,15 @@
 }
 .addIcon:hover {
   color: green;
+}
+.emptyFolderContainer {
+  text-align: center;
+  font-size: 14px;
+  color: gray;
+  font-family: Inter;
+  padding: 5px;
+  /* position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%); */
 }

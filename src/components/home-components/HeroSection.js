@@ -24,7 +24,9 @@ const HeroSection = () => {
           }
         > */}
         <NavLink to={ctxMain.user ? `/pdf-ai-gen1/start` : `/auth?mode=signIn`}>
-          <button>Get started -{">"}</button>
+          <button>
+            {ctxMain?.user ? "Go to dashboard" : "Get started"} -{">"}
+          </button>
         </NavLink>
 
         <div className={styles.heroSectionImg}>
