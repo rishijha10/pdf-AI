@@ -3,6 +3,7 @@
   height: 100%;
   padding: 24rem 0;
   background-color: #f8f5ee;
+  display: none;
 }
 
 .innerContainer {
