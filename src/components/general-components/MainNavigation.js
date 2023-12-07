@@ -43,6 +43,7 @@ const MainNavigation = (props) => {
         ctxMain.setCurrentPath("root");
         ctxMain.setUserFolders([]);
         ctxMain.setUserFiles([]);
+        setIsOpen(false);
       })
       .then(() => navigate("/"))
       .catch((err) => console.log(err));
@@ -118,23 +119,26 @@ const MainNavigation = (props) => {
                   </button>
                 </>
               )}
-              {!props.onDocumentAiPage && ( // dont show this when document ai page is open
-                <Link to={`/auth?mode=signIn`}>
-                  <p
-                    className={` ${
-                      isScrolled ? styles.white : styles.defaultLogo
-                    }`}
-                  >
-                    {ctxMain.user?.email}
-                  </p>
-                </Link>
+              {!props.onDocumentAiPage && (
+                // dont show this when document ai page is open
+                <div className={styles.logoutDiv}>
+                  <Link to={`/auth?mode=signIn`}>
+                    <p
+                      className={` ${
+                        isScrolled ? styles.white : styles.defaultLogo
+                      }`}
+                    >
+                      {ctxMain.user?.email}
+                    </p>
+                  </Link>
+                  <button onClick={signOutUser}>Log out</button>
+                </div>
               )}
-              <button onClick={signOutUser}>Log out</button>
             </>
           ) : (
             <>
               <Link to="/auth?mode=signIn">
-                <button>
+                <button className={styles.loginBtn}>
                   <span>Log in</span>
                 </button>
               </Link>
@@ -148,7 +152,7 @@ const MainNavigation = (props) => {
           {isOpen && (
             <div
               className={styles.dropDown}
-              data-aos="fade-down"
+              data-aos="fade-right"
               data-aos-duration="400"
               data-aos-once="true"
               data-aos-easing="ease-in-out"
@@ -169,11 +173,48 @@ const MainNavigation = (props) => {
                   />
                 </div>
                 <div className={styles.menuList}>
-                  <li>Product</li>
-                  <li>Solution</li>
-                  <li>Pricing</li>
-                  <li>Resources</li>
-                  <li>Partners</li>
+                  <div className={styles.upNavBtn}>
+                    <ul className={styles.dropDownLi}>
+                      <li>Product</li>
+                      <li>Solution</li>
+                      <li>Pricing</li>
+                      <li>Resources</li>
+                      <li>Partners</li>
+                    </ul>
+                  </div>
+                  {ctxMain?.user ? (
+                    <div className={styles.downNavBtn}>
+                      <div className={styles.dropDownLogout}>
+                        <Link to={`/auth?mode=signIn`}>
+                          <p
+                            className={` ${
+                              isScrolled ? styles.white : styles.defaultLogo
+                            }`}
+                          >
+                            {ctxMain.user?.email}
+                          </p>
+                        </Link>
+                        <button onClick={signOutUser}>Log out</button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className={styles.downNavBtn}>
+                        <li>
+                          <Link to="/auth?mode=signIn">
+                            <button className={styles.loginBtn}>
+                              <span>Log in</span>
+                            </button>
+                          </Link>
+                        </li>
+                        <li>
+                          <NavLink to="/auth?mode=signUp">
+                            <button className={styles.vibrant}>
+                              Get Started For Free
+                            </button>
+                          </NavLink>
+                        </li>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

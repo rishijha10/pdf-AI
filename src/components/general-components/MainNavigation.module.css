@@ -52,7 +52,7 @@ nav ul {
   font-weight: 600;
   font-size: 16px;
   border-radius: 6px;
-  padding: 0.7vw;
+  padding: 1rem;
   margin-left: 1vw;
   cursor: pointer;
   display: flex;
@@ -75,6 +75,7 @@ nav ul {
   /* background-color: #ff9900; */
   color: white;
 }
+
 .vibrant {
   background: rgb(67, 134, 141);
   background: linear-gradient(
@@ -131,7 +132,7 @@ a {
 .hamburgerIcon {
   display: none;
 }
-.dropDown .menuList {
+.dropDown {
   display: none;
 }
 .cross {
@@ -175,7 +176,7 @@ a {
   .navLinks {
     display: none;
   }
-  .dropDown .menuList {
+  .dropDown {
     display: block;
   }
   .dropDown {
@@ -183,7 +184,6 @@ a {
     position: fixed;
     top: 0%;
     left: 0;
-    /* height: 50vh; */
     width: 100%;
   }
   .dropInnercontainer {
@@ -194,7 +194,10 @@ a {
     display: flex;
     padding: 15px 0px;
   }
-  .menuList li {
+  .dropDownLi{
+    padding: 0;
+  }
+  .dropDownLi li {
     list-style: none;
     color: black;
     padding: 12px 0px;
@@ -256,5 +259,78 @@ a {
     font-size: 35px;
     font-weight: 500;
     color: #062427;
+  }
+  .menuList li button.loginBtn {
+    display: none;
+  }
+
+  .menuList li button.vibrant {
+    display: none;
+
+  }
+
+}
+
+/*----------- mediaueries for 768px----------------
+------------------------------------------------- */
+
+@media (max-width: 768px) {
+  button.loginBtn {
+    display: none;
+  }
+  .navButtons button.vibrant {
+    display: none;
+  }
+  
+  .dropDown {
+    height: 100vh;
+  }
+  .dropInnercontainer {
+    height: 100%;
+  }
+  .menuList {
+    height: 95vh;
+    padding: 40px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .dropDownLi li {
+    padding: 15px 0px;
+  }
+  .menuList li button.loginBtn {
+    width: 100%;
+    display: block;
+    padding: 18px;
+    font-size: 1.8rem;
+    border: 0.8px solid lightgray;
+  }
+
+  .menuList li button.vibrant {
+    width: 100%;
+    display: block;
+    font-size: 1.8rem;
+    padding: 18px;
+
+  }
+ 
+  .logoutDiv {
+    display: none;
+  }
+  .dropDownLogout {
+    display: block;
+    text-align: center;
+    /* background-color: aquamarine; */
+  }
+  .dropDownLogout p {
+    color: black;
+    font-size: 1.8rem;
+
+  }
+  .dropDownLogout button {
+    width: 100%;
+    border: 0.8px solid lightgrey;
+    font-size: 1.8rem;
+
   }
 }
