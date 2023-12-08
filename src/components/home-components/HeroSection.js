@@ -25,7 +25,7 @@ const HeroSection = () => {
         > */}
         <NavLink to={ctxMain.user ? `/pdf-ai-gen1/start` : `/auth?mode=signIn`}>
           <button>
-            {ctxMain?.user ? "Go to dashboard" : "Get started"} -{">"}
+            {!ctxMain?.user ? "Get started" : "Go to dashboard"} -{">"}
           </button>
         </NavLink>
 

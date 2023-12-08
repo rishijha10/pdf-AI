@@ -71,8 +71,6 @@ nav ul {
 }
 .createBtn {
   background-color: #ff612f;
-
-  /* background-color: #ff9900; */
   color: white;
 }
 
@@ -109,7 +107,6 @@ a {
 .logo .defaultLogo {
   margin: 0 5px;
   font-family: Kanit;
-  /* font-family: Inter; */
   font-weight: 500;
   font-size: 35px;
   color: white;
@@ -156,6 +153,10 @@ a {
 .goBackIcon {
   font-size: 40px;
 }
+.logoutDiv {
+  display: flex;
+  align-items: center;
+}
 /* ------------- mediaqueries--------------------
  --------------------------------------------------------------- */
 
@@ -192,9 +193,9 @@ a {
   .menuList {
     text-align: left;
     display: flex;
-    padding: 15px 0px;
+    padding: 1rem 0px;
   }
-  .dropDownLi{
+  .dropDownLi {
     padding: 0;
   }
   .dropDownLi li {
@@ -266,9 +267,7 @@ a {
 
   .menuList li button.vibrant {
     display: none;
-
   }
-
 }
 
 /*----------- mediaueries for 768px----------------
@@ -281,22 +280,22 @@ a {
   .navButtons button.vibrant {
     display: none;
   }
-  
+
   .dropDown {
     height: 100vh;
   }
   .dropInnercontainer {
-    height: 100%;
+    /* height: 100vh; */
   }
   .menuList {
-    height: 95vh;
-    padding: 40px 0px;
+    height: 100%;
+    padding: 2rem 0px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
   .dropDownLi li {
-    padding: 15px 0px;
+    padding: 10px 0px;
   }
   .menuList li button.loginBtn {
     width: 100%;
@@ -311,26 +310,26 @@ a {
     display: block;
     font-size: 1.8rem;
     padding: 18px;
-
   }
- 
+
   .logoutDiv {
     display: none;
   }
   .dropDownLogout {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
     text-align: center;
+    margin: 2rem 0;
     /* background-color: aquamarine; */
   }
   .dropDownLogout p {
     color: black;
     font-size: 1.8rem;
-
   }
   .dropDownLogout button {
     width: 100%;
     border: 0.8px solid lightgrey;
     font-size: 1.8rem;
-
   }
 }

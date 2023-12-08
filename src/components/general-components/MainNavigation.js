@@ -199,20 +199,20 @@ const MainNavigation = (props) => {
                     </div>
                   ) : (
                     <div className={styles.downNavBtn}>
-                        <li>
-                          <Link to="/auth?mode=signIn">
-                            <button className={styles.loginBtn}>
-                              <span>Log in</span>
-                            </button>
-                          </Link>
-                        </li>
-                        <li>
-                          <NavLink to="/auth?mode=signUp">
-                            <button className={styles.vibrant}>
-                              Get Started For Free
-                            </button>
-                          </NavLink>
-                        </li>
+                      <li style={{ listStyle: "none" }}>
+                        <Link to="/auth?mode=signIn">
+                          <button className={styles.loginBtn}>
+                            <span>Log in</span>
+                          </button>
+                        </Link>
+                      </li>
+                      <li style={{ listStyle: "none" }}>
+                        <NavLink to="/auth?mode=signUp">
+                          <button className={styles.vibrant}>
+                            Get Started For Free
+                          </button>
+                        </NavLink>
+                      </li>
                     </div>
                   )}
                 </div>

@@ -31,7 +31,7 @@ const ThreeBox = () => {
             data-aos-delay="50"
             data-aos-duration="1000"
           >
-            <h1>3. Cite the Source of Information</h1>
+            <h1>2. Cite the Source of Information</h1>
             <p>
               Without needing to rescan the whole document again, you chat to
               the PDF and ask for the sources of its answers. The AI PDF reader
@@ -49,7 +49,7 @@ const ThreeBox = () => {
           data-aos-delay="100"
           data-aos-duration="1000"
         >
-          <h1>2. Ask Questions, Get Answers</h1>
+          <h1>3. Ask Questions, Get Answers</h1>
 
           <p>
             Start your chat with the PDF. Our AI PDF reader understands your

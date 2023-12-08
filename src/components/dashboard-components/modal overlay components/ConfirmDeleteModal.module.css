@@ -9,6 +9,14 @@
   border-radius: 6px;
   padding: 30px;
 }
+.modalContainer h3 {
+  font-size: 2rem;
+  font-family: inherit;
+}
+.modalContainer p {
+  font-size: 1.6rem;
+  font-family: inherit;
+}
 .buttonConatiner {
   display: flex;
   align-items: center;
