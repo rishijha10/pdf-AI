@@ -2,6 +2,7 @@ import styles from "./DocumentAiComponent.module.css";
 import pdfFile from "../../assets/Lion.pdf";
 import zz from "../../assets/zz.pdf";
 import dummy_pdf from "../../assets/Introduction to quantum mechanics.pdf";
+import { RiUploadCloud2Line } from "react-icons/ri";
 import { FaRegFilePdf } from "react-icons/fa6";
 import React, { useContext, useEffect, useState } from "react";
 import { IoIosArrowDroprightCircle, IoIosSend } from "react-icons/io";
@@ -143,6 +144,23 @@ const DocumentAiComponent = () => {
   return (
     <div className={styles.container}>
       <MainNavigation onDocumentAiPage={true} />
+      <div className={styles.navButtonsResponsive}>
+        <button
+          onClick={() => ctxMain.setIsCreateFolderOpen(true)}
+          className={styles.createBtn}
+        >
+          Create folder
+        </button>
+        <button
+          className={styles.uploadBtn}
+          onClick={() => {
+            ctxMain.setCurrentPath("root");
+            ctxMain.setIsUploadPdfOpen(true);
+          }}
+        >
+          Upload <RiUploadCloud2Line className={styles.uploadIcon} />
+        </button>
+      </div>
       <div className={styles.inner}>
         <div
           className={styles.fileSection}

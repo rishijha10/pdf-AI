@@ -270,7 +270,7 @@ a {
   }
 }
 
-/*----------- mediaueries for 768px----------------
+/*----------- mediqueries for 768px----------------
 ------------------------------------------------- */
 
 @media (max-width: 768px) {
@@ -331,5 +331,18 @@ a {
     width: 100%;
     border: 0.8px solid lightgrey;
     font-size: 1.8rem;
+  }
+}
+
+
+/*----------- mediqueries for 700px----------------
+------------------------------------------------- */
+
+@media (max-width: 700px){
+  button.createBtn{
+    display: none;
+  }
+  button.uploadBtn{
+    display: none;
   }
 }
